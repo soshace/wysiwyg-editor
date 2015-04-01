@@ -1,0 +1,637 @@
+.button-toolbar {
+    display: none;
+    position: absolute;
+    top: 149px;
+    left: 50%;
+    width: 240px;
+    border: 1px solid #bfbfbf;
+    padding-bottom: 10px;
+    margin-left: 15px;
+    background: #EDEEED;
+}
+
+.button-toolbar header {
+    display: block;
+    float: left;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 7px;
+    padding: 5px 0;
+}
+
+.button-toolbar hr {
+    color: #bfbfbf;
+    border: none;
+    border-top: 1px solid;
+    margin: 0;
+    clear: both;
+}
+
+.button-toolbar .close-btn {
+    display: block;
+    float: right;
+    color: black;
+    width: 14px;
+    height: 20px;
+    font-size: 17px;
+    margin-top: 8px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.button-toolbar .close-btn:hover,
+.button-toolbar .close-btn:active {
+    cursor: pointer;
+    color: #4ca7da;
+}
+
+.button-toolbar .fonts-list {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.button-toolbar .fonts-list li {
+    /*border-bottom: 1px solid #bfbfbf;*/
+}
+
+.button-toolbar .color-palette {
+    width: 327px;
+    height: 380px;
+    background: #EDEEED;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.button-toolbar .color-palette .currentColor {
+    display: block;
+    float: right;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    margin-top: 13px;
+    margin-right: 18px;
+    border: 1px solid;
+}
+
+.button-toolbar .color-palette span {
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 12px 14px;
+}
+
+.button-toolbar .color-palette table {
+    border-collapse: separate;
+    border-spacing: 1px 1px;
+    table-layout: fixed;
+    width: 265px;
+}
+
+.button-toolbar .color-palette .last-color-table {
+    width: 20px;
+    float: left;
+    clear: both;
+    margin-right: 20px;
+    margin-left: 15px;
+    margin-top: 8px;
+}
+
+.button-toolbar .color-palette .main-color-table {
+    width: 240px;
+    float: left;
+    margin-top: 8px;
+}
+
+.button-toolbar .color-palette .black-color-table {
+    float: left;
+    clear: both;
+    margin-left: 56px;
+    margin-top: 6px;
+    width: 253px;
+}
+
+.button-toolbar .color-palette table tr {
+    margin: 2px;
+}
+
+.button-toolbar .color-palette table tr td {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.button-toolbar .color-palette table tr td.picked, .button-toolbar .color-palette table tr td:hover {
+    border: 2px solid #B4D8FE;
+}
+
+.button-toolbar .color-palette table tr td a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.button-toolbar .color-palette input {
+    float: left;
+    width: 27px;
+    margin-top: 8px;
+    padding: 4px;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.button-toolbar .color-palette .opacity-title {
+    clear: both;
+    font-size: 18px;
+}
+
+.button-toolbar .color-palette #slider1,
+.button-toolbar .color-palette #slider2 {
+    display: block;
+    float: left;
+    width: 132px;
+    margin-top: 15px;
+    margin-left: 13px;
+}
+
+.button-toolbar:before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 13px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-right: 23px solid #bfbfbf;
+    border-bottom: 15px solid transparent;
+}
+
+.button-toolbar:after {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 22px solid #EDEEED;
+    border-bottom: 13px solid transparent;
+}
+
+.button-toolbar .font-style-buttons .btn-info {
+    color: #4ca7da;
+    background: #dcdcdc !important;
+    text-shadow: none;
+}
+
+.button-toolbar .btn-group > .btn {
+    font-size: 16px;
+}
+
+.button-toolbar .dropdown-toggle {
+    margin: 5px;
+    margin-right: 0;
+    padding: 3px 3px 3px 10px;
+    background: #fafafa;
+    text-align: left;
+    border: none;
+    border-radius: 0;
+}
+
+.button-toolbar .color-palette-group .dropdown-toggle span {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    margin-right: 4px;
+    background-color: #ffffff;
+}
+
+.button-toolbar .color-palette-group.font-color .dropdown-toggle span {
+    background-color: #000000;
+}
+
+.button-toolbar .font-style-buttons .btn {
+    font-family: "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: bold;
+    width: 49px;
+    height: 16px;
+    padding: 14px;
+    background: none;
+    border: none;
+}
+
+.color-palette-group > a {
+    height: 20px;
+}
+
+.color-palette-group > span {
+    position: relative;
+    top: 6px;
+    font-size: 14px;
+}
+
+.color-palette-group img {
+    width: 30px;
+    height: 22px;
+    margin-left: 8px;
+    margin-top: 9px;
+}
+
+.color-palette-group .dropdown-toggle {
+    padding: 0 !important;
+    width: 50px;
+    margin-top: 13px;
+}
+
+.button-toolbar .btn-group {
+    font-size: 20px;
+    height: 44px;
+}
+
+.button-toolbar .fonts-list-group .dropdown-toggle {
+    width: 150px;
+    margin-left: 6px;
+    margin-top: 9px;
+}
+
+.button-toolbar .fonts-list-group .dropdown-toggle > span {
+    width: 125px;
+    display: block;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.button-toolbar .font-sizes-group .dropdown-toggle {
+    width: 42px;
+    margin-left: 0;
+    margin-top: 9px;
+}
+
+.button-toolbar .submit-buttons-group {
+    float: right;
+    margin-top: 43px;
+    margin-right: 14px;
+}
+
+.button-toolbar .submit-buttons-group .btn {
+    padding: 1px 13px;
+    margin-left: 14px;
+}
+.button-toolbar .submit-buttons-group .btn:active {
+    color: #4ca7da;
+}
+
+.button-toolbar .caret {
+    /*float: right;*/
+    position: absolute;
+    right: 2px;
+    top: 1px;
+    margin-right: 3px;
+    margin-top: 6px;
+    border-top: 8px solid #656769;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.button-toolbar .insert-link {
+    display: block;
+    margin: 7px 0;
+}
+
+.button-toolbar .insert-link span {
+    display: block;
+    float: left;
+    margin: 5px 10px 0;
+    border: none;
+    border-radius: 0;
+}
+
+.button-toolbar .insert-link input {
+    display: block;
+    width: 138px;
+    margin: 0;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 0;
+    background: #fafafa;
+}
+
+.button-toolbar .styles {
+    display: block;
+    width: 500px;
+}
+
+.button-toolbar .styles > span {
+    float: left;
+    margin: 10px;
+    font-size: 14px;
+}
+
+.button-toolbar .styles .dropdown-toggle {
+    display: block;
+    float: left;
+    width: 140px;
+    margin-top: 9px;
+}
+
+.button-toolbar .styles .dropdown-menu {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.button-toolbar .styles > .dropdown-menu {
+    margin-left: 62px;
+    min-width: 0;
+    width: 153px;
+}
+
+.button-toolbar .styles .dropdown-menu .custom {
+
+}
+
+.button-toolbar .styles .dropdown-menu .custom > .icon-trash {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 14px;
+    color: red;
+}
+
+.button-toolbar .styles .dropdown-menu .custom > .icon-pencil {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 19px;
+    color: black;
+}
+
+.button-toolbar .styles .dropdown-menu .custom > .icon-pencil:hover,
+.button-toolbar .styles .dropdown-menu .custom > .icon-pencil.active {
+    color: #4ca7da;
+}
+
+.button-toolbar .styles .dropdown-menu li > .icon-check {
+    position: absolute;
+    left: 3px;
+    top: 8px;
+    font-size: 19px;
+    color: #4ca7da;
+}
+
+.button-toolbar .styles .dropdown-menu li {
+    position: relative;
+    border-bottom: 1px solid #BABABA;
+    height: 30px;
+    padding-top: 6px;
+}
+
+.button-toolbar .styles .dropdown-menu li > a {
+    float: left;
+    clear: none;
+    height: 20px;
+}
+
+.button-toolbar .styles .dropdown-menu li a span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    display: inline-block;
+}
+
+.button-toolbar .styles .dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.button-toolbar .styles .dropdown-menu li a:hover,
+.button-toolbar .styles .dropdown-menu li a:focus {
+    color: black;
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+
+}
+
+.button-toolbar .styles .dropdown-menu li:hover,
+.button-toolbar .styles .dropdown-menu li:focus {
+    background: #dcdcdc;
+    cursor: pointer;
+}
+
+.button-toolbar .styles .dropdown-menu > li > a:hover,
+.button-toolbar .styles .dropdown-menu > li > a:focus,
+.button-toolbar .styles .dropdown-submenu:hover > a,
+.button-toolbar .styles .dropdown-submenu:focus > a {
+    background: transparent none;
+    color: black;
+}
+
+.button-toolbar .styles .dropdown-submenu > a:after {
+    border-left-color: #656769;
+    margin-right: -75px;
+}
+
+.button-toolbar .styles .dropdown-menu .dropdown-submenu {
+    font-weight: bold;
+}
+
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li {
+    font-weight: bold;
+}
+
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li a {
+    font-weight: bold;
+}
+
+/*.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li:hover,*/
+/*.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li a:hover {*/
+/*color: #4ca7da;*/
+/*}*/
+
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li.disabled,
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li.disabled:hover,
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li.disabled a,
+.button-toolbar .styles .dropdown-menu .dropdown-submenu .dropdown-menu > li.disabled a:hover {
+    color: #A7A7A7;
+    cursor: default;
+}
+
+.closeDialog {
+    position: absolute;
+    display: none;
+    right: -14px;
+    top: -143px;
+    border: 2px solid #BABABA;
+    border-radius: 5px;
+    width: 265px;
+    height: 110px;
+    background-color: #FFF;
+}
+
+.closeDialog header {
+    width: 100px;
+}
+
+.closeDialog p {
+    margin: 0px 0px 10px;
+    float: left;
+    width: 175px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 9px;
+}
+
+.closeDialog span {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    color: #991020;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.closeDialog .btn-group {
+    width: 100%;
+    margin-top: 13px;
+
+}
+
+.closeDialog .btn-group .btn {
+    color: #676767;
+    padding: 1px 14px;
+    margin-left: 8px;
+    font-size: 12px;
+    background: white;
+    border: 1px solid #bababa;
+}
+
+.closeDialog .btn-group .btn:active {
+    color: #4ca7da;
+}
+.closeDialog .btn-group .btn:hover {
+    background-color: #e6e6e6;
+}
+
+.closeDialog:before {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 22px solid #bfbfbf;
+    border-right: 18px solid transparent;
+    border-left: 18px solid transparent;
+
+}
+
+.closeDialog:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #ffffff;
+    border-right: 16px solid transparent;
+    border-left: 16px solid transparent;
+}
+
+.deleteStyleDialog {
+    position: absolute;
+    display: none;
+    right: -14px;
+    top: -143px;
+    border: 2px solid #BABABA;
+    border-radius: 5px;
+    width: 265px;
+    height: 110px;
+    background-color: #FFF;
+    white-space: normal;
+}
+
+.deleteStyleDialog header {
+    width: 100px;
+}
+
+.deleteStyleDialog p {
+    margin: 0px 0px 10px;
+    float: left;
+    width: 175px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 9px;
+}
+
+.deleteStyleDialog span {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    color: #991020;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.deleteStyleDialog .btn-group {
+    float: left;
+    width: 100%;
+    margin-top: 13px;
+}
+
+.deleteStyleDialog .btn-group .btn {
+    color: #676767;
+    padding: 1px 14px;
+    margin-left: 8px;
+    font-size: 12px;
+    background: white;
+    border: 1px solid #bababa;
+    border-radius: 2px;
+}
+
+.deleteStyleDialog .btn-group .btn:last-child {
+    float: right;
+    margin-right: 10px;
+}
+
+.deleteStyleDialog .btn-group .btn:active {
+    color: #4ca7da;
+}
+.deleteStyleDialog .btn-group .btn:hover {
+    background-color: #e6e6e6;
+}
+
+.deleteStyleDialog:before {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 22px solid #bfbfbf;
+    border-right: 18px solid transparent;
+    border-left: 18px solid transparent;
+
+}
+
+.deleteStyleDialog:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #ffffff;
+    border-right: 16px solid transparent;
+    border-left: 16px solid transparent;
+}
+.link-preparer {
+    color: white;
+    background-color: #328DFF;
+}

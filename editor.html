@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/editor.css">
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css"
+          rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css"
+          rel="stylesheet">
+</head>
+<body>
+<div id="button-toolbar" class="button-toolbar" data-role="editor-toolbar" data-target="#editor"
+     style="display: block;">
+
+    <div>
+        <header>Word Editor</header>
+        <a class="close-btn" href="#" title="Close">X</a>
+
+        <div class="closeDialog" style="display: none;">
+            <span>Warning:</span>
+
+            <p>Save changes to the transcript before closing?</p>
+
+            <div class="btn-group">
+                <a class="btn dontSaveBtn">Don't Save</a>
+                <a class="btn cancelBtn">Cancel</a>
+                <a class="btn saveBtn">Save</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <div class="btn-group fonts-list-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Change Font" data-original-title="Font">Helvetica<b
+                class="caret"></b></a>
+        <ul class="dropdown-menu fonts-list">
+
+            <li><a class="font-item" data-edit="fontName Serif" style="font-family:'Serif'">Serif</a></li>
+            <li><a class="font-item" data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
+            <li><a class="font-item" data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li>
+            <li><a class="font-item" data-edit="fontName Courier New" style="font-family:'Courier New'">Courier New</a>
+            </li>
+            <li><a class="font-item" data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans
+                MS</a></li>
+            <li><a class="font-item" data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li>
+            <li><a class="font-item" data-edit="fontName Impact" style="font-family:'Impact'">Impact</a></li>
+            <li><a class="font-item" data-edit="fontName Lucida Grande" style="font-family:'Lucida Grande'">Lucida
+                Grande</a></li>
+            <li><a class="font-item" data-edit="fontName Lucida Sans" style="font-family:'Lucida Sans'">Lucida Sans</a>
+            </li>
+            <li><a class="font-item" data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li>
+            <li><a class="font-item" data-edit="fontName Times" style="font-family:'Times'">Times</a></li>
+            <li><a class="font-item" data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times
+                New Roman</a></li>
+            <li><a class="font-item" data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+        </ul>
+    </div>
+    <div class="btn-group font-sizes-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Change font size">14<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a class="fontsize-picker" data-fontsize="fontSize 9px">9</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 10px">10</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 11px">11</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 12px">12</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 14px">14</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 16px">16</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 18px">18</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 20px">20</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 22px">22</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 24px">24</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 26px">26</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 28px">28</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 30px">30</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 32px">32</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 34px">34</a></li>
+            <li><a class="fontsize-picker" data-fontsize="fontSize 36px">36</a></li>
+        </ul>
+    </div>
+
+    <br>
+    <hr>
+
+    <div class="btn-group font-style-buttons">
+        <a class="btn" data-edit="bold" title="Bold"><strong>B</strong></a>
+        <a class="btn" data-edit="italic" title="Italic"><em>I</em></a>
+        <a class="btn" data-edit="underline" title="Underline" style="text-decoration: underline;">U</a>
+    </div>
+
+    <br>
+    <hr>
+
+    <div class="btn-group color-palette-group font-color">
+        <img src="img/icons/FontColor-ICON.svg#svgView(viewBox(10, 5, 17, 25))">
+        <span>Font Color</span>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Change font color"><span
+                style="background-color: rgb(0, 0, 0);"></span><b class="caret"></b></a>
+
+        <div class="dropdown-menu color-palette">
+            <span>Color Menu</span>
+
+            <div class="currentColor" style="background-color: rgb(100, 101, 100);"></div>
+            <table class="last-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(0,0,0)"><a data-edit="foreColor #000000"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(50,50,50)"><a data-edit="foreColor #323232"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(102,102,102)"><a data-edit="foreColor #666666"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(152,152,152)"><a data-edit="foreColor #989898"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(203,203,203)"><a data-edit="foreColor #CBCBCB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="foreColor #FFFFFF"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,18,35)"><a data-edit="foreColor #FB1223"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(22,127,23)"><a data-edit="foreColor #167F17"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(16,43,251)"><a data-edit="foreColor #102BFB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(254,253,59)"><a data-edit="foreColor #FEFD3B"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(47,254,251)"><a data-edit="foreColor #2FFEFB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(127,21,124)"><a data-edit="foreColor #7F157C"></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="main-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(101,0,5)"><a data-edit="foreColor #650005"></a></td>
+                    <td style="background-color: rgb(102,50,12)"><a data-edit="foreColor #66320C"></a></td>
+                    <td style="background-color: rgb(101,101,22)"><a data-edit="foreColor #656516"></a></td>
+                    <td style="background-color: rgb(101,153,34)"><a data-edit="foreColor #659922"></a></td>
+                    <td style="background-color: rgb(106,201,42)"><a data-edit="foreColor #6AC92A"></a></td>
+                    <td style="background-color: rgb(107,253,49)"><a data-edit="foreColor #6BFD31"></a></td>
+                    <td style="background-color: rgb(45,0,0)"><a data-edit="foreColor #2D0000"></a></td>
+                    <td style="background-color: rgb(1,48,1)"><a data-edit="foreColor #013001"></a></td>
+                    <td style="background-color: rgb(15,98,16)"><a data-edit="foreColor #0F6210"></a></td>
+                    <td style="background-color: rgb(26,150,31)"><a data-edit="foreColor #1A961F"></a></td>
+                    <td style="background-color: rgb(38,202,42)"><a data-edit="foreColor #26CA2A"></a></td>
+                    <td style="background-color: rgb(46,253,48)"><a data-edit="foreColor #2EFD30"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,2,49)"><a data-edit="foreColor #640231"></a></td>
+                    <td style="background-color: rgb(101,50,51)"><a data-edit="foreColor #653233"></a></td>
+                    <td style="background-color: rgb(102,100,51)"><a data-edit="foreColor #666433"></a></td>
+                    <td style="background-color: rgb(102,153,57)"><a data-edit="foreColor #669939"></a></td>
+                    <td style="background-color: rgb(105,201,61)"><a data-edit="foreColor #69C93D"></a></td>
+                    <td style="background-color: rgb(109,253,69)"><a data-edit="foreColor #6DFD45"></a></td>
+                    <td style="background-color: rgb(0,0,48)"><a data-edit="foreColor #000030"></a></td>
+                    <td style="background-color: rgb(1,49,50)"><a data-edit="foreColor #013132"></a></td>
+                    <td style="background-color: rgb(14,99,51)"><a data-edit="foreColor #0E6333"></a></td>
+                    <td style="background-color: rgb(29,152,57)"><a data-edit="foreColor #1D9839"></a></td>
+                    <td style="background-color: rgb(39,202,42)"><a data-edit="foreColor #27CA2A"></a></td>
+                    <td style="background-color: rgb(46,253,69)"><a data-edit="foreColor #2EFD45"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,12,99)"><a data-edit="foreColor #640C63"></a></td>
+                    <td style="background-color: rgb(101,52,101)"><a data-edit="foreColor #653465"></a></td>
+                    <td style="background-color: rgb(100,101,100)" class="picked"><a data-edit="foreColor #646564"></a>
+                    </td>
+                    <td style="background-color: rgb(103,152,104)"><a data-edit="foreColor #679868"></a></td>
+                    <td style="background-color: rgb(104,201,105)"><a data-edit="foreColor #68C969"></a></td>
+                    <td style="background-color: rgb(108,253,109)"><a data-edit="foreColor #6CFD6D"></a></td>
+                    <td style="background-color: rgb(0,11,97)"><a data-edit="foreColor #000B61"></a></td>
+                    <td style="background-color: rgb(5,51,99)"><a data-edit="foreColor #053363"></a></td>
+                    <td style="background-color: rgb(13,102,101)"><a data-edit="foreColor #0D6665"></a></td>
+                    <td style="background-color: rgb(29,152,101)"><a data-edit="foreColor #1D9865"></a></td>
+                    <td style="background-color: rgb(38,202,61)"><a data-edit="foreColor #26CA3D"></a></td>
+                    <td style="background-color: rgb(46,252,110)"><a data-edit="foreColor #2EFC6E"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(98,26,149)"><a data-edit="foreColor #621A95"></a></td>
+                    <td style="background-color: rgb(100,55,151)"><a data-edit="foreColor #643797"></a></td>
+                    <td style="background-color: rgb(101,102,150)"><a data-edit="foreColor #656696"></a></td>
+                    <td style="background-color: rgb(103,151,151)"><a data-edit="foreColor #679797"></a></td>
+                    <td style="background-color: rgb(106,202,154)"><a data-edit="foreColor #6ACA9A"></a></td>
+                    <td style="background-color: rgb(108,253,156)"><a data-edit="foreColor #6CFD9C"></a></td>
+                    <td style="background-color: rgb(2,22,149)"><a data-edit="foreColor #021695"></a></td>
+                    <td style="background-color: rgb(7,54,149)"><a data-edit="foreColor #073695"></a></td>
+                    <td style="background-color: rgb(18,103,151)"><a data-edit="foreColor #126797"></a></td>
+                    <td style="background-color: rgb(30,153,153)"><a data-edit="foreColor #1E9999"></a></td>
+                    <td style="background-color: rgb(40,201,152)"><a data-edit="foreColor #28C998"></a></td>
+                    <td style="background-color: rgb(47,253,156)"><a data-edit="foreColor #2FFD9C"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,34,198)"><a data-edit="foreColor #6422C6"></a></td>
+                    <td style="background-color: rgb(102,58,201)"><a data-edit="foreColor #663AC9"></a></td>
+                    <td style="background-color: rgb(100,104,200)"><a data-edit="foreColor #6468C8"></a></td>
+                    <td style="background-color: rgb(102,154,201)"><a data-edit="foreColor #669AC9"></a></td>
+                    <td style="background-color: rgb(103,204,202)"><a data-edit="foreColor #67CCCA"></a></td>
+                    <td style="background-color: rgb(108,254,205)"><a data-edit="foreColor #6CFECD"></a></td>
+                    <td style="background-color: rgb(9,34,200)"><a data-edit="foreColor #0922C8"></a></td>
+                    <td style="background-color: rgb(13,57,202)"><a data-edit="foreColor #0D39CA"></a></td>
+                    <td style="background-color: rgb(22,102,202)"><a data-edit="foreColor #1666CA"></a></td>
+                    <td style="background-color: rgb(32,154,204)"><a data-edit="foreColor #209ACC"></a></td>
+                    <td style="background-color: rgb(40,203,200)"><a data-edit="foreColor #28CBC8"></a></td>
+                    <td style="background-color: rgb(47,253,205)"><a data-edit="foreColor #2FFDCD"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(101,43,249)"><a data-edit="foreColor #652BF9"></a></td>
+                    <td style="background-color: rgb(102,62,250)"><a data-edit="foreColor #663EFA"></a></td>
+                    <td style="background-color: rgb(101,107,250)"><a data-edit="foreColor #656BFA"></a></td>
+                    <td style="background-color: rgb(104,155,252)"><a data-edit="foreColor #689BFC"></a></td>
+                    <td style="background-color: rgb(107,205,252)"><a data-edit="foreColor #6BCDFC"></a></td>
+                    <td style="background-color: rgb(111,255,254)"><a data-edit="foreColor #6FFFFE"></a></td>
+                    <td style="background-color: rgb(17,43,251)"><a data-edit="foreColor #112BFB"></a></td>
+                    <td style="background-color: rgb(18,62,251)"><a data-edit="foreColor #123EFB"></a></td>
+                    <td style="background-color: rgb(26,106,250)"><a data-edit="foreColor #1A6AFA"></a></td>
+                    <td style="background-color: rgb(34,154,252)"><a data-edit="foreColor #229AFC"></a></td>
+                    <td style="background-color: rgb(43,206,253)"><a data-edit="foreColor #2BCEFD"></a></td>
+                    <td style="background-color: rgb(48,255,254)"><a data-edit="foreColor #30FFFE"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(250,18,34)"><a data-edit="foreColor #FA1222"></a></td>
+                    <td style="background-color: rgb(252,53,36)"><a data-edit="foreColor #FC3524"></a></td>
+                    <td style="background-color: rgb(252,101,40)"><a data-edit="foreColor #FC6528"></a></td>
+                    <td style="background-color: rgb(252,152,44)"><a data-edit="foreColor #FC982C"></a></td>
+                    <td style="background-color: rgb(253,202,48)"><a data-edit="foreColor #FDCA30"></a></td>
+                    <td style="background-color: rgb(253,253,59)"><a data-edit="foreColor #FDFD3B"></a></td>
+                    <td style="background-color: rgb(150,6,19)"><a data-edit="foreColor #960613"></a></td>
+                    <td style="background-color: rgb(151,50,19)"><a data-edit="foreColor #973213"></a></td>
+                    <td style="background-color: rgb(150,101,26)"><a data-edit="foreColor #96651A"></a></td>
+                    <td style="background-color: rgb(151,151,36)"><a data-edit="foreColor #979724"></a></td>
+                    <td style="background-color: rgb(152,200,45)"><a data-edit="foreColor #98C82D"></a></td>
+                    <td style="background-color: rgb(156,253,49)"><a data-edit="foreColor #9CFD31"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,21,56)"><a data-edit="foreColor #FB1538"></a></td>
+                    <td style="background-color: rgb(251,53,58)"><a data-edit="foreColor #FB353A"></a></td>
+                    <td style="background-color: rgb(253,102,58)"><a data-edit="foreColor #FD663A"></a></td>
+                    <td style="background-color: rgb(253,151,63)"><a data-edit="foreColor #FD973F"></a></td>
+                    <td style="background-color: rgb(253,203,66)"><a data-edit="foreColor #FDCB42"></a></td>
+                    <td style="background-color: rgb(255,251,74)"><a data-edit="foreColor #FFFB4A"></a></td>
+                    <td style="background-color: rgb(152,6,51)"><a data-edit="foreColor #980633"></a></td>
+                    <td style="background-color: rgb(151,52,53)"><a data-edit="foreColor #973435"></a></td>
+                    <td style="background-color: rgb(151,101,53)"><a data-edit="foreColor #976535"></a></td>
+                    <td style="background-color: rgb(153,152,58)"><a data-edit="foreColor #99983A"></a></td>
+                    <td style="background-color: rgb(154,201,62)"><a data-edit="foreColor #9AC93E"></a></td>
+                    <td style="background-color: rgb(155,253,69)"><a data-edit="foreColor #9BFD45"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(249,25,101)"><a data-edit="foreColor #F91965"></a></td>
+                    <td style="background-color: rgb(251,52,103)"><a data-edit="foreColor #FB3467"></a></td>
+                    <td style="background-color: rgb(253,101,102)"><a data-edit="foreColor #FD6566"></a></td>
+                    <td style="background-color: rgb(252,153,106)"><a data-edit="foreColor #FC996A"></a></td>
+                    <td style="background-color: rgb(252,203,111)"><a data-edit="foreColor #FCCB6F"></a></td>
+                    <td style="background-color: rgb(255,253,115)"><a data-edit="foreColor #FFFD73"></a></td>
+                    <td style="background-color: rgb(148,16,97)"><a data-edit="foreColor #941061"></a></td>
+                    <td style="background-color: rgb(150,52,102)"><a data-edit="foreColor #963466"></a></td>
+                    <td style="background-color: rgb(151,100,103)"><a data-edit="foreColor #976467"></a></td>
+                    <td style="background-color: rgb(153,152,103)"><a data-edit="foreColor #999867"></a></td>
+                    <td style="background-color: rgb(152,203,107)"><a data-edit="foreColor #98CB6B"></a></td>
+                    <td style="background-color: rgb(156,253,111)"><a data-edit="foreColor #9CFD6F"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,33,154)"><a data-edit="foreColor #FB219A"></a></td>
+                    <td style="background-color: rgb(252,57,154)"><a data-edit="foreColor #FC399A"></a></td>
+                    <td style="background-color: rgb(253,102,154)"><a data-edit="foreColor #FD669A"></a></td>
+                    <td style="background-color: rgb(253,155,156)"><a data-edit="foreColor #FD9B9C"></a></td>
+                    <td style="background-color: rgb(253,203,155)"><a data-edit="foreColor #FDCB9B"></a></td>
+                    <td style="background-color: rgb(255,254,158)"><a data-edit="foreColor #FFFE9E"></a></td>
+                    <td style="background-color: rgb(150,27,150)"><a data-edit="foreColor #961B96"></a></td>
+                    <td style="background-color: rgb(152,56,151)"><a data-edit="foreColor #983897"></a></td>
+                    <td style="background-color: rgb(151,101,151)"><a data-edit="foreColor #976597"></a></td>
+                    <td style="background-color: rgb(153,153,153)"><a data-edit="foreColor #999999"></a></td>
+                    <td style="background-color: rgb(154,202,155)"><a data-edit="foreColor #9ACA9B"></a></td>
+                    <td style="background-color: rgb(156,253,156)"><a data-edit="foreColor #9CFD9C"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(252,39,200)"><a data-edit="foreColor #FC27C8"></a></td>
+                    <td style="background-color: rgb(252,60,201)"><a data-edit="foreColor #FC3CC9"></a></td>
+                    <td style="background-color: rgb(251,104,203)"><a data-edit="foreColor #FB68CB"></a></td>
+                    <td style="background-color: rgb(253,155,204)"><a data-edit="foreColor #FD9BCC"></a></td>
+                    <td style="background-color: rgb(253,204,206)"><a data-edit="foreColor #FDCCCE"></a></td>
+                    <td style="background-color: rgb(255,254,205)"><a data-edit="foreColor #FFFECD"></a></td>
+                    <td style="background-color: rgb(150,36,201)"><a data-edit="foreColor #9624C9"></a></td>
+                    <td style="background-color: rgb(152,58,199)"><a data-edit="foreColor #983AC7"></a></td>
+                    <td style="background-color: rgb(150,104,202)"><a data-edit="foreColor #9668CA"></a></td>
+                    <td style="background-color: rgb(152,154,202)"><a data-edit="foreColor #989ACA"></a></td>
+                    <td style="background-color: rgb(153,203,203)"><a data-edit="foreColor #99CBCB"></a></td>
+                    <td style="background-color: rgb(156,252,204)"><a data-edit="foreColor #9CFCCC"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(252,45,251)"><a data-edit="foreColor #FC2DFB"></a></td>
+                    <td style="background-color: rgb(253,65,252)"><a data-edit="foreColor #FD41FC"></a></td>
+                    <td style="background-color: rgb(250,106,249)"><a data-edit="foreColor #FA6AF9"></a></td>
+                    <td style="background-color: rgb(252,156,253)"><a data-edit="foreColor #FC9CFD"></a></td>
+                    <td style="background-color: rgb(253,204,252)"><a data-edit="foreColor #FDCCFC"></a></td>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="foreColor #FFFFFF"></a></td>
+                    <td style="background-color: rgb(152,43,250)"><a data-edit="foreColor #982BFA"></a></td>
+                    <td style="background-color: rgb(152,63,250)"><a data-edit="foreColor #983FFA"></a></td>
+                    <td style="background-color: rgb(153,107,251)"><a data-edit="foreColor #996BFB"></a></td>
+                    <td style="background-color: rgb(153,156,252)"><a data-edit="foreColor #999CFC"></a></td>
+                    <td style="background-color: rgb(155,205,252)"><a data-edit="foreColor #9BCDFC"></a></td>
+                    <td style="background-color: rgb(157,255,254)"><a data-edit="foreColor #9DFFFE"></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="black-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(10,10,10)"><a data-edit="foreColor #0A0A0A"></a></td>
+                    <td style="background-color: rgb(24,24,24)"><a data-edit="foreColor #181818"></a></td>
+                    <td style="background-color: rgb(94,94,94)"><a data-edit="foreColor #5E5E5E"></a></td>
+                    <td style="background-color: rgb(107,107,107)"><a data-edit="foreColor #6B6B6B"></a></td>
+                    <td style="background-color: rgb(133,133,133)"><a data-edit="foreColor #858585"></a></td>
+                    <td style="background-color: rgb(148,148,148)"><a data-edit="foreColor #949494"></a></td>
+                    <td style="background-color: rgb(174,174,174)"><a data-edit="foreColor #AEAEAE"></a></td>
+                    <td style="background-color: rgb(187,187,187)"><a data-edit="foreColor #BBBBBB"></a></td>
+                    <td style="background-color: rgb(213,213,213)"><a data-edit="foreColor #D5D5D5"></a></td>
+                    <td style="background-color: rgb(228,228,228)"><a data-edit="foreColor #E4E4E4"></a></td>
+                    <td style="background-color: rgb(241,241,241)"><a data-edit="foreColor #F1F1F1"></a></td>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="foreColor #FFFFFF"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <br>
+    <hr>
+
+    <div class="btn-group color-palette-group background-color">
+        <img src="img/icons/editandhighlighttool.svg#svgView(viewBox(16, 10, 10, 15))">
+        <span>Background Color</span>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Change background color"><span
+                style="background-color: rgb(253, 155, 156);"></span><b class="caret"></b></a>
+
+        <div class="dropdown-menu color-palette">
+            <span>Color Menu</span>
+
+            <div class="currentColor" style="background-color: rgb(253, 155, 156);"></div>
+            <table class="last-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(0,0,0)"><a data-edit="backColor #000000"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(50,50,50)" class=""><a data-edit="backColor #323232"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(102,102,102)"><a data-edit="backColor #666666"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(152,152,152)"><a data-edit="backColor #989898"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(203,203,203)" class=""><a data-edit="backColor #CBCBCB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="backColor #FFFFFF"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,18,35)"><a data-edit="backColor #FB1223"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(22,127,23)"><a data-edit="backColor #167F17"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(16,43,251)"><a data-edit="backColor #102BFB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(254,253,59)"><a data-edit="backColor #FEFD3B"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(47,254,251)"><a data-edit="backColor #2FFEFB"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(127,21,124)"><a data-edit="backColor #7F157C"></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="main-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(101,0,5)"><a data-edit="backColor #650005"></a></td>
+                    <td style="background-color: rgb(102,50,12)"><a data-edit="backColor #66320C"></a></td>
+                    <td style="background-color: rgb(101,101,22)"><a data-edit="backColor #656516"></a></td>
+                    <td style="background-color: rgb(101,153,34)"><a data-edit="backColor #659922"></a></td>
+                    <td style="background-color: rgb(106,201,42)"><a data-edit="backColor #6AC92A"></a></td>
+                    <td style="background-color: rgb(107,253,49)"><a data-edit="backColor #6BFD31"></a></td>
+                    <td style="background-color: rgb(45,0,0)"><a data-edit="backColor #2D0000"></a></td>
+                    <td style="background-color: rgb(1,48,1)"><a data-edit="backColor #013001"></a></td>
+                    <td style="background-color: rgb(15,98,16)"><a data-edit="backColor #0F6210"></a></td>
+                    <td style="background-color: rgb(26,150,31)"><a data-edit="backColor #1A961F"></a></td>
+                    <td style="background-color: rgb(38,202,42)"><a data-edit="backColor #26CA2A"></a></td>
+                    <td style="background-color: rgb(46,253,48)"><a data-edit="backColor #2EFD30"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,2,49)"><a data-edit="backColor #640231"></a></td>
+                    <td style="background-color: rgb(101,50,51)"><a data-edit="backColor #653233"></a></td>
+                    <td style="background-color: rgb(102,100,51)"><a data-edit="backColor #666433"></a></td>
+                    <td style="background-color: rgb(102,153,57)"><a data-edit="backColor #669939"></a></td>
+                    <td style="background-color: rgb(105,201,61)"><a data-edit="backColor #69C93D"></a></td>
+                    <td style="background-color: rgb(109,253,69)"><a data-edit="backColor #6DFD45"></a></td>
+                    <td style="background-color: rgb(0,0,48)"><a data-edit="backColor #000030"></a></td>
+                    <td style="background-color: rgb(1,49,50)"><a data-edit="backColor #013132"></a></td>
+                    <td style="background-color: rgb(14,99,51)"><a data-edit="backColor #0E6333"></a></td>
+                    <td style="background-color: rgb(29,152,57)"><a data-edit="backColor #1D9839"></a></td>
+                    <td style="background-color: rgb(39,202,42)"><a data-edit="backColor #27CA2A"></a></td>
+                    <td style="background-color: rgb(46,253,69)"><a data-edit="backColor #2EFD45"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,12,99)"><a data-edit="backColor #640C63"></a></td>
+                    <td style="background-color: rgb(101,52,101)"><a data-edit="backColor #653465"></a></td>
+                    <td style="background-color: rgb(100,101,100)"><a data-edit="backColor #646564"></a></td>
+                    <td style="background-color: rgb(103,152,104)"><a data-edit="backColor #679868"></a></td>
+                    <td style="background-color: rgb(104,201,105)"><a data-edit="backColor #68C969"></a></td>
+                    <td style="background-color: rgb(108,253,109)"><a data-edit="backColor #6CFD6D"></a></td>
+                    <td style="background-color: rgb(0,11,97)"><a data-edit="backColor #000B61"></a></td>
+                    <td style="background-color: rgb(5,51,99)"><a data-edit="backColor #053363"></a></td>
+                    <td style="background-color: rgb(13,102,101)"><a data-edit="backColor #0D6665"></a></td>
+                    <td style="background-color: rgb(29,152,101)"><a data-edit="backColor #1D9865"></a></td>
+                    <td style="background-color: rgb(38,202,61)"><a data-edit="backColor #26CA3D"></a></td>
+                    <td style="background-color: rgb(46,252,110)"><a data-edit="backColor #2EFC6E"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(98,26,149)"><a data-edit="backColor #621A95"></a></td>
+                    <td style="background-color: rgb(100,55,151)"><a data-edit="backColor #643797"></a></td>
+                    <td style="background-color: rgb(101,102,150)"><a data-edit="backColor #656696"></a></td>
+                    <td style="background-color: rgb(103,151,151)"><a data-edit="backColor #679797"></a></td>
+                    <td style="background-color: rgb(106,202,154)"><a data-edit="backColor #6ACA9A"></a></td>
+                    <td style="background-color: rgb(108,253,156)"><a data-edit="backColor #6CFD9C"></a></td>
+                    <td style="background-color: rgb(2,22,149)"><a data-edit="backColor #021695"></a></td>
+                    <td style="background-color: rgb(7,54,149)"><a data-edit="backColor #073695"></a></td>
+                    <td style="background-color: rgb(18,103,151)"><a data-edit="backColor #126797"></a></td>
+                    <td style="background-color: rgb(30,153,153)"><a data-edit="backColor #1E9999"></a></td>
+                    <td style="background-color: rgb(40,201,152)"><a data-edit="backColor #28C998"></a></td>
+                    <td style="background-color: rgb(47,253,156)"><a data-edit="backColor #2FFD9C"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(100,34,198)"><a data-edit="backColor #6422C6"></a></td>
+                    <td style="background-color: rgb(102,58,201)"><a data-edit="backColor #663AC9"></a></td>
+                    <td style="background-color: rgb(100,104,200)"><a data-edit="backColor #6468C8"></a></td>
+                    <td style="background-color: rgb(102,154,201)"><a data-edit="backColor #669AC9"></a></td>
+                    <td style="background-color: rgb(103,204,202)"><a data-edit="backColor #67CCCA"></a></td>
+                    <td style="background-color: rgb(108,254,205)"><a data-edit="backColor #6CFECD"></a></td>
+                    <td style="background-color: rgb(9,34,200)"><a data-edit="backColor #0922C8"></a></td>
+                    <td style="background-color: rgb(13,57,202)"><a data-edit="backColor #0D39CA"></a></td>
+                    <td style="background-color: rgb(22,102,202)"><a data-edit="backColor #1666CA"></a></td>
+                    <td style="background-color: rgb(32,154,204)"><a data-edit="backColor #209ACC"></a></td>
+                    <td style="background-color: rgb(40,203,200)"><a data-edit="backColor #28CBC8"></a></td>
+                    <td style="background-color: rgb(47,253,205)"><a data-edit="backColor #2FFDCD"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(101,43,249)"><a data-edit="backColor #652BF9"></a></td>
+                    <td style="background-color: rgb(102,62,250)"><a data-edit="backColor #663EFA"></a></td>
+                    <td style="background-color: rgb(101,107,250)"><a data-edit="backColor #656BFA"></a></td>
+                    <td style="background-color: rgb(104,155,252)"><a data-edit="backColor #689BFC"></a></td>
+                    <td style="background-color: rgb(107,205,252)"><a data-edit="backColor #6BCDFC"></a></td>
+                    <td style="background-color: rgb(111,255,254)"><a data-edit="backColor #6FFFFE"></a></td>
+                    <td style="background-color: rgb(17,43,251)"><a data-edit="backColor #112BFB"></a></td>
+                    <td style="background-color: rgb(18,62,251)"><a data-edit="backColor #123EFB"></a></td>
+                    <td style="background-color: rgb(26,106,250)"><a data-edit="backColor #1A6AFA"></a></td>
+                    <td style="background-color: rgb(34,154,252)"><a data-edit="backColor #229AFC"></a></td>
+                    <td style="background-color: rgb(43,206,253)"><a data-edit="backColor #2BCEFD"></a></td>
+                    <td style="background-color: rgb(48,255,254)"><a data-edit="backColor #30FFFE"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(250,18,34)"><a data-edit="backColor #FA1222"></a></td>
+                    <td style="background-color: rgb(252,53,36)"><a data-edit="backColor #FC3524"></a></td>
+                    <td style="background-color: rgb(252,101,40)"><a data-edit="backColor #FC6528"></a></td>
+                    <td style="background-color: rgb(252,152,44)"><a data-edit="backColor #FC982C"></a></td>
+                    <td style="background-color: rgb(253,202,48)"><a data-edit="backColor #FDCA30"></a></td>
+                    <td style="background-color: rgb(253,253,59)"><a data-edit="backColor #FDFD3B"></a></td>
+                    <td style="background-color: rgb(150,6,19)"><a data-edit="backColor #960613"></a></td>
+                    <td style="background-color: rgb(151,50,19)"><a data-edit="backColor #973213"></a></td>
+                    <td style="background-color: rgb(150,101,26)"><a data-edit="backColor #96651A"></a></td>
+                    <td style="background-color: rgb(151,151,36)"><a data-edit="backColor #979724"></a></td>
+                    <td style="background-color: rgb(152,200,45)"><a data-edit="backColor #98C82D"></a></td>
+                    <td style="background-color: rgb(156,253,49)"><a data-edit="backColor #9CFD31"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,21,56)"><a data-edit="backColor #FB1538"></a></td>
+                    <td style="background-color: rgb(251,53,58)"><a data-edit="backColor #FB353A"></a></td>
+                    <td style="background-color: rgb(253,102,58)"><a data-edit="backColor #FD663A"></a></td>
+                    <td style="background-color: rgb(253,151,63)" class=""><a data-edit="backColor #FD973F"></a></td>
+                    <td style="background-color: rgb(253,203,66)"><a data-edit="backColor #FDCB42"></a></td>
+                    <td style="background-color: rgb(255,251,74)"><a data-edit="backColor #FFFB4A"></a></td>
+                    <td style="background-color: rgb(152,6,51)"><a data-edit="backColor #980633"></a></td>
+                    <td style="background-color: rgb(151,52,53)"><a data-edit="backColor #973435"></a></td>
+                    <td style="background-color: rgb(151,101,53)"><a data-edit="backColor #976535"></a></td>
+                    <td style="background-color: rgb(153,152,58)"><a data-edit="backColor #99983A"></a></td>
+                    <td style="background-color: rgb(154,201,62)"><a data-edit="backColor #9AC93E"></a></td>
+                    <td style="background-color: rgb(155,253,69)"><a data-edit="backColor #9BFD45"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(249,25,101)"><a data-edit="backColor #F91965"></a></td>
+                    <td style="background-color: rgb(251,52,103)"><a data-edit="backColor #FB3467"></a></td>
+                    <td style="background-color: rgb(253,101,102)"><a data-edit="backColor #FD6566"></a></td>
+                    <td style="background-color: rgb(252,153,106)"><a data-edit="backColor #FC996A"></a></td>
+                    <td style="background-color: rgb(252,203,111)"><a data-edit="backColor #FCCB6F"></a></td>
+                    <td style="background-color: rgb(255,253,115)"><a data-edit="backColor #FFFD73"></a></td>
+                    <td style="background-color: rgb(148,16,97)"><a data-edit="backColor #941061"></a></td>
+                    <td style="background-color: rgb(150,52,102)"><a data-edit="backColor #963466"></a></td>
+                    <td style="background-color: rgb(151,100,103)"><a data-edit="backColor #976467"></a></td>
+                    <td style="background-color: rgb(153,152,103)"><a data-edit="backColor #999867"></a></td>
+                    <td style="background-color: rgb(152,203,107)"><a data-edit="backColor #98CB6B"></a></td>
+                    <td style="background-color: rgb(156,253,111)"><a data-edit="backColor #9CFD6F"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(251,33,154)"><a data-edit="backColor #FB219A"></a></td>
+                    <td style="background-color: rgb(252,57,154)" class=""><a data-edit="backColor #FC399A"></a></td>
+                    <td style="background-color: rgb(253,102,154)"><a data-edit="backColor #FD669A"></a></td>
+                    <td style="background-color: rgb(253,155,156)" class="picked"><a data-edit="backColor #FD9B9C"></a>
+                    </td>
+                    <td style="background-color: rgb(253,203,155)"><a data-edit="backColor #FDCB9B"></a></td>
+                    <td style="background-color: rgb(255,254,158)"><a data-edit="backColor #FFFE9E"></a></td>
+                    <td style="background-color: rgb(150,27,150)"><a data-edit="backColor #961B96"></a></td>
+                    <td style="background-color: rgb(152,56,151)"><a data-edit="backColor #983897"></a></td>
+                    <td style="background-color: rgb(151,101,151)"><a data-edit="backColor #976597"></a></td>
+                    <td style="background-color: rgb(153,153,153)"><a data-edit="backColor #999999"></a></td>
+                    <td style="background-color: rgb(154,202,155)"><a data-edit="backColor #9ACA9B"></a></td>
+                    <td style="background-color: rgb(156,253,156)"><a data-edit="backColor #9CFD9C"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(252,39,200)"><a data-edit="backColor #FC27C8"></a></td>
+                    <td style="background-color: rgb(252,60,201)"><a data-edit="backColor #FC3CC9"></a></td>
+                    <td style="background-color: rgb(251,104,203)"><a data-edit="backColor #FB68CB"></a></td>
+                    <td style="background-color: rgb(253,155,204)"><a data-edit="backColor #FD9BCC"></a></td>
+                    <td style="background-color: rgb(253,204,206)"><a data-edit="backColor #FDCCCE"></a></td>
+                    <td style="background-color: rgb(255,254,205)" class=""><a data-edit="backColor #FFFECD"></a></td>
+                    <td style="background-color: rgb(150,36,201)"><a data-edit="backColor #9624C9"></a></td>
+                    <td style="background-color: rgb(152,58,199)"><a data-edit="backColor #983AC7"></a></td>
+                    <td style="background-color: rgb(150,104,202)"><a data-edit="backColor #9668CA"></a></td>
+                    <td style="background-color: rgb(152,154,202)"><a data-edit="backColor #989ACA"></a></td>
+                    <td style="background-color: rgb(153,203,203)"><a data-edit="backColor #99CBCB"></a></td>
+                    <td style="background-color: rgb(156,252,204)"><a data-edit="backColor #9CFCCC"></a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: rgb(252,45,251)"><a data-edit="backColor #FC2DFB"></a></td>
+                    <td style="background-color: rgb(253,65,252)"><a data-edit="backColor #FD41FC"></a></td>
+                    <td style="background-color: rgb(250,106,249)"><a data-edit="backColor #FA6AF9"></a></td>
+                    <td style="background-color: rgb(252,156,253)"><a data-edit="backColor #FC9CFD"></a></td>
+                    <td style="background-color: rgb(253,204,252)"><a data-edit="backColor #FDCCFC"></a></td>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="backColor #FFFFFF"></a></td>
+                    <td style="background-color: rgb(152,43,250)"><a data-edit="backColor #982BFA"></a></td>
+                    <td style="background-color: rgb(152,63,250)"><a data-edit="backColor #983FFA"></a></td>
+                    <td style="background-color: rgb(153,107,251)"><a data-edit="backColor #996BFB"></a></td>
+                    <td style="background-color: rgb(153,156,252)"><a data-edit="backColor #999CFC"></a></td>
+                    <td style="background-color: rgb(155,205,252)"><a data-edit="backColor #9BCDFC"></a></td>
+                    <td style="background-color: rgb(157,255,254)"><a data-edit="backColor #9DFFFE"></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="black-color-table">
+                <tbody>
+                <tr>
+                    <td style="background-color: rgb(10,10,10)"><a data-edit="backColor #0A0A0A"></a></td>
+                    <td style="background-color: rgb(24,24,24)"><a data-edit="backColor #181818"></a></td>
+                    <td style="background-color: rgb(94,94,94)"><a data-edit="backColor #5E5E5E"></a></td>
+                    <td style="background-color: rgb(107,107,107)"><a data-edit="backColor #6B6B6B"></a></td>
+                    <td style="background-color: rgb(133,133,133)"><a data-edit="backColor #858585"></a></td>
+                    <td style="background-color: rgb(148,148,148)"><a data-edit="backColor #949494"></a></td>
+                    <td style="background-color: rgb(174,174,174)"><a data-edit="backColor #AEAEAE"></a></td>
+                    <td style="background-color: rgb(187,187,187)"><a data-edit="backColor #BBBBBB"></a></td>
+                    <td style="background-color: rgb(213,213,213)"><a data-edit="backColor #D5D5D5"></a></td>
+                    <td style="background-color: rgb(228,228,228)"><a data-edit="backColor #E4E4E4"></a></td>
+                    <td style="background-color: rgb(241,241,241)"><a data-edit="backColor #F1F1F1"></a></td>
+                    <td style="background-color: rgb(255,255,255)"><a data-edit="backColor #FFFFFF"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <br>
+    <hr>
+
+
+    <div class="btn-group styles">
+
+        <span>Styles</span>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Change style">somce<b class="caret"></b></a>
+
+
+        <ul class="dropdown-menu">
+
+
+            <li class="style-picker" data-name="Normal"><span class=""></span><a><span style="font-size:14px"><span
+                    style="font-weight: none"><span style="font-style: none">Normal</span></span></span></a></li>
+            <li class="style-picker" data-name="Title"><span></span><a><span style="font-size:18px"><span
+                    style="font-weight: bold">Title</span></span></a></li>
+            <li class="style-picker" data-name="Subtitle"><span></span><a><span style="font-size:14px"><span
+                    style="font-style: italic">Subtitle</span></span></a></li>
+            <li class="style-picker" data-name="Heading 3"><span></span><a><span style="font-size:12px"><span
+                    style="color: #666666">Heading 3</span></span></a></li>
+            <li data-name="somce" class="custom style-picker"><span class="icon-check"></span><a
+                    contenteditable="false"><i>somce</i></a><span class="icon-pencil"></span><span class="icon-trash"
+                                                                                                   style="display: none;"></span>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="#">Options</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" id="saveStyles">Save as my default styles</a></li>
+                    <li class=""><a href="#" id="deleteStyles">Delete styles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="insert-link">
+        <span>Insert link</span>
+        <input placeholder="www." type="text" data-edit="createLink" class="add-link-input">
+    </div>
+
+    <hr>
+
+    <div class="submit-buttons-group">
+        <a class="btn" id="cancelButton">Cancel</a>
+        <a class="btn saveEdits" id="saveButton">SAVE</a>
+    </div>
+
+</div>
+</body>
+</html>
