@@ -1,6 +1,6 @@
 tinymce.init({
     plugins: [
-        "link", "textcolor"
+        "link", "myColor"
     ],
     selector: ".js-editor",
     menubar: false,
