@@ -128,15 +128,10 @@ div.mce-edit-area {
 }
 
 .mce-grid td.mce-grid-cell div {
-    border: 1px solid #d6d6d6;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     margin: 0;
-    cursor: pointer
-}
-
-.mce-grid td.mce-grid-cell div:focus {
-    border-color: #a1a1a1
+    cursor: pointer;
 }
 
 .mce-grid td.mce-grid-cell div[disabled] {
@@ -144,7 +139,7 @@ div.mce-edit-area {
 }
 
 .mce-grid {
-    border-spacing: 2px;
+    border-spacing: 1px;
     border-collapse: separate
 }
 
@@ -966,7 +961,33 @@ i.mce-i-checkbox {
 }
 
 .mce-colorbutton-grid {
+    display: inline-block;
     margin: 4px
+}
+
+.mce-colorbutton-grid-left
+{
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.mce-colorbutton-grid-bottom
+{
+    margin-left: 34px;
+}
+
+.mce-colorbutton-grid-header
+{
+    float: left;
+}
+
+.mce-colorbutton-grid-header-color
+{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    margin: 11px 0 0 258px;
 }
 
 .mce-colorbutton button {
