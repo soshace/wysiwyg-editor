@@ -773,34 +773,13 @@ body .mce-abs-layout-item, .mce-abs-end {
     vertical-align: top;
 }
 
-.mce-btn .mce-caret {
-    margin-top: 8px;
-    margin-left: 0
-}
-
-.mce-btn-small .mce-caret {
-    margin-top: 8px;
-    margin-left: 0
-}
-
 .mce-caret {
-    display: inline-block;;;
-    width: 0;
-    height: 0;
-    vertical-align: top;
-    border-top: 4px solid #333;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    content: ""
-}
-
-.mce-disabled .mce-caret {
-    border-top-color: #aaa
-}
-
-.mce-caret.mce-up {
-    border-bottom: 4px solid #333;
-    border-top: 0
+    position: absolute;
+    right: 6px;
+    top: 7px;
+    border-top: 8px solid #656769;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
 }
 
 .mce-btn-flat {
@@ -956,33 +935,25 @@ i.mce-i-checkbox {
     height: 14px
 }
 
-.mce-colorbutton .mce-ico {
-    position: relative
-}
-
 .mce-colorbutton-grid {
     display: inline-block;
     margin: 4px
 }
 
-.mce-colorbutton-grid-left
-{
+.mce-colorbutton-grid-left {
     display: inline-block;
     margin-top: 4px;
 }
 
-.mce-colorbutton-grid-bottom
-{
+.mce-colorbutton-grid-bottom {
     margin-left: 34px;
 }
 
-.mce-colorbutton-grid-header
-{
+.mce-colorbutton-grid-header {
     float: left;
 }
 
-.mce-colorbutton-grid-header-color
-{
+.mce-colorbutton-grid-header-color {
     display: block;
     width: 20px;
     height: 20px;
@@ -1278,10 +1249,6 @@ i.mce-i-checkbox {
     color: #333
 }
 
-.mce-menubar .mce-caret {
-    border-top-color: #333
-}
-
 .mce-menubar .mce-menubtn:hover, .mce-menubar .mce-menubtn.mce-active, .mce-menubar .mce-menubtn:focus {
     border-color: transparent;
     background: #e6e6e6;
@@ -1323,18 +1290,6 @@ i.mce-i-checkbox {
     position: relative
 }
 
-.mce-listbox .mce-caret {
-    position: absolute;
-    margin-top: -2px;
-    right: 8px;
-    top: 50%
-}
-
-.mce-rtl .mce-listbox .mce-caret {
-    right: auto;
-    left: 8px
-}
-
 .mce-rtl .mce-listbox button {
     padding-right: 10px;
     padding-left: 20px
@@ -1354,19 +1309,7 @@ i.mce-i-checkbox {
     margin-bottom: 1px
 }
 
-.mce-menu-item .mce-ico, .mce-menu-item .mce-text {
-    color: #333
-}
-
-.mce-menu-item.mce-disabled .mce-text, .mce-menu-item.mce-disabled .mce-ico {
-    color: #adadad
-}
-
 .mce-menu-item:hover .mce-text, .mce-menu-item.mce-selected .mce-text, .mce-menu-item:focus .mce-text {
-    color: #fff
-}
-
-.mce-menu-item:hover .mce-ico, .mce-menu-item.mce-selected .mce-ico, .mce-menu-item:focus .mce-ico {
     color: #fff
 }
 
@@ -1400,11 +1343,6 @@ i.mce-i-checkbox {
     border-left-color: #fff
 }
 
-.mce-menu-align .mce-menu-shortcut, .mce-menu-align .mce-caret {
-    position: absolute;
-    right: 0
-}
-
 .mce-menu-item.mce-active i {
     visibility: visible
 }
@@ -1419,14 +1357,6 @@ i.mce-i-checkbox {
 
 .mce-menu-item-normal.mce-active .mce-text {
     color: #333
-}
-
-.mce-menu-item-normal.mce-active:hover .mce-text, .mce-menu-item-normal.mce-active:hover .mce-ico {
-    color: #fff
-}
-
-.mce-menu-item-normal.mce-active:focus .mce-text, .mce-menu-item-normal.mce-active:focus .mce-ico {
-    color: #fff
 }
 
 .mce-menu-item:hover, .mce-menu-item.mce-selected, .mce-menu-item:focus {
@@ -1463,23 +1393,6 @@ div.mce-menu .mce-menu-item-sep, .mce-menu-item-sep:hover {
     text-align: right;
     direction: rtl;
     padding: 6px 12px 6px 15px
-}
-
-.mce-menu-align.mce-rtl .mce-menu-shortcut, .mce-menu-align.mce-rtl .mce-caret {
-    right: auto;
-    left: 0
-}
-
-.mce-rtl .mce-menu-item .mce-caret {
-    margin-left: 6px;
-    margin-right: 0;
-    border-right: 4px solid #333;
-    border-left: 0
-}
-
-.mce-rtl .mce-menu-item.mce-selected .mce-caret, .mce-rtl .mce-menu-item:focus .mce-caret, .mce-rtl .mce-menu-item:hover .mce-caret {
-    border-left-color: transparent;
-    border-right-color: #fff
 }
 
 .mce-menu {
@@ -1712,29 +1625,6 @@ i.mce-i-resize {
     font-style: normal
 }
 
-.mce-ico {
-    font-family: tinymce, Arial;
-    font-style: normal;
-    font-weight: 400;
-    font-variant: normal;
-    font-size: 16px;
-    line-height: 16px;
-    speak: none;
-    vertical-align: text-top;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: inline-block;
-    background: transparent center center;
-    background-size: cover;
-    width: 16px;
-    height: 16px;
-    color: #333
-}
-
-.mce-btn-small .mce-ico {
-    font-family: tinymce-small, Arial
-}
-
 .mce-i-save:before {
     content: "\e000"
 }
@@ -1912,14 +1802,30 @@ i.mce-i-resize {
     font-family: "Times New Roman", serif;
     font-size: 25px;
     font-weight: bold;
+    font-style: normal;
+    line-height: 44px;
+    cursor: pointer;
 }
 
 .mce-i-italic:before {
-    content: "\e02b"
+    font-family: "Times New Roman", serif;
+    content: "I";
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    line-height: 44px;
+    cursor: pointer;
 }
 
 .mce-i-underline:before {
-    content: "\e02c"
+    font-family: "Times New Roman", serif;
+    cursor: pointer;
+    content: "U";
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+    font-style: normal;
+    line-height: 44px;
 }
 
 .mce-i-strikethrough:before {
@@ -2013,6 +1919,31 @@ i.mce-i-backcolor {
     width: 165px;
 }
 
+#mceu_0.mce-menubtn.mce-fixed-width span {
+    width: 135px;
+    padding-left: 9px;
+}
+
 #mceu_1 {
     width: 51px;
+}
+
+#mceu_1.mce-menubtn.mce-fixed-width span {
+    width: 20px;
+    padding-left: 9px;
+}
+
+#mceu_12-body {
+    overflow: hidden;
+}
+
+#mceu_2, #mceu_3, #mceu_4 {
+    float: left;
+    width: 33.333%;
+    height: 44px;
+}
+
+#mceu_2 button, #mceu_3 button, #mceu_4 button {
+    width: 100%;
+    text-align: center;
 }

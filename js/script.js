@@ -1,7 +1,7 @@
 $(function () {
     tinymce.init({
         plugins: [
-            "link", "myColor", "fontfamily", "fontsize"
+            "link", "myColor", "fontfamily", "fontsize", "simplecontrols"
         ],
         selector: ".js-editor",
         menubar: false,
