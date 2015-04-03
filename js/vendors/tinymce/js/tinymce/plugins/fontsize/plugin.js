@@ -4,7 +4,6 @@ require([
     var each = Tools.each;
 
     tinymce.PluginManager.add('fontsize', function (editor) {
-
         function createListBoxChangeHandler(items, formatName) {
             return function () {
                 var self = this;

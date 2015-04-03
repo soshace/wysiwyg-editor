@@ -11,30 +11,30 @@
 /*global tinymce:true */
 /*eslint consistent-this:0 */
 
-tinymce.PluginManager.add('myColorBack', function(editor) {
-	var cols, rows, lastColor=0, lastTable=0;
+tinymce.PluginManager.add('my_color_bg', function(editor) {
+    var cols, rows, lastColor=0, lastTable=0;
 
-	rows = editor.settings.textcolor_rows || 12;
-	cols = editor.settings.textcolor_cols || 12;
+    rows = editor.settings.textcolor_rows || 12;
+    cols = editor.settings.textcolor_cols || 12;
 
-	function getCurrentColor(format) {
-		var color;
+    function getCurrentColor(format) {
+        var color;
 
-		editor.dom.getParents(editor.selection.getStart(), function(elm) {
-			var value;
+        editor.dom.getParents(editor.selection.getStart(), function(elm) {
+            var value;
 
-			if ((value = elm.style[format == 'forecolor' ? 'color' : 'background-color'])) {
-				color = value;
-			}
-		});
+            if ((value = elm.style[format == 'forecolor' ? 'color' : 'background-color'])) {
+                color = value;
+            }
+        });
 
-		return color;
-	}
+        return color;
+    }
 
-	function mapColors() {
-		var i, colors = [], colorMap;
+    function mapColors() {
+        var i, colors = [], colorMap;
 
-		colorMap = editor.settings.textcolor_map || [
+        colorMap = editor.settings.textcolor_map || [
             "000000", "000000",
             "323232", "323232",
             "666666", "666666",
@@ -49,13 +49,13 @@ tinymce.PluginManager.add('myColorBack', function(editor) {
             "7f157c", "7f157c",
 
 
-			"650005", "650005",
-			"66320c", "66320c",
-			"656516", "656516",
-			"659922", "659922",
-			"6ac92a", "6ac92a",
-			"6bfd31", "6bfd31",
-			"2d0000", "2d0000",
+            "650005", "650005",
+            "66320c", "66320c",
+            "656516", "656516",
+            "659922", "659922",
+            "6ac92a", "6ac92a",
+            "6bfd31", "6bfd31",
+            "2d0000", "2d0000",
             "013001", "013001",
             "0f6210", "0f6210",
             "1a961f", "1a961f",
@@ -220,38 +220,38 @@ tinymce.PluginManager.add('myColorBack', function(editor) {
             "d5d5d5", "d5d5d5",
             "e4e4e4", "e4e4e4",
             "f1f1f1", "f1f1f1",
-			"ffffff", "ffffff"
-		];
+            "ffffff", "ffffff"
+        ];
 
-		for (i = 0; i < colorMap.length; i += 2) {
-			colors.push({
-				text: colorMap[i + 1],
-				color: '#' + colorMap[i]
-			});
-		}
+        for (i = 0; i < colorMap.length; i += 2) {
+            colors.push({
+                text: colorMap[i + 1],
+                color: '#' + colorMap[i]
+            });
+        }
 
-		return colors;
-	}
+        return colors;
+    }
 
-	function renderColorPicker() {
-		var ctrl = this, colors, color, html, last, x, y, i, id = ctrl._id, count = 0;
+    function renderColorPicker() {
+        var ctrl = this, colors, color, html, last, x, y, i, id = ctrl._id, count = 0;
 
-		function getColorCellHtml(color, title) {
-			var isNoColor = color == 'transparent';
+        function getColorCellHtml(color, title) {
+            var isNoColor = color == 'transparent';
 
-			return (
-				'<td class="mce-grid-cell' + (isNoColor ? ' mce-colorbtn-trans' : '') + '">' +
-					'<div id="' + id + '-' + (count++) + '"' +
-						' data-mce-color="' + (color ? color : '') + '"' +
-						' role="option"' +
-						' tabIndex="-1"' +
-						' style="' + (color ? 'background-color: ' + color : '') + '"' +
-						' title="' + tinymce.translate(title) + '">' +
-						(isNoColor ? '&#215;' : '') +
-					'</div>' +
-				'</td>'
-			);
-		}
+            return (
+            '<td class="mce-grid-cell' + (isNoColor ? ' mce-colorbtn-trans' : '') + '">' +
+            '<div id="' + id + '-' + (count++) + '"' +
+            ' data-mce-color="' + (color ? color : '') + '"' +
+            ' role="option"' +
+            ' tabIndex="-1"' +
+            ' style="' + (color ? 'background-color: ' + color : '') + '"' +
+            ' title="' + tinymce.translate(title) + '">' +
+            (isNoColor ? '&#215;' : '') +
+            '</div>' +
+            '</td>'
+            );
+        }
 
         html = '<h1 class="mce-colorbutton-back-grid-header">Color Menu</h1>';
         html += '<div class="mce-colorbutton-back-grid-header-color"></div>';
@@ -306,96 +306,96 @@ tinymce.PluginManager.add('myColorBack', function(editor) {
         }
         html += '</tr>';
 
-		if (editor.settings.color_picker_callback) {
-			html += (
-				'<tr>' +
-					'<td colspan="' + cols + '" class="mce-custom-color-btn">' +
-						'<div id="' + id + '-c" class="mce-widget mce-btn mce-btn-small mce-btn-flat" ' +
-							'role="button" tabindex="-1" aria-labelledby="' + id + '-c" style="width: 100%">' +
-							'<button type="button" role="presentation" tabindex="-1">' + tinymce.translate('Custom...') + '</button>' +
-						'</div>' +
-					'</td>' +
-				'</tr>'
-			);
+        if (editor.settings.color_picker_callback) {
+            html += (
+            '<tr>' +
+            '<td colspan="' + cols + '" class="mce-custom-color-btn">' +
+            '<div id="' + id + '-c" class="mce-widget mce-btn mce-btn-small mce-btn-flat" ' +
+            'role="button" tabindex="-1" aria-labelledby="' + id + '-c" style="width: 100%">' +
+            '<button type="button" role="presentation" tabindex="-1">' + tinymce.translate('Custom...') + '</button>' +
+            '</div>' +
+            '</td>' +
+            '</tr>'
+            );
 
-			html += '<tr>';
+            html += '<tr>';
 
-			for (x = 0; x < cols; x++) {
-				html += getColorCellHtml('', 'Custom color');
-			}
+            for (x = 0; x < cols; x++) {
+                html += getColorCellHtml('', 'Custom color');
+            }
 
-			html += '</tr>';
-		}
+            html += '</tr>';
+        }
 
-		html += '</tbody></table>';
+        html += '</tbody></table>';
 
-		return html;
-	}
+        return html;
+    }
 
-	function applyFormat(format, value) {
-		editor.undoManager.transact(function() {
-			editor.focus();
-			editor.formatter.apply(format, {value: value});
-			editor.nodeChanged();
-		});
-	}
+    function applyFormat(format, value) {
+        editor.undoManager.transact(function() {
+            editor.focus();
+            editor.formatter.apply(format, {value: value});
+            editor.nodeChanged();
+        });
+    }
 
-	function removeFormat(format) {
-		editor.undoManager.transact(function() {
-			editor.focus();
-			editor.formatter.remove(format, {value: null}, null, true);
-			editor.nodeChanged();
-		});
-	}
+    function removeFormat(format) {
+        editor.undoManager.transact(function() {
+            editor.focus();
+            editor.formatter.remove(format, {value: null}, null, true);
+            editor.nodeChanged();
+        });
+    }
 
-	function onPanelClick(e) {
-		var buttonCtrl = this.parent(), value;
+    function onPanelClick(e) {
+        var buttonCtrl = this.parent(), value;
 
-		function selectColor(value) {
-			buttonCtrl.hidePanel();
-			buttonCtrl.color(value);
-			applyFormat(buttonCtrl.settings.format, value);
-		}
+        function selectColor(value) {
+            buttonCtrl.hidePanel();
+            buttonCtrl.color(value);
+            applyFormat(buttonCtrl.settings.format, value);
+        }
 
-		function resetColor() {
-			buttonCtrl.hidePanel();
-			buttonCtrl.resetColor();
-			removeFormat(buttonCtrl.settings.format);
-		}
+        function resetColor() {
+            buttonCtrl.hidePanel();
+            buttonCtrl.resetColor();
+            removeFormat(buttonCtrl.settings.format);
+        }
 
-		function setDivColor(div, value) {
-			div.style.background = value;
-			div.setAttribute('data-mce-color', value);
-		}
+        function setDivColor(div, value) {
+            div.style.background = value;
+            div.setAttribute('data-mce-color', value);
+        }
 
-		if (tinymce.DOM.getParent(e.target, '.mce-custom-color-btn')) {
-			buttonCtrl.hidePanel();
+        if (tinymce.DOM.getParent(e.target, '.mce-custom-color-btn')) {
+            buttonCtrl.hidePanel();
 
-			editor.settings.color_picker_callback.call(editor, function(value) {
-				var tableElm = buttonCtrl.panel.getEl().getElementsByTagName('table')[0];
-				var customColorCells, div, i;
+            editor.settings.color_picker_callback.call(editor, function(value) {
+                var tableElm = buttonCtrl.panel.getEl().getElementsByTagName('table')[0];
+                var customColorCells, div, i;
 
-				customColorCells = tinymce.map(tableElm.rows[tableElm.rows.length - 1].childNodes, function(elm) {
-					return elm.firstChild;
-				});
+                customColorCells = tinymce.map(tableElm.rows[tableElm.rows.length - 1].childNodes, function(elm) {
+                    return elm.firstChild;
+                });
 
-				for (i = 0; i < customColorCells.length; i++) {
-					div = customColorCells[i];
-					if (!div.getAttribute('data-mce-color')) {
-						break;
-					}
-				}
+                for (i = 0; i < customColorCells.length; i++) {
+                    div = customColorCells[i];
+                    if (!div.getAttribute('data-mce-color')) {
+                        break;
+                    }
+                }
 
-				// TODO: Might need to be the left on RTL
-				if (i == cols) {
-					for (i = 0; i < cols - 1; i++) {
-						setDivColor(customColorCells[i], customColorCells[i + 1].getAttribute('data-mce-color'));
-					}
-				}
-				setDivColor(div, value);
-				selectColor(value);
-			}, getCurrentColor(buttonCtrl.settings.format));
-		}
+                // TODO: Might need to be the left on RTL
+                if (i == cols) {
+                    for (i = 0; i < cols - 1; i++) {
+                        setDivColor(customColorCells[i], customColorCells[i + 1].getAttribute('data-mce-color'));
+                    }
+                }
+                setDivColor(div, value);
+                selectColor(value);
+            }, getCurrentColor(buttonCtrl.settings.format));
+        }
 
         function findParentClass(element, className){
             while(element.parentNode) {
@@ -406,47 +406,47 @@ tinymce.PluginManager.add('myColorBack', function(editor) {
             return null;
         }
 
-		value = e.target.getAttribute('data-mce-color');
+        value = e.target.getAttribute('data-mce-color');
         $(findParentClass(e.target, 'mce-container').getElementsByClassName('mce-colorbutton-back-grid-header-color')).css('background-color', value);
 
-		if (value) {
-			if (this.lastId) {
-				document.getElementById(this.lastId).setAttribute('aria-selected', false);
-			}
+        if (value) {
+            if (this.lastId) {
+                document.getElementById(this.lastId).setAttribute('aria-selected', false);
+            }
 
-			e.target.setAttribute('aria-selected', true);
-			this.lastId = e.target.id;
+            e.target.setAttribute('aria-selected', true);
+            this.lastId = e.target.id;
 
-			if (value == 'transparent') {
-				resetColor();
-			} else {
-				selectColor(value);
-			}
-		} else if (value !== null) {
-			buttonCtrl.hidePanel();
-		}
-	}
+            if (value == 'transparent') {
+                resetColor();
+            } else {
+                selectColor(value);
+            }
+        } else if (value !== null) {
+            buttonCtrl.hidePanel();
+        }
+    }
 
-	function onButtonClick() {
-		var self = this;
+    function onButtonClick() {
+        var self = this;
 
-		if (self._color) {
-			applyFormat(self.settings.format, self._color);
-		} else {
-			removeFormat(self.settings.format);
-		}
-	}
+        if (self._color) {
+            applyFormat(self.settings.format, self._color);
+        } else {
+            removeFormat(self.settings.format);
+        }
+    }
 
-	editor.addButton('backcolor', {
-		type: 'colorbutton',
-		tooltip: 'Background color',
-		format: 'hilitecolor',
-		panel: {
-			role: 'application',
-			ariaRemember: true,
-			html: renderColorPicker,
-			onclick: onPanelClick
-		},
-		onclick: onButtonClick
-	});
+    editor.addButton('backcolor', {
+        type: 'colorbutton',
+        tooltip: 'Background color',
+        format: 'hilitecolor',
+        panel: {
+            role: 'application',
+            ariaRemember: true,
+            html: renderColorPicker,
+            onclick: onPanelClick
+        },
+        onclick: onButtonClick
+    });
 });

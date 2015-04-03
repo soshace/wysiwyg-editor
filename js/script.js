@@ -1,13 +1,13 @@
 $(function () {
     tinymce.init({
         plugins: [
-            "link", "myColor", "myColorBack", "fontfamily", "fontsize", "simplecontrols"
+            "simple_link", "my_color", "my_color_bg", "fontfamily", "fontsize", "simplecontrols"
         ],
         selector: ".js-editor",
         menubar: false,
         statusbar: false,
         skin: 'recorder',
-        toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | link",
+        toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
         setup: tinyMceSetupHandler
     });
 

@@ -226,6 +226,7 @@ div.mce-tinymce-inline {
 
 .mce-toolbar-grp .mce-flow-layout-item {
     border-bottom: 1px solid #bfbfbf;
+    overflow: hidden;
 }
 
 .mce-rtl .mce-wordcount {
