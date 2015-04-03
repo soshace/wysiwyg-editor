@@ -1947,3 +1947,7 @@ i.mce-i-backcolor {
     width: 100%;
     text-align: center;
 }
+
+.mce-colorbutton .mce-caret{
+    position: relative;
+}
