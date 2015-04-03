@@ -1,4 +1,6 @@
 $(function () {
+    var $linkInput = $('<input>', {type: 'text'});
+
     tinymce.init({
         plugins: [
             "simple_link", "my_color", "my_color_bg", "fontfamily", "fontsize", "simplecontrols"
@@ -7,6 +9,7 @@ $(function () {
         menubar: false,
         statusbar: false,
         skin: 'recorder',
+        linkInput: $linkInput,
         toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
         setup: tinyMceSetupHandler
     });
@@ -24,15 +27,7 @@ $(function () {
         $header.append($('<h1>', {text: 'Word Editor'}));
         $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
         $toolbar.prepend($header);
-
-        customizeFontSizeDropDown();
-    }
-
-    function customizeFontSizeDropDown() {
-        var $dropDown = $('#mceu_18'),
-            $sizeItems = $('.mce-text', $dropDown);
-
-        console.log($sizeItems);
+        $toolbar.append($linkInput);
     }
 
     function editorFocusHandler() {
