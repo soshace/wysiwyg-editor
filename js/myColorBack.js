@@ -11,8 +11,8 @@
 /*global tinymce:true */
 /*eslint consistent-this:0 */
 
-tinymce.PluginManager.add('myColor', function(editor) {
-	var cols, rows, lastPanel, previousPanel;
+tinymce.PluginManager.add('myColorBack', function(editor) {
+	var cols, rows, lastColor=0, lastTable=0;
 
 	rows = editor.settings.textcolor_rows || 12;
 	cols = editor.settings.textcolor_cols || 12;
@@ -253,14 +253,14 @@ tinymce.PluginManager.add('myColor', function(editor) {
 			);
 		}
 
-        html = '<h1 class="mce-colorbutton-grid-header">Color Menu</h1>';
-        html += '<div class="mce-colorbutton-grid-header-color"></div>';
+        html = '<h1 class="mce-colorbutton-back-grid-header">Color Menu</h1>';
+        html += '<div class="mce-colorbutton-back-grid-header-color"></div>';
         colors = mapColors();
         colors.push({
             text: tinymce.translate("No color"),
             color: "transparent"
         });
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-left" role="list" cellspacing="0"><tbody>';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-back-grid-left" role="list" cellspacing="0"><tbody>';
         last = colors.length - 1;
 
         for (x = 0; x < cols; x++) {
@@ -274,7 +274,7 @@ tinymce.PluginManager.add('myColor', function(editor) {
             html += '</tr>';
         }
 
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid" role="list" cellspacing="0"><tbody>';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-back-grid" role="list" cellspacing="0"><tbody>';
 
         for (y = 1; y < rows+1; y++) {
             html += '<tr>';
@@ -293,7 +293,7 @@ tinymce.PluginManager.add('myColor', function(editor) {
             html += '</tr>';
         }
 
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-bottom" role="list" cellspacing="0"><tbody>';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-back-grid-bottom" role="list" cellspacing="0"><tbody>';
 
         html += '<tr>';
         for (x = 156; x < last; x++) {
@@ -397,13 +397,17 @@ tinymce.PluginManager.add('myColor', function(editor) {
 			}, getCurrentColor(buttonCtrl.settings.format));
 		}
 
-		value = e.target.getAttribute('data-mce-color');
-
-        if(e.target !== lastPanel) {
-            previousPanel =lastPanel;
-            lastPanel = e.target;
-            applyChooseColor(value);
+        function findParentClass(element, className){
+            while(element.parentNode) {
+                element = element.parentNode;
+                if(element.classList[0]===className)
+                    return element
+            }
+            return null;
         }
+
+		value = e.target.getAttribute('data-mce-color');
+        $(findParentClass(e.target, 'mce-container').getElementsByClassName('mce-colorbutton-back-grid-header-color')).css('background-color', value);
 
 		if (value) {
 			if (this.lastId) {
@@ -432,82 +436,11 @@ tinymce.PluginManager.add('myColor', function(editor) {
 			removeFormat(self.settings.format);
 		}
 	}
-    /***********************Get color from text*******************/
-    function rgb2hex(rgb) {
-        if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
 
-        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-        function hex(x) {
-            return ("0" + parseInt(x).toString(16)).slice(-2);
-        }
-        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-    }
-
-    function findParentColorUntil(element, parentUntil){
-        if(typeof element.style !== 'undefined') {
-            if (element.style.color)
-                return rgb2hex(element.style.color);
-        }
-        while(element.parentNode && parentUntil>0) {
-            parentUntil --;
-            element = element.parentNode;
-            if(typeof element.style !== 'undefined') {
-                if (element.style.color)
-                    return rgb2hex(element.style.color);
-            }
-        }
-        return null;
-    }
-
-    function createListBoxChangeHandler() {
-            editor.on('nodeChange', function (e) {
-                var newColor=findParentColorUntil(e["element"], 3);
-                applyChooseColor(newColor)
-            });
-    }
-
-    function findParentClass(element, className){
-        while(element.parentNode) {
-            element = element.parentNode;
-            if(element.classList[0]===className)
-                return element
-        }
-        return null;
-    }
-
-    function applyChooseColor(value) {
-        if (typeof lastPanel !== 'undefined') {
-            var panel = findParentClass(lastPanel, 'mce-container');
-            var $elem = $(panel.getElementsByClassName('mce-colorbutton-grid-header-color'));
-            if (!value)
-                value = '#000000';
-            $elem.css('background-color', value);
-            if (lastPanel.getAttribute('data-mce-color') != value)
-            {
-                var allCells = panel.getElementsByClassName('mce-grid-cell');
-                for (var i = 0; i < allCells.length; i++) {
-                    if (allCells[i].getElementsByTagName('div')[0].getAttribute('data-mce-color') == value) {
-                        if (allCells[i].getElementsByTagName('div')[0] !== lastPanel) {
-                            previousPanel = lastPanel;
-                            lastPanel = allCells[i].getElementsByTagName('div')[0];
-                        }
-                    }
-                }
-            }
-            if (lastPanel.getAttribute('data-mce-color') == value) {
-                $(lastPanel).css("border", "1px solid red");
-                if (previousPanel)
-                    $(previousPanel).css("border", "none");
-            }
-        }
-    }
-    /***********************Get color from text*******************/
-
-	editor.addButton('forecolor', {
+	editor.addButton('backcolor', {
 		type: 'colorbutton',
-		tooltip: 'Text color',
-		format: 'forecolor',
-        onPostRender: createListBoxChangeHandler(),
+		tooltip: 'Background color',
+		format: 'hilitecolor',
 		panel: {
 			role: 'application',
 			ariaRemember: true,
