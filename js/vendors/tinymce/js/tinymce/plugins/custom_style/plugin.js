@@ -147,7 +147,7 @@ tinymce.PluginManager.add('custom_style', function (editor) {
             }
 
             if (key === 'fontSize') {
-                editor.formatter.apply('fontsize', {value: value});
+                editor.formatter.apply('fontsize', {value: value + 'px'});
                 return;
             }
 
