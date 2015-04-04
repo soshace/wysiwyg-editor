@@ -22,32 +22,32 @@ $(function () {
                     fontSize: '12px',
                     bold: true,
                     italic: true,
-                    backgroundColor: '#fff'
+                    backgroundColor: 'rgba(255, 255, 255, 1)'
+                }
+            },
+            {
+                title: 'Header2',
+                isDefault: true,
+                values: {
+                    fontFamily: 'Arial',
+                    fontSize: '12px',
+                    bold: true,
+                    italic: true,
+                    backgroundColor: 'blue',
+                    color: 'red'
+                }
+            },
+            {
+                title: 'Header3',
+                isDefault: true,
+                values: {
+                    fontFamily: 'Arial',
+                    fontSize: '36px',
+                    bold: true,
+                    color: 'rgba(255, 233, 233, 0.2)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
                 }
             }
-            //{
-            //    title: 'Header2',
-            //    isDefault: true,
-            //    values: {
-            //        fontFamily: 'Arial',
-            //        fontSize: '12',
-            //        bold: true,
-            //        italic: true,
-            //        backgroundColor: 'blue',
-            //        color: 'red'
-            //    }
-            //},
-            //{
-            //    title: 'Header3',
-            //    isDefault: true,
-            //    values: {
-            //        fontFamily: 'Arial',
-            //        fontSize: '36',
-            //        bold: true,
-            //        color: 'rgba(255, 233, 233, 0.2)',
-            //        backgroundColor: 'rgba(0, 0, 0, 0.2)'
-            //    }
-            //}
         ],
         //toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
         toolbar: "fontfamily fontsize | bold italic underline | simpleLink",
