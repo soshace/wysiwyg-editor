@@ -1,46 +1,67 @@
-tinymce.PluginManager.add('custom_style', function (editor) {
-    var defaultStyles = editor.settings.defaultStyles,
-        $textField = editor.settings.customStyle,
-        CustomStyle = function ($wrapper, styleName, styles, isDefault) {
-            this.$wrapper = $wrapper;
-            this.$el = null;
-            this.styleName = null;
-            this.isDefault = false;
-            this.styles = {
-                fontFamily: null,
-                fontSize: null,
-                bold: false,
-                italic: false,
-                underline: false,
-                backgroundColor: null,
-                color: null
-            };
-
-            this.setDefault(isDefault);
-            this.setCurrentStyles(styles);
-            this.setStyleName(styleName);
-            this.createDomElement();
-            this.addListeners();
+(function () {
+    var CustomStyle = function (editor, $wrapper, styleName, styles, isDefault) {
+        this.editor = editor;
+        this.$wrapper = $wrapper;
+        this.$el = null;
+        this.styleName = null;
+        this.isDefault = false;
+        this.styles = {
+            fontFamily: null,
+            fontSize: null,
+            bold: false,
+            italic: false,
+            underline: false,
+            backgroundColor: null,
+            color: null
         };
+
+        this.setDefault(isDefault);
+        this.setCurrentStyles(styles);
+        this.setStyleName(styleName);
+        this.createDomElement();
+        this.addListeners();
+    };
 
     CustomStyle.prototype.setDefault = function (isDefault) {
         this.isDefault = !!isDefault;
     };
 
-    CustomStyle.prototype.isCurrent = function (styles) {
-        var isCurrentStyle = false,
-            that = this;
+    CustomStyle.prototype.isMatchStyles = function (parents) {
+        var styles = this.styles;
 
-        $.each(styles, function (styleName, value) {
-            if (that.styles[styleName] === value) {
-                isCurrentStyle = true;
-            } else {
-                isCurrentStyle = false;
-                return false;
-            }
-        });
+        if (styles['bold'] && !this.checkFormatter('bold', parents)) {
+            return false;
+        }
 
-        return false;
+        if (styles['italic'] && !this.checkFormatter('italic', parents)) {
+            return false;
+        }
+
+        if (styles['underline'] && !this.checkFormatter('underline', parents)) {
+            return false;
+        }
+
+        if (styles['backGroundColor'] && !this.checkFormatter('hilitecolor', parents, 'backGroundColor')) {
+            return false;
+        }
+
+        if (styles['color'] && !this.checkFormatter('forecolor', parents, 'color')) {
+            return false;
+        }
+
+        if (styles['fontSize'] && !this.checkFormatter('fontsize', parents, 'fontSize')) {
+            return false;
+        }
+
+        return styles['fontFamily'] && this.checkFormatter('fontname', parents, 'fontFamily');
+    };
+
+    CustomStyle.prototype.setActive = function () {
+        this.$el.addClass('active');
+    };
+
+    CustomStyle.prototype.unsetActive = function () {
+        this.$el.removeClass('active');
     };
 
     CustomStyle.prototype.setCurrentStyles = function (styles) {
@@ -84,7 +105,7 @@ tinymce.PluginManager.add('custom_style', function (editor) {
             }
 
             if (key === 'fontSize') {
-                css['font-size'] = value + 'px';
+                css['font-size'] = value;
                 return;
             }
 
@@ -117,7 +138,9 @@ tinymce.PluginManager.add('custom_style', function (editor) {
     };
 
     CustomStyle.prototype.applyStylesToEditor = function () {
-        var styles = this.styles;
+        var editor = this.editor,
+            styles = this.styles;
+
         $.each(styles, function (key, value) {
             if (value === null) {
                 return;
@@ -133,7 +156,7 @@ tinymce.PluginManager.add('custom_style', function (editor) {
             }
 
             if (key === 'fontSize') {
-                editor.formatter.apply('fontsize', {value: value + 'px'});
+                editor.formatter.apply('fontsize', {value: value});
                 return;
             }
 
@@ -169,22 +192,69 @@ tinymce.PluginManager.add('custom_style', function (editor) {
 
     CustomStyle.prototype.addListeners = function () {
         this.$el.on('click', this.styleClickHandler.bind(this));
+        this.editor.on('nodeChange', this.nodeChangeHandler.bind(this));
+    };
+
+    CustomStyle.prototype.nodeChangeHandler = function (event) {
+        var parents;
+
+        if (!event.selectionChange) {
+            return;
+        }
+
+        parents = event.parents;
+
+        if (this.isMatchStyles(parents)) {
+            this.setActive();
+            return;
+        }
+
+        this.unsetActive();
+    };
+
+    CustomStyle.prototype.checkFormatter = function (formatterName, parents, styleName) {
+        var styleValue,
+            styles = this.styles,
+            editor = this.editor,
+            isMatch = false;
+
+        $.each(parents, function (index, element) {
+            if (typeof styleName === 'undefined') {
+                isMatch = editor.formatter.matchNode(element, formatterName);
+            } else {
+                styleValue = styles[styleName];
+                isMatch = editor.formatter.matchNode(element, formatterName, {value: styleValue});
+            }
+
+            if (isMatch) {
+                return false;
+            }
+        });
+
+        return !!isMatch;
     };
 
     CustomStyle.prototype.styleClickHandler = function () {
         this.applyStylesToEditor();
     };
 
-    function setDropDownView($wrapper, defaultStyles) {
-        $.each(defaultStyles, function (index, style) {
-            var styleName = style.title,
-                isDefault = style.isDefault,
-                styleValues = style.values;
 
-            new CustomStyle($wrapper, styleName, styleValues, isDefault);
-        });
-    }
+    tinymce.PluginManager.add('custom_style', function (editor) {
+        var defaultStyles = editor.settings.defaultStyles,
+            $textField = editor.settings.customStyle;
 
 
-    setDropDownView($textField, defaultStyles);
-});
+        function setDropDownView($wrapper, defaultStyles) {
+            $.each(defaultStyles, function (index, style) {
+                var styleName = style.title,
+                    isDefault = style.isDefault,
+                    styleValues = style.values;
+
+                new CustomStyle(editor, $wrapper, styleName, styleValues, isDefault);
+            });
+        }
+
+
+        setDropDownView($textField, defaultStyles);
+    });
+})();

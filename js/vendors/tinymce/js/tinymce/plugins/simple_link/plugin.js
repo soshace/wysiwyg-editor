@@ -1,9 +1,15 @@
 tinymce.PluginManager.add('simple_link', function (editor) {
     var $textField = editor.settings.linkInput;
 
-    editor.on('nodeChange', function (editor) {
+    editor.on('nodeChange', function (event) {
         var href = '',
-            parents = editor.parents;
+            parents;
+
+        if (!event.selectionChange) {
+            return;
+        }
+
+        parents = event.parents;
 
         $.each(parents, function (index, element) {
             var tagName = element.tagName.toLowerCase();

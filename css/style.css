@@ -7,3 +7,15 @@
 .editor textarea {
     height: 100%;
 }
+
+.editor__custom-style {
+
+}
+
+.editor__custom-style li.active:before {
+    content: '';
+    background: blue;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
