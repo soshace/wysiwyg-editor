@@ -24,6 +24,14 @@ tinymce.PluginManager.add('custom_style', function (editor) {
             this.addListeners();
         };
 
+    CustomStyle.prototype.registrFormats = function () {
+        editor.formatter.register({
+            'custom_opacity': {
+                inline: 'span', styles: {color: '%value'}
+            }
+        });
+    };
+
     CustomStyle.prototype.setDefault = function (isDefault) {
         this.isDefault = !!isDefault;
     };
@@ -123,7 +131,55 @@ tinymce.PluginManager.add('custom_style', function (editor) {
     };
 
     CustomStyle.prototype.applyStylesToEditor = function () {
+        var styles = this.styles;
+        $.each(styles, function (key, value) {
+            if (value === null) {
+                return;
+            }
 
+            if (value === false) {
+                return;
+            }
+
+            if (key === 'fontFamily') {
+                editor.formatter.apply('fontname', {value: value});
+                return;
+            }
+
+            if (key === 'fontSize') {
+                editor.formatter.apply('fontsize', {value: value});
+                return;
+            }
+
+            if (key === 'bold') {
+                editor.formatter.apply('bold');
+                return;
+            }
+
+            if (key === 'italic') {
+                editor.formatter.apply('italic');
+                return;
+            }
+
+            if (key === 'underline') {
+                editor.formatter.apply('underline');
+                return;
+            }
+
+            if (key === 'backgroundColor') {
+                editor.formatter.apply('hilitecolor', {value: value});
+                return;
+            }
+
+            if (key === 'color') {
+                editor.formatter.apply('forecolor', {value: value});
+                return;
+            }
+
+            if (key === 'opacity') {
+                editor.formatter.apply('custom_opacity', {value: value});
+            }
+        });
     };
 
     CustomStyle.prototype.setStyleName = function (styleName) {
@@ -135,7 +191,7 @@ tinymce.PluginManager.add('custom_style', function (editor) {
     };
 
     CustomStyle.prototype.styleClickHandler = function () {
-        debugger;
+        this.applyStylesToEditor();
     };
 
     function setDropDownView($wrapper, defaultStyles) {
