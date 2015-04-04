@@ -4,7 +4,8 @@ $(function () {
 
     tinymce.init({
         plugins: [
-            "simple_link", "my_color", "my_color_bg", "fontfamily", "fontsize", "simplecontrols", "custom_style"
+            //"simple_link", "my_color", "my_color_bg", "fontfamily", "fontsize", "simplecontrols", "custom_style"
+            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style"
         ],
         selector: ".js-editor",
         menubar: false,
@@ -43,11 +44,13 @@ $(function () {
                     fontFamily: 'Arial',
                     fontSize: '36',
                     bold: true,
-                    backgroundColor: '#fff'
+                    color: 'rgba(255, 233, 233, 0.2)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
                 }
             }
         ],
-        toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
+        //toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
+        toolbar: "fontfamily fontsize | bold italic underline | simpleLink",
         setup: tinyMceSetupHandler
     });
 

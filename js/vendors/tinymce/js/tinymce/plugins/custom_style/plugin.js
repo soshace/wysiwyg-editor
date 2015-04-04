@@ -13,8 +13,7 @@ tinymce.PluginManager.add('custom_style', function (editor) {
                 italic: false,
                 underline: false,
                 backgroundColor: null,
-                color: null,
-                opacity: null
+                color: null
             };
 
             this.setDefault(isDefault);
@@ -23,14 +22,6 @@ tinymce.PluginManager.add('custom_style', function (editor) {
             this.createDomElement();
             this.addListeners();
         };
-
-    CustomStyle.prototype.registrFormats = function () {
-        editor.formatter.register({
-            'custom_opacity': {
-                inline: 'span', styles: {color: '%value'}
-            }
-        });
-    };
 
     CustomStyle.prototype.setDefault = function (isDefault) {
         this.isDefault = !!isDefault;
@@ -119,11 +110,6 @@ tinymce.PluginManager.add('custom_style', function (editor) {
 
             if (key === 'color') {
                 css['color'] = value;
-                return;
-            }
-
-            if (key === 'opacity') {
-                css['opacity'] = value;
             }
         });
 
@@ -173,11 +159,6 @@ tinymce.PluginManager.add('custom_style', function (editor) {
 
             if (key === 'color') {
                 editor.formatter.apply('forecolor', {value: value});
-                return;
-            }
-
-            if (key === 'opacity') {
-                editor.formatter.apply('custom_opacity', {value: value});
             }
         });
     };
