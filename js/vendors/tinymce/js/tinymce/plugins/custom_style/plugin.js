@@ -240,21 +240,131 @@
 
 
     tinymce.PluginManager.add('custom_style', function (editor) {
-        var defaultStyles = editor.settings.defaultStyles,
-            $textField = editor.settings.customStyle;
+        var stylesList = [],
+            defaultStyles = editor.settings.defaultStyles,
+            $optionsWrapper = $('<li>', {text: 'options'}),
+            $optionsList = $('<ul>'),
+            $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
+            $deleteStyles = $('<li>', {text: 'Delete styles'}),
+            eventEditor,
+            $wrapper = editor.settings.customStyle;
 
+        editor.on('nodeChange', function (event) {
+            if (!event.selectionChange) {
+                return;
+            }
 
-        function setDropDownView($wrapper, defaultStyles) {
+            eventEditor = event;
+        });
+
+        function setDropDownView(defaultStyles) {
             $.each(defaultStyles, function (index, style) {
                 var styleName = style.title,
                     isDefault = style.isDefault,
-                    styleValues = style.values;
+                    styleValues = style.values,
+                    newCustomStyle = new CustomStyle(editor, $wrapper, styleName, styleValues, isDefault);
 
-                new CustomStyle(editor, $wrapper, styleName, styleValues, isDefault);
+                stylesList.push(newCustomStyle);
             });
+
+            setOptionsView();
+        }
+
+        function getSelectionStyleValue(styleName) {
+            var parents = eventEditor.parents,
+                value = null;
+
+            $.each(parents, function (index, element) {
+                var $el = $(element),
+                    styleValue = $el.css(styleName);
+
+                if (styleValue) {
+                    value = styleValue;
+                    return false
+                }
+            });
+
+            return value;
+        }
+
+        function getCurrentStyles() {
+            var fontSize = getSelectionStyleValue('font-size'),
+                fontFamily = getSelectionStyleValue('font-family'),
+                color = getSelectionStyleValue('color'),
+                backgroundColor = getSelectionStyleValue('background-color'),
+                styles = {};
+
+            if (editor.formatter.match('bold')) {
+                styles.bold = true;
+            }
+
+            if (editor.formatter.match('italic')) {
+                styles.italic = true;
+            }
+
+            if (editor.formatter.match('underline')) {
+                styles.underline = true;
+            }
+
+            if (fontSize) {
+                styles.fontSize = fontSize;
+            }
+
+            if (fontFamily) {
+                styles.fontFamily = fontFamily;
+            }
+
+            if (color) {
+                styles.color = color;
+            }
+
+            if (backgroundColor) {
+                styles.backgroundColor = backgroundColor;
+            }
+
+            return styles;
+        }
+
+        function setDeleteStyleView() {
+            var isCustomStyles = false;
+
+            $.each(stylesList, function (index, style) {
+                if (!style.isDefault) {
+                    isCustomStyles = true;
+                    return false;
+                }
+            });
+
+            if (isCustomStyles) {
+                $deleteStyles.addClass('active');
+                return;
+            }
+
+            $deleteStyles.removeClass('active');
+        }
+
+        function saveAsMyDefaultHandler() {
+            console.log(getCurrentStyles());
+            setDeleteStyleView();
+        }
+
+        function deleteStyles() {
+            setDeleteStyleView();
         }
 
 
-        setDropDownView($textField, defaultStyles);
+        function setOptionsView() {
+            $saveAsMyDefaultStyles.on('click', saveAsMyDefaultHandler);
+            $deleteStyles.on('click', deleteStyles);
+
+            $optionsList.append($saveAsMyDefaultStyles).
+                append($deleteStyles);
+
+            $optionsWrapper.append($optionsList);
+            $wrapper.append($optionsWrapper);
+        }
+
+
+        setDropDownView(defaultStyles);
     });
 })();
