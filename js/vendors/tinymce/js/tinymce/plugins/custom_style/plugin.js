@@ -242,7 +242,8 @@
     tinymce.PluginManager.add('custom_style', function (editor) {
         var stylesList = [],
             defaultStyles = editor.settings.defaultStyles,
-            $optionsWrapper = $('<li>', {text: 'options'}),
+            $stylesList = $('<ul>'),
+            $optionsWrapper = $('<div>', {text: 'options'}),
             $optionsList = $('<ul>'),
             $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
             $deleteStyles = $('<li>', {text: 'Delete styles'}),
@@ -258,15 +259,17 @@
         });
 
         function setDropDownView(defaultStyles) {
+
             $.each(defaultStyles, function (index, style) {
                 var styleName = style.title,
                     isDefault = style.isDefault,
                     styleValues = style.values,
-                    newCustomStyle = new CustomStyle(editor, $wrapper, styleName, styleValues, isDefault);
+                    newCustomStyle = new CustomStyle(editor, $stylesList, styleName, styleValues, isDefault);
 
                 stylesList.push(newCustomStyle);
             });
 
+            $wrapper.append($stylesList);
             setOptionsView();
         }
 
@@ -343,8 +346,49 @@
             $deleteStyles.removeClass('active');
         }
 
+        function getStyleName() {
+            var styleName = 'untitled',
+                newMaxUntitledNumber = 0,
+                maxUntitledNumber = 0;
+
+            $.each(stylesList, function (index, style) {
+                var currentStyleName = style.styleName;
+
+                if (style.isDefault) {
+                    return;
+                }
+
+                if (!/untitled(\d+)?/.test(currentStyleName)) {
+                    return;
+                }
+
+                if (/untitled/.test(currentStyleName)) {
+                    newMaxUntitledNumber = 1;
+                }
+
+                if (/untitled(\d+)/.test(currentStyleName)) {
+                    newMaxUntitledNumber = Number(currentStyleName.match(/untitled(\d+)/)[1]);
+                    newMaxUntitledNumber++;
+                }
+
+                if (maxUntitledNumber < newMaxUntitledNumber) {
+                    maxUntitledNumber = newMaxUntitledNumber;
+                }
+            });
+
+            if (maxUntitledNumber === 0) {
+                return styleName;
+            }
+
+            return styleName + maxUntitledNumber;
+        }
+
         function saveAsMyDefaultHandler() {
-            console.log(getCurrentStyles());
+            var currentStyles = getCurrentStyles(),
+                styleName = getStyleName(),
+                newCustomStyle = new CustomStyle(editor, $stylesList, styleName, currentStyles);
+
+            stylesList.push(newCustomStyle);
             setDeleteStyleView();
         }
 
