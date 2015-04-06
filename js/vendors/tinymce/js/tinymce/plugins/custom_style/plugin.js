@@ -77,14 +77,15 @@
     };
 
     CustomStyle.prototype.convertRgbaToRgb = function (value) {
-        var formattedValue = value.replace(/\s/g, '');
+        var rgbaValues;
 
-        if (/rgba\(\d+,\d+,\d+,1\)/.test(formattedValue)) {
-            formattedValue = formattedValue.replace('rgba', 'rgb');
-            formattedValue = formattedValue.replace(',1)', ')');
+
+        if (/rgba\(\d+,\s?\d+,\s?\d+,\s?1\)/.test(value)) {
+            rgbaValues = value.match(/rgba\((\d+),\s?(\d+),\s?(\d+),\s?1/);
+            return 'rgb(' + rgbaValues[1] + ', ' + rgbaValues[2] + ', ' + rgbaValues[3] + ')';
         }
 
-        return formattedValue;
+        return value;
     };
 
     CustomStyle.prototype.setActive = function () {
@@ -281,24 +282,13 @@
 
         function getSelectionStyleValue(styleName) {
             var parents = eventEditor.parents,
-                formatters = {
-                    'font-size': 'fontsize',
-                    'font-family': 'fontname',
-                    'color': 'forecolor',
-                    'background-color': 'hilitecolor'
-                },
-                isValue = editor.formatter.match(formatters[styleName]),
                 value = null;
-
-            if (!isValue) {
-                return value;
-            }
 
             $.each(parents, function (index, element) {
                 var $el = $(element),
-                    styleValue = $el.css(styleName);
+                    styleValue = $el[0].style[styleName];
 
-                if (styleValue) {
+                if (styleValue.length) {
                     value = styleValue;
                     return false
                 }
