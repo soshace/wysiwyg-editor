@@ -45,8 +45,8 @@ $(function () {
                     fontSize: '12px',
                     bold: true,
                     italic: true,
-                    backgroundColor: 'blue',
-                    color: 'red'
+                    backgroundColor: 'rgba(108,253,109,1)',
+                    color: 'rgba(101,52,101,1)'
                 }
             },
             {
@@ -56,8 +56,8 @@ $(function () {
                     fontFamily: 'Arial',
                     fontSize: '36px',
                     bold: true,
-                    color: 'rgba(255, 233, 233, 0.2)',
-                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+                    color: 'rgba(100,55,151,1)',
+                    backgroundColor: 'rgba(108,253,109,0.4)'
                 }
             }
         ],
