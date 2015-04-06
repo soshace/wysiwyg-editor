@@ -2247,3 +2247,49 @@ td.mce-grid-cell div
     content: '';
 }
 
+.editor__custom-style {
+
+}
+
+.editor__custom-style ul {
+    list-style: none;
+}
+
+.editor__custom-style li {
+    cursor: pointer;
+}
+
+.editor__custom-style li.active .editor__checked-sign {
+    content: '';
+    background: blue;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.showDelete .editor__delete-button {
+    content: '';
+    background: red;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.showDelete.active .editor__checked-sign {
+    display: none;
+}
+
+.editor__custom-style li.custom-style:hover .editor__edit-button {
+    content: '';
+    background: grey;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.custom-style .editor__title-input {
+}
+
+.hide {
+    display: none;
+}
