@@ -224,31 +224,18 @@ tinymce.PluginManager.add('my_color', function (editor) {
             $.each(parents, function (index, element) {
                 if (typeof element.style !== 'undefined')
                     if (element.style.color) {
-                        lastColor = allToRgba(element.style.color);
-                        applyChooseColor(lastColor);
-                        reachEnd = false;
-                        return false;
+                        if(element.style.color.indexOf("rgb")>-1) {
+                            lastColor = allToRgba(element.style.color);
+                            applyChooseColor(lastColor);
+                            reachEnd = false;
+                            return false;
+                        }
                     }
 
                 })
             if (reachEnd)
                 applyChooseColor('rgba(0,0,0,1)');
             });
-    }
-
-    function findParentColor(parents)
-    {
-        var findElement=false;
-        $.each(parents, function (index, element) {
-            if (typeof element.style !== 'undefined')
-                if (element.style.color) {
-                    lastColor = allToRgba(element.style.color);
-                    findElement = true;
-                    return false;
-                }
-
-        })
-
     }
 
     function getRgbArray(rgb)
