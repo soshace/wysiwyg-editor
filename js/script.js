@@ -17,13 +17,13 @@ $(function () {
         colorInput: $colorInput,
         colorInputBg: $colorInputBg,
         editorStyles: {
-            fontFamily: 'Helvetica',
-            fontSize: '14px',
+            fontFamily: null,
+            fontSize: null,
             bold: false,
             italic: false,
             underline: false,
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-            color: 'rgb(0, 0, 0)'
+            backgroundColor: null,
+            color: null
         },
         defaultStyles: [
             {

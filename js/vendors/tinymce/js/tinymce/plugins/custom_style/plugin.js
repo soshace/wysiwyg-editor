@@ -1,18 +1,17 @@
 (function () {
     var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault) {
-            this.editor = editor;
-            this.$wrapper = $wrapper;
-            this.$el = null;
-            this.styleName = null;
-            this.isDefault = false;
-            this.styles = $.extend({}, editorStyles);
-
-            this.setDefault(isDefault);
-            this.setCurrentStyles(styles);
-            this.setStyleName(styleName);
-            this.createDomElement();
-            this.addListeners();
-        };
+        this.editor = editor;
+        this.$wrapper = $wrapper;
+        this.$el = null;
+        this.styleName = null;
+        this.isDefault = false;
+        this.styles = $.extend({}, editorStyles);
+        this.setDefault(isDefault);
+        this.setCurrentStyles(styles);
+        this.setStyleName(styleName);
+        this.createDomElement();
+        this.addListeners();
+    };
 
     CustomStyle.prototype.setDefault = function (isDefault) {
         this.isDefault = !!isDefault;
@@ -26,34 +25,63 @@
             fontSize = styles.fontSize,
             color = styles.color,
             backgroundColor = styles.backgroundColor,
-            fontFamily = styles.fontFamily,
-            editor = this.editor;
+            fontFamily = styles.fontFamily;
 
-        if (bold !== editor.formatter.match('bold')) {
+        if (!this.isMatchValue('bold', bold)) {
             return false;
         }
 
-        if (italic !== editor.formatter.match('italic')) {
+        if (!this.isMatchValue('italic', italic)) {
             return false;
         }
 
-        if (underline !== editor.formatter.match('underline')) {
+        if (!this.isMatchValue('underline', underline)) {
             return false;
         }
 
-        if (!editor.formatter.match('fontname', {value: fontFamily})) {
+        if (!this.isMatchValue('fontname', fontFamily)) {
             return false;
         }
 
-        if (!editor.formatter.match('fontsize', {value: fontSize})) {
+        if (!this.isMatchValue('fontsize', fontSize)) {
             return false;
         }
 
-        if (!editor.formatter.match('hilitecolor', {value: backgroundColor})) {
+        if (!this.isMatchValue('hilitecolor', backgroundColor)) {
             return false;
         }
 
-        return editor.formatter.match('forecolor', {value: color});
+        return this.isMatchValue('forecolor', color);
+    };
+
+    CustomStyle.prototype.isMatchValue = function (styleName, styleValue) {
+        var editor = this.editor,
+            simpleStyles = ['bold', 'italic', 'underline'];
+
+        if (simpleStyles.indexOf(styleName) !== -1) {
+            return editor.formatter.match(styleName) === styleValue;
+        }
+
+        if (styleValue) {
+            if (styleName === 'forecolor' || styleName === 'hilitecolor') {
+                styleValue = this.convertRgbaToRgb(styleValue);
+            }
+
+            return editor.formatter.match(styleName, {value: styleValue});
+        }
+
+        return !editor.formatter.match(styleName);
+    };
+
+    CustomStyle.prototype.convertRgbaToRgb = function (value) {
+        var formattedValue = value.replace(/\s/g, '');
+
+        if (/rgba\(\d+,\d+,\d+,1\)/.test(formattedValue)) {
+            formattedValue = formattedValue.replace('rgba', 'rgb');
+            formattedValue = formattedValue.replace(',1)', ')');
+        }
+
+        return formattedValue;
     };
 
     CustomStyle.prototype.setActive = function () {
@@ -250,7 +278,18 @@
 
         function getSelectionStyleValue(styleName) {
             var parents = eventEditor.parents,
+                formatters = {
+                    'font-size': 'fontsize',
+                    'font-family': 'fontname',
+                    'color': 'forecolor',
+                    'background-color': 'hilitecolor'
+                },
+                isValue = editor.formatter.match(formatters[styleName]),
                 value = null;
+
+            if (!isValue) {
+                return value;
+            }
 
             $.each(parents, function (index, element) {
                 var $el = $(element),
