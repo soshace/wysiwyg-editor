@@ -1,5 +1,5 @@
 (function () {
-    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault) {
+    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive) {
         this.editor = editor;
         this.$wrapper = $wrapper;
         this.$el = null;
@@ -11,6 +11,9 @@
         this.setStyleName(styleName);
         this.createDomElement();
         this.addListeners();
+        if (isActive) {
+            this.setActive();
+        }
     };
 
     CustomStyle.prototype.setDefault = function (isDefault) {
@@ -400,7 +403,7 @@
         function saveAsMyDefaultHandler() {
             var currentStyles = getCurrentStyles(),
                 styleName = getStyleName(),
-                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles);
+                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true);
 
             stylesList.push(newCustomStyle);
             setDeleteStyleView();
