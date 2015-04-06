@@ -1,11 +1,12 @@
 $(function () {
     var $linkInput = $('<input>', {type: 'text'}),
-        $customStyle = $('<div>', {'class': 'editor__custom-style'});
+        $customStyle = $('<div>', {'class': 'editor__custom-style'}),
+        $colorInput = $('<div>', {"class": 'colorInput'});
 
+    /******font color panel***************/
     tinymce.init({
         plugins: [
-            //"simple_link", "my_color", "my_color_bg", "fontfamily", "fontsize", "simplecontrols", "custom_style"
-            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style"
+            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color"
         ],
         selector: ".js-editor",
         menubar: false,
@@ -13,6 +14,7 @@ $(function () {
         skin: 'recorder',
         linkInput: $linkInput,
         customStyle: $customStyle,
+        colorInput: $colorInput,
         defaultStyles: [
             {
                 title: 'Header1',
@@ -49,7 +51,6 @@ $(function () {
                 }
             }
         ],
-        //toolbar: "fontfamily fontsize | bold italic underline | forecolor | backcolor | simpleLink",
         toolbar: "fontfamily fontsize | bold italic underline | simpleLink",
         setup: tinyMceSetupHandler
     });
@@ -67,6 +68,7 @@ $(function () {
         $header.append($('<h1>', {text: 'Word Editor'}));
         $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
         $toolbar.prepend($header);
+        $toolbar.append($colorInput);
         $toolbar.append($linkInput);
         $toolbar.append($customStyle);
     }
