@@ -3,7 +3,6 @@ $(function () {
         $customStyle = $('<div>', {'class': 'editor__custom-style'}),
         $colorInput = $('<div>', {"class": 'colorInput'});
 
-    /******font color panel***************/
     tinymce.init({
         plugins: [
             "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color"
@@ -15,6 +14,15 @@ $(function () {
         linkInput: $linkInput,
         customStyle: $customStyle,
         colorInput: $colorInput,
+        editorStyles: {
+            fontFamily: 'Helvetica',
+            fontSize: '14px',
+            bold: false,
+            italic: false,
+            underline: false,
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            color: 'rgb(0, 0, 0)'
+        },
         defaultStyles: [
             {
                 title: 'Header1',
