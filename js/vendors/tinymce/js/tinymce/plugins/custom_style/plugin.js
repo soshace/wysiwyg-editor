@@ -262,7 +262,7 @@
         var $target,
             value;
 
-        if (event.which === '13') {
+        if (event.which === 13) {
             $target = $(event.target);
             value = $target.val();
             this.saveTitle(value);
