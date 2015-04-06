@@ -3,7 +3,6 @@ $(function () {
         $customStyle = $('<div>', {'class': 'editor__custom-style'}),
         $colorInput = $('<div>', {"class": 'colorInput'});
 
-    /******font color panel***************/
     tinymce.init({
         plugins: [
             "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color"
