@@ -1952,7 +1952,7 @@ i.mce-i-backcolor {
 
 #colorMenuPanel{
     position: absolute;
-    background-color: white;
+    background-color: #EDEEED;;
     z-index: 1;
 }
 
@@ -1977,4 +1977,9 @@ i.mce-i-backcolor {
     height: 20px;
     margin: 0;
     cursor: pointer;
+}
+
+#opacitySliderText{
+    width: 40px;
+    background: white;
 }

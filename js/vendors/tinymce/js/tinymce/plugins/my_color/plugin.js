@@ -120,7 +120,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html += '</tbody></table>';
 
-        html += '<div class="opacitySlider"><span>Opacity</span><input type="range" min="0" max="1" step="0.1" value="1" id="opacitySlider"></div>';
+        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100"><input type="range" min="0" max="1" step="0.01" value="1" id="opacitySlider"></div>';
 
         return html;
     }
@@ -145,8 +145,8 @@ tinymce.PluginManager.add('my_color', function (editor) {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
 
-                $('body').one('click', function (e) {
-                    if (!$(e.target).is('#colorPicker__buton')) {
+                $('body').on('click', function (e) {
+                    if (e.target.id != 'colorPicker__buton' &&  e.target.id != 'opacitySliderText') {
                         divColorMenuPanel.style.display = 'none';
                     }
                 });
@@ -168,6 +168,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
         colorMenuPanelListener();
         createListBoxChangeHandler();
         opacitySliderListener();
+        opacitySliderTextListener()
     }
 
     /******font color panel***************/
@@ -197,13 +198,37 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     function opacitySliderListener()
     {
-        $('#opacitySlider').click(function (e) {
+        $('#opacitySlider').change(function (e) {
             var newColor;
             if (lastColor.indexOf("rgb")>-1) {
                 if (lastColor.indexOf("rgba") > -1)
                     newColor = lastColor.replace(/[^,]+(?=\))/, e.target.value);
                 else
                     newColor = lastColor.replace(')', ', ' + e.target.value).replace('rgb', 'rgba');
+            }
+            else
+            {
+                newColor='rgba(0,0,0,1)';
+            }
+            applyFormat('forecolor', newColor);
+        });
+    }
+
+    function opacitySliderTextListener()
+    {
+        $('#opacitySliderText').change(function (e) {
+            if(!e.target.value)
+                return -1;
+            if(e.target.value)
+                if(e.target.value<0 && e.target.value>100)
+                    return -2;
+
+            var newColor;
+            if (lastColor.indexOf("rgb")>-1) {
+                if (lastColor.indexOf("rgba") > -1)
+                    newColor = lastColor.replace(/[^,]+(?=\))/, (e.target.value/100));
+                else
+                    newColor = lastColor.replace(')', ', ' + (e.target.value/100)).replace('rgb', 'rgba');
             }
             else
             {
@@ -248,16 +273,16 @@ tinymce.PluginManager.add('my_color', function (editor) {
             $colorPicker__color = $('.colorPicker__color'),
             $allCells = $('.mce-grid-cell'),
             $opacitySlider = $('#opacitySlider'),
+            $opacitySliderText = $('#opacitySliderText'),
             rgbValue, cellRgb;
 
         $headerColor.css('background-color', value);
         $colorPicker__color.css('background-color', value);
-        console.log(value);
         rgbValue=getRgbArray(value);
         if(rgbValue.length>2)
         {
-            console.log(rgbValue[3]);
             $opacitySlider.val(rgbValue[3]);
+            $opacitySliderText.val(Math.floor(rgbValue[3]*100));
         }
         for (var i = 0; i < $allCells.length; i++) {
             cellRgb = getRgbArray($allCells[i].getElementsByTagName('div')[0].getAttribute('data-mce-color'));
