@@ -356,7 +356,7 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
             createListBoxChangeHandler();
             opacitySliderListener();
             opacitySliderTextListener()
-        }, 0);
+        }, 1000);
     }
 
     /******font color panel***************/
