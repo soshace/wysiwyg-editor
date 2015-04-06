@@ -47,7 +47,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
                 });
             }
             drawAllAndAddListeners(sideBlock, mainBlock, blackBlock)
-        });
+        })
     }
 
     function renderColorPicker(sideBlock, mainBlock, blackBlock) {
