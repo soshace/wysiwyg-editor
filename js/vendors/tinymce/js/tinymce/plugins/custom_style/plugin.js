@@ -240,21 +240,175 @@
 
 
     tinymce.PluginManager.add('custom_style', function (editor) {
-        var defaultStyles = editor.settings.defaultStyles,
-            $textField = editor.settings.customStyle;
+        var stylesList = [],
+            defaultStyles = editor.settings.defaultStyles,
+            $stylesList = $('<ul>'),
+            $optionsWrapper = $('<div>', {text: 'options'}),
+            $optionsList = $('<ul>'),
+            $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
+            $deleteStyles = $('<li>', {text: 'Delete styles'}),
+            eventEditor,
+            $wrapper = editor.settings.customStyle;
 
+        editor.on('nodeChange', function (event) {
+            if (!event.selectionChange) {
+                return;
+            }
 
-        function setDropDownView($wrapper, defaultStyles) {
+            eventEditor = event;
+        });
+
+        function setDropDownView(defaultStyles) {
+
             $.each(defaultStyles, function (index, style) {
                 var styleName = style.title,
                     isDefault = style.isDefault,
-                    styleValues = style.values;
+                    styleValues = style.values,
+                    newCustomStyle = new CustomStyle(editor, $stylesList, styleName, styleValues, isDefault);
 
-                new CustomStyle(editor, $wrapper, styleName, styleValues, isDefault);
+                stylesList.push(newCustomStyle);
             });
+
+            $wrapper.append($stylesList);
+            setOptionsView();
+        }
+
+        function getSelectionStyleValue(styleName) {
+            var parents = eventEditor.parents,
+                value = null;
+
+            $.each(parents, function (index, element) {
+                var $el = $(element),
+                    styleValue = $el.css(styleName);
+
+                if (styleValue) {
+                    value = styleValue;
+                    return false
+                }
+            });
+
+            return value;
+        }
+
+        function getCurrentStyles() {
+            var fontSize = getSelectionStyleValue('font-size'),
+                fontFamily = getSelectionStyleValue('font-family'),
+                color = getSelectionStyleValue('color'),
+                backgroundColor = getSelectionStyleValue('background-color'),
+                styles = {};
+
+            if (editor.formatter.match('bold')) {
+                styles.bold = true;
+            }
+
+            if (editor.formatter.match('italic')) {
+                styles.italic = true;
+            }
+
+            if (editor.formatter.match('underline')) {
+                styles.underline = true;
+            }
+
+            if (fontSize) {
+                styles.fontSize = fontSize;
+            }
+
+            if (fontFamily) {
+                styles.fontFamily = fontFamily;
+            }
+
+            if (color) {
+                styles.color = color;
+            }
+
+            if (backgroundColor) {
+                styles.backgroundColor = backgroundColor;
+            }
+
+            return styles;
+        }
+
+        function setDeleteStyleView() {
+            var isCustomStyles = false;
+
+            $.each(stylesList, function (index, style) {
+                if (!style.isDefault) {
+                    isCustomStyles = true;
+                    return false;
+                }
+            });
+
+            if (isCustomStyles) {
+                $deleteStyles.addClass('active');
+                return;
+            }
+
+            $deleteStyles.removeClass('active');
+        }
+
+        function getStyleName() {
+            var styleName = 'untitled',
+                newMaxUntitledNumber = 0,
+                maxUntitledNumber = 0;
+
+            $.each(stylesList, function (index, style) {
+                var currentStyleName = style.styleName;
+
+                if (style.isDefault) {
+                    return;
+                }
+
+                if (!/untitled(\d+)?/.test(currentStyleName)) {
+                    return;
+                }
+
+                if (/untitled/.test(currentStyleName)) {
+                    newMaxUntitledNumber = 1;
+                }
+
+                if (/untitled(\d+)/.test(currentStyleName)) {
+                    newMaxUntitledNumber = Number(currentStyleName.match(/untitled(\d+)/)[1]);
+                    newMaxUntitledNumber++;
+                }
+
+                if (maxUntitledNumber < newMaxUntitledNumber) {
+                    maxUntitledNumber = newMaxUntitledNumber;
+                }
+            });
+
+            if (maxUntitledNumber === 0) {
+                return styleName;
+            }
+
+            return styleName + maxUntitledNumber;
+        }
+
+        function saveAsMyDefaultHandler() {
+            var currentStyles = getCurrentStyles(),
+                styleName = getStyleName(),
+                newCustomStyle = new CustomStyle(editor, $stylesList, styleName, currentStyles);
+
+            stylesList.push(newCustomStyle);
+            setDeleteStyleView();
+        }
+
+        function deleteStyles() {
+            setDeleteStyleView();
         }
 
 
-        setDropDownView($textField, defaultStyles);
+        function setOptionsView() {
+            $saveAsMyDefaultStyles.on('click', saveAsMyDefaultHandler);
+            $deleteStyles.on('click', deleteStyles);
+
+            $optionsList.append($saveAsMyDefaultStyles).
+                append($deleteStyles);
+
+            $optionsWrapper.append($optionsList);
+            $wrapper.append($optionsWrapper);
+        }
+
+
+        setDropDownView(defaultStyles);
     });
 })();
