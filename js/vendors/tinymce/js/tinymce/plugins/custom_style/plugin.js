@@ -3,13 +3,18 @@
         this.editor = editor;
         this.$wrapper = $wrapper;
         this.$el = null;
+        this.$deleteButton = null;
+        this.$editButton = null;
+        this.$checkedSign = null;
+        this.$editInput = null;
+        this.$title = null;
         this.styleName = null;
         this.isDefault = false;
         this.styles = $.extend({}, editorStyles);
         this.setDefault(isDefault);
         this.setCurrentStyles(styles);
-        this.setStyleName(styleName);
         this.createDomElement();
+        this.setStyleName(styleName);
         this.addListeners();
         if (isActive) {
             this.setActive();
@@ -110,10 +115,23 @@
 
     CustomStyle.prototype.createDomElement = function () {
         var $el,
-            styleName = this.styleName,
+            $deleteButton,
+            $editButton,
+            $editInput,
+            $checkedSign,
+            $title,
             $wrapper = this.$wrapper;
 
-        $el = this.$el = $('<li>', {text: styleName});
+        $el = this.$el = $('<li>');
+        $title = this.$title = $('<span>', {class: 'editor__title'});
+        $deleteButton = this.$deleteButton = $('<span>', {class: 'editor__delete-button'});
+        $editButton = this.$editButton = $('<span>', {class: 'editor__edit-button'});
+        $checkedSign = this.$checkedSign = $('<span>', {class: 'editor__checked-sign'});
+        $editInput = this.$editInput = $('<input>', {class: 'editor__title-input hide'});
+        $el.append($title, $deleteButton, $editButton, $checkedSign, $editInput);
+        if (!this.isDefault) {
+            this.$el.addClass('custom-style');
+        }
         this.applyStylesToTitle();
         $wrapper.append($el);
     };
@@ -166,7 +184,7 @@
             }
         });
 
-        this.$el.css(css);
+        this.$title.css(css);
     };
 
     CustomStyle.prototype.applyStylesToEditor = function () {
@@ -220,11 +238,52 @@
 
     CustomStyle.prototype.setStyleName = function (styleName) {
         this.styleName = styleName || 'untitled';
+        this.$title.html(this.styleName);
+        this.$editInput.val(this.styleName);
     };
 
     CustomStyle.prototype.addListeners = function () {
+        this.$deleteButton.on('click', this.deleteStyleHandler.bind(this));
+        this.$editButton.on('click', this.editStyleHandler.bind(this));
+        this.$editInput.on('blur', this.editStyleBlurHandler.bind(this));
+        this.$editInput.on('keypress', this.editStyleEnterHandler.bind(this));
         this.$el.on('click', this.styleClickHandler.bind(this));
         this.editor.on('nodeChange', this.nodeChangeHandler.bind(this));
+    };
+
+    CustomStyle.prototype.editStyleBlurHandler = function (event) {
+        var $target = $(event.target),
+            value = $target.val();
+
+        this.saveTitle(value);
+    };
+
+    CustomStyle.prototype.editStyleEnterHandler = function (event) {
+        var $target,
+            value;
+
+        if (event.which === '13') {
+            $target = $(event.target);
+            value = $target.val();
+            this.saveTitle(value);
+        }
+    };
+
+    CustomStyle.prototype.saveTitle = function (styleTitle) {
+        this.$editInput.addClass('hide');
+        this.$title.removeClass('hide');
+        this.setStyleName(styleTitle);
+    };
+
+    CustomStyle.prototype.deleteStyleHandler = function () {
+        this.$el.remove();
+        delete this;
+    };
+
+    CustomStyle.prototype.editStyleHandler = function () {
+        this.$editInput.toggleClass('hide');
+        this.$title.toggleClass('hide');
+        this.$editInput.focus();
     };
 
     CustomStyle.prototype.nodeChangeHandler = function (event) {
@@ -242,6 +301,12 @@
 
     CustomStyle.prototype.styleClickHandler = function () {
         this.applyStylesToEditor();
+    };
+
+    CustomStyle.prototype.showDeleteButton = function () {
+        if (!this.isDefault) {
+            this.$el.toggleClass('showDelete');
+        }
     };
 
 
@@ -400,6 +465,9 @@
         }
 
         function deleteStyles() {
+            $.each(stylesList, function (index, style) {
+                style.showDeleteButton();
+            });
             setDeleteStyleView();
         }
 

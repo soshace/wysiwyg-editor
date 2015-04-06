@@ -1942,7 +1942,7 @@ i.mce-i-backcolor {
     text-align: center;
 }
 
-.mce-colorbutton .mce-caret{
+.mce-colorbutton .mce-caret {
     position: relative;
 }
 
@@ -1950,20 +1950,20 @@ i.mce-i-backcolor {
     width: 150px;
 }
 
-#colorMenuPanel{
+#colorMenuPanel {
     position: absolute;
     background-color: #EDEEED;;
     z-index: 1;
 }
 
-.colorPicker__color{
+.colorPicker__color {
     display: inline-block;
     width: 40px;
     height: 20px;
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0, 0, 0, 1);
 }
 
-.colorPicker{
+.colorPicker {
     display: inline-block;
 }
 
@@ -1974,7 +1974,7 @@ i.mce-i-backcolor {
     cursor: pointer;
 }
 
-#opacitySliderText{
+#opacitySliderText {
     width: 40px;
     background: white;
 }
@@ -1990,24 +1990,71 @@ i.mce-i-backcolor {
     width: 150px;
 }
 
-#colorMenuPanelBg{
+#colorMenuPanelBg {
     position: absolute;
     background-color: #EDEEED;;
     z-index: 1;
 }
 
-.colorPickerBg__color{
+.colorPickerBg__color {
     display: inline-block;
     width: 40px;
     height: 20px;
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0, 0, 0, 1);
 }
 
-.colorPickerBg{
+.colorPickerBg {
     display: inline-block;
 }
 
-#opacitySliderTextBg{
+#opacitySliderTextBg {
     width: 40px;
     background: white;
+}
+
+.editor__custom-style {
+
+}
+
+.editor__custom-style ul {
+    list-style: none;
+}
+
+.editor__custom-style li {
+    cursor: pointer;
+}
+
+.editor__custom-style li.active .editor__checked-sign {
+    content: '';
+    background: blue;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.showDelete .editor__delete-button {
+    content: '';
+    background: red;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.showDelete.active .editor__checked-sign {
+    display: none;
+}
+
+.editor__custom-style li.custom-style:hover .editor__edit-button {
+    content: '';
+    background: grey;
+    width: 5px;
+    height: 10px;
+    display: inline-block;
+}
+
+.editor__custom-style li.custom-style .editor__title-input {
+}
+
+.hide {
+    display: none;
 }
