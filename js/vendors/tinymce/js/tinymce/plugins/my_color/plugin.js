@@ -1,13 +1,3 @@
-/**
- * plugin.js
- *
- * Copyright, Moxiecode Systems AB
- * Released under LGPL License.
- *
- * License: http://www.tinymce.com/license
- * Contributing: http://www.tinymce.com/contributing
- */
-
 /*global tinymce:true */
 /*eslint consistent-this:0 */
 
@@ -259,7 +249,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
             return (
             '<td class="mce-grid-cell' + (isNoColor ? ' mce-colorbtn-trans' : '') + '">' +
-            '<div id="' + id + '-' + (count++) + '"' +
+            '<div id="' + 'my_color' + '-' + (count++) + '"' +
             ' data-mce-color="' + (color ? color : '') + '"' +
             ' role="option"' +
             ' tabIndex="-1"' +

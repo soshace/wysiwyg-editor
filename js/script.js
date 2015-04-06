@@ -1,11 +1,12 @@
 $(function () {
     var $linkInput = $('<input>', {type: 'text'}),
         $customStyle = $('<div>', {'class': 'editor__custom-style'}),
-        $colorInput = $('<div>', {"class": 'colorInput'});
+        $colorInput = $('<div>', {"class": 'colorInput'}),
+        $colorInputBg = $('<div>', {"class": 'colorInputBg'});
 
     tinymce.init({
         plugins: [
-            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color"
+            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color", "my_color_bg"
         ],
         selector: ".js-editor",
         menubar: false,
@@ -14,6 +15,7 @@ $(function () {
         linkInput: $linkInput,
         customStyle: $customStyle,
         colorInput: $colorInput,
+        colorInputBg: $colorInputBg,
         editorStyles: {
             fontFamily: 'Helvetica',
             fontSize: '14px',
@@ -77,6 +79,7 @@ $(function () {
         $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
         $toolbar.prepend($header);
         $toolbar.append($colorInput);
+        $toolbar.append($colorInputBg);
         $toolbar.append($linkInput);
         $toolbar.append($customStyle);
     }
