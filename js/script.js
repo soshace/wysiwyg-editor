@@ -15,6 +15,15 @@ $(function () {
         linkInput: $linkInput,
         customStyle: $customStyle,
         colorInput: $colorInput,
+        editorStyles: {
+            fontFamily: 'Helvetica',
+            fontSize: '14px',
+            bold: false,
+            italic: false,
+            underline: false,
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            color: 'rgb(0, 0, 0)'
+        },
         defaultStyles: [
             {
                 title: 'Header1',

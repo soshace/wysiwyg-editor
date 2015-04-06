@@ -1,59 +1,59 @@
 (function () {
-    var CustomStyle = function (editor, $wrapper, styleName, styles, isDefault) {
-        this.editor = editor;
-        this.$wrapper = $wrapper;
-        this.$el = null;
-        this.styleName = null;
-        this.isDefault = false;
-        this.styles = {
-            fontFamily: null,
-            fontSize: null,
-            bold: false,
-            italic: false,
-            underline: false,
-            backgroundColor: null,
-            color: null
-        };
+    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault) {
+            this.editor = editor;
+            this.$wrapper = $wrapper;
+            this.$el = null;
+            this.styleName = null;
+            this.isDefault = false;
+            this.styles = $.extend({}, editorStyles);
 
-        this.setDefault(isDefault);
-        this.setCurrentStyles(styles);
-        this.setStyleName(styleName);
-        this.createDomElement();
-        this.addListeners();
-    };
+            this.setDefault(isDefault);
+            this.setCurrentStyles(styles);
+            this.setStyleName(styleName);
+            this.createDomElement();
+            this.addListeners();
+        };
 
     CustomStyle.prototype.setDefault = function (isDefault) {
         this.isDefault = !!isDefault;
     };
 
-    CustomStyle.prototype.isMatchStyles = function (parents) {
-        var styles = this.styles;
+    CustomStyle.prototype.isMatchStyles = function () {
+        var styles = this.styles,
+            bold = styles.bold,
+            italic = styles.italic,
+            underline = styles.underline,
+            fontSize = styles.fontSize,
+            color = styles.color,
+            backgroundColor = styles.backgroundColor,
+            fontFamily = styles.fontFamily,
+            editor = this.editor;
 
-        if (styles['bold'] && !this.checkFormatter('bold', parents)) {
+        if (bold !== editor.formatter.match('bold')) {
             return false;
         }
 
-        if (styles['italic'] && !this.checkFormatter('italic', parents)) {
+        if (italic !== editor.formatter.match('italic')) {
             return false;
         }
 
-        if (styles['underline'] && !this.checkFormatter('underline', parents)) {
+        if (underline !== editor.formatter.match('underline')) {
             return false;
         }
 
-        if (styles['backGroundColor'] && !this.checkFormatter('hilitecolor', parents, 'backGroundColor')) {
+        if (!editor.formatter.match('fontname', {value: fontFamily})) {
             return false;
         }
 
-        if (styles['color'] && !this.checkFormatter('forecolor', parents, 'color')) {
+        if (!editor.formatter.match('fontsize', {value: fontSize})) {
             return false;
         }
 
-        if (styles['fontSize'] && !this.checkFormatter('fontsize', parents, 'fontSize')) {
+        if (!editor.formatter.match('hilitecolor', {value: backgroundColor})) {
             return false;
         }
 
-        return styles['fontFamily'] && this.checkFormatter('fontname', parents, 'fontFamily');
+        return editor.formatter.match('forecolor', {value: color});
     };
 
     CustomStyle.prototype.setActive = function () {
@@ -196,42 +196,16 @@
     };
 
     CustomStyle.prototype.nodeChangeHandler = function (event) {
-        var parents;
-
         if (!event.selectionChange) {
             return;
         }
 
-        parents = event.parents;
-
-        if (this.isMatchStyles(parents)) {
+        if (this.isMatchStyles()) {
             this.setActive();
             return;
         }
 
         this.unsetActive();
-    };
-
-    CustomStyle.prototype.checkFormatter = function (formatterName, parents, styleName) {
-        var styleValue,
-            styles = this.styles,
-            editor = this.editor,
-            isMatch = false;
-
-        $.each(parents, function (index, element) {
-            if (typeof styleName === 'undefined') {
-                isMatch = editor.formatter.matchNode(element, formatterName);
-            } else {
-                styleValue = styles[styleName];
-                isMatch = editor.formatter.matchNode(element, formatterName, {value: styleValue});
-            }
-
-            if (isMatch) {
-                return false;
-            }
-        });
-
-        return !!isMatch;
     };
 
     CustomStyle.prototype.styleClickHandler = function () {
@@ -241,6 +215,7 @@
 
     tinymce.PluginManager.add('custom_style', function (editor) {
         var stylesList = [],
+            editorStyles = editor.settings.editorStyles,
             defaultStyles = editor.settings.defaultStyles,
             $stylesList = $('<ul>'),
             $optionsWrapper = $('<div>', {text: 'options'}),
@@ -264,7 +239,7 @@
                 var styleName = style.title,
                     isDefault = style.isDefault,
                     styleValues = style.values,
-                    newCustomStyle = new CustomStyle(editor, $stylesList, styleName, styleValues, isDefault);
+                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault);
 
                 stylesList.push(newCustomStyle);
             });
@@ -386,7 +361,7 @@
         function saveAsMyDefaultHandler() {
             var currentStyles = getCurrentStyles(),
                 styleName = getStyleName(),
-                newCustomStyle = new CustomStyle(editor, $stylesList, styleName, currentStyles);
+                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles);
 
             stylesList.push(newCustomStyle);
             setDeleteStyleView();
@@ -407,7 +382,6 @@
             $optionsWrapper.append($optionsList);
             $wrapper.append($optionsWrapper);
         }
-
 
         setDropDownView(defaultStyles);
     });
