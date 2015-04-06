@@ -6,11 +6,11 @@ tinymce.PluginManager.add('my_color', function (editor) {
     var $colorInput = editor.settings.colorInput;
 
     /******font color toolbar***************/
-    $colorInput.append($('<span>', {"id": 'colorPicker__bigA', text: 'A'}));
+    $colorInput.append($('<img>', {"id": 'colorPicker__bigA', "src": 'img/icons/FontColor-ICON.svg#svgView(viewBox(10, 5, 17, 25))'}));
     $colorInput.append($('<span>', {"id": 'colorPicker__FontColor', text: 'Font Color'}));
-    var $colorPicker = $('<div>', {"class": 'colorPicker'});
+    var $colorPicker = $('<div>', {"class": 'colorPicker', "id": 'colorPicker'});
     $colorPicker.append($('<div>', {"class": 'colorPicker__color'}));
-    $colorPicker.append($('<a>', {"id": 'colorPicker__buton', 'href': '#', text: 'choose'}));
+    $colorPicker.append($('<i>', {"id": 'colorPicker__buton', 'class': 'mce-caret'}));
     $colorInput.append($colorPicker);
     /******font color toolbar***************/
 
@@ -264,6 +264,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html = '<h1 class="mce-colorbutton-grid-header">Color Menu</h1>';
         html += '<div class="mce-colorbutton-grid-header-color"></div>';
+        html += '<div class="mce-grid-color-tables">';
         html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-left" role="list" cellspacing="0"><tbody>';
 
         for (x = 0; x < cols; x++) {
@@ -311,7 +312,11 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html += '</tbody></table>';
 
-        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100"><input type="range" min="0" max="1" step="0.01" value="1" id="opacitySlider"></div>';
+        html += '</div>';
+
+        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100">'+
+        '<input type="range" min="0" max="1" step="0.01" value="1" id="opacitySlider" list="opacitySliderDataList">'+
+        '<datalist id=opacitySliderDataList> <option>0</option> <option>0.2</option> <option>0.4</option> <option>0.6</option> <option>0.8</option> <option>1</option> </datalist> </div>';
 
         return html;
     }
@@ -329,12 +334,12 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanel');
-        $('body').on('click', '#colorPicker__buton', function () {
+        $('body').on('click', '#colorPicker' || '#colorPicker__buton', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
 
                 $('body').on('click', function (e) {
-                    if (e.target.id != 'colorPicker__buton' && e.target.id != 'opacitySliderText') {
+                    if (e.target.id != 'colorPicker' && e.target.id != 'opacitySliderText' && e.target.id != 'colorPicker__buton') {
                         divColorMenuPanel.style.display = 'none';
                     }
                 });
@@ -473,9 +478,13 @@ tinymce.PluginManager.add('my_color', function (editor) {
                     previousPanel = lastPanel;
                 }
                 lastPanel = $allCells[i].getElementsByTagName('div')[0];
-                lastPanel.style['border'] = '1px solid red';
+                lastPanel.style['border'] = '3px solid #00f8f8';
+                lastPanel.style['width'] = '14px';
+                lastPanel.style['height'] = '14px';
                 if (previousPanel) {
                     previousPanel.style['border'] = 'none';
+                    previousPanel.style['width'] = '20px';
+                    previousPanel.style['height'] = '20px';
                 }
             }
         }

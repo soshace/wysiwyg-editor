@@ -6,11 +6,11 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
     var $colorInput = editor.settings.colorInputBg;
 
     /******font color toolbar***************/
-    $colorInput.append($('<span>', {"id": 'colorPickerBg__bigA', text: 'A'}));
-    $colorInput.append($('<span>', {"id": 'colorPickerBg__FontColor', text: 'Font Color'}));
-    var $colorPicker = $('<div>', {"class": 'colorPickerBg'});
+    $colorInput.append($('<img>', {"id": 'colorPickerBg__bigA', 'src': 'img/icons/editandhighlighttool.svg#svgView(viewBox(16, 10, 10, 15))'}));
+    $colorInput.append($('<span>', {"id": 'colorPickerBg__FontColor', text: 'Background Color'}));
+    var $colorPicker = $('<div>', {"class": 'colorPickerBg', "id": 'colorPickerBg'});
     $colorPicker.append($('<div>', {"class": 'colorPickerBg__color'}));
-    $colorPicker.append($('<a>', {"id": 'colorPickerBg__buton', 'href': '#', text: 'choose'}));
+    $colorPicker.append($('<i>', {"id": 'colorPickerBg__buton', 'class': 'mce-caret'}));
     $colorInput.append($colorPicker);
     /******font color toolbar***************/
 
@@ -327,12 +327,12 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanelBg');
-        $('body').on('click', '#colorPickerBg__buton', function () {
+        $('body').on('click', '#colorPickerBg' || '#colorPickerBg__buton', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
 
                 $('body').on('click', function (e) {
-                    if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'opacitySliderTextBg') {
+                    if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'opacitySliderTextBg' && e.target.id != 'colorPickerBg') {
                         divColorMenuPanel.style.display = 'none';
                     }
                 });
@@ -471,13 +471,16 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
                     previousPanel = lastPanel;
                 }
                 lastPanel = $allCells[i].getElementsByTagName('div')[0];
-                lastPanel.style['border'] = '1px solid red';
+                lastPanel.style['border'] = '3px solid #00f8f8';
+                lastPanel.style['width'] = '14px';
+                lastPanel.style['height'] = '14px';
                 if (previousPanel) {
                     previousPanel.style['border'] = 'none';
+                    previousPanel.style['width'] = '20px';
+                    previousPanel.style['height'] = '20px';
                 }
             }
         }
     }
-
     mapColors();//Initialize all
 });
