@@ -332,13 +332,13 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanel');
-        $('body').on('click', '#colorPicker', function () {
+        $(document).on('click', '#colorPicker', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
                 $("#colorMenuPanel").click(function(e) {
                     e.stopPropagation();
                 });
-                $('body').one('click', function (e) {
+                $(document).one('click', function (e) {
                     if (e.target.id != 'colorPicker__buton' && e.target.id != 'colorPicker') {
                         divColorMenuPanel.style.display = 'none';
                     }
@@ -478,7 +478,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
         $colorPicker__color.css('background-color', value);
         rgbValue = getRgbArray(value);
         if (rgbValue.length > 2) {
-            $opacitySlider.slider('value', rgbValue[3]);//val(rgbValue[3]);
+            $opacitySlider.slider('value', rgbValue[3]);
             $opacitySliderText.val(Math.round(rgbValue[3] * 100));
         }
         for (var i = 0; i < $allCells.length; i++) {

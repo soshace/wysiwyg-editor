@@ -330,13 +330,13 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanelBg');
-        $('body').on('click', '#colorPickerBg' || '#colorPickerBg', function () {
+        $(document).on('click', '#colorPickerBg', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
                 $("#colorMenuPanelBg").click(function(e) {
                     e.stopPropagation();
                 });
-                $('body').one('click', function (e) {
+                $(document).one('click', function (e) {
                     if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'colorPickerBg') {
                         divColorMenuPanel.style.display = 'none';
                     }
@@ -443,16 +443,16 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
             var parents = e.parents;
             /*Find and apply choosed text color*/
             $.each(parents, function (index, element) {
-                if (typeof element.style !== 'undefined')
-                    if (element.style.background) {
-                        if (element.style.background.indexOf("rgb") > -1) {
-                            lastColor = allToRgba(element.style.background);
+                if (typeof element.style !== 'undefined') {
+                    if (element.style['background-color']) {
+                        if (element.style['background-color'].indexOf("rgb") > -1) {
+                            lastColor = allToRgba(element.style['background-color']);
                             applyChooseColor(lastColor);
                             reachEnd = false;
                             return false;
                         }
                     }
-
+                }
             })
             if (reachEnd)
                 applyChooseColor('rgba(255,255,255,1)');
