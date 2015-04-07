@@ -4,12 +4,16 @@ $(function () {
         $colorInput = $('<div>', {"class": 'colorInput'}),
         $fontFamily = $('<div>', {"class": 'editor__font-family'}),
         $fontSize = $('<div>', {"class": 'editor__font-size'}),
+        $fontBold = $('<div>', {"class": 'editor__font-bold'}),
+        $fontItalic = $('<div>', {"class": 'editor__font-italic'}),
+        $fontUnderline = $('<div>', {"class": 'editor__font-underline'}),
+        $simpleControls = $('<div>', {"class": 'editor__simple-controls'}),
         $dropDownMenu,
         $colorInputBg = $('<div>', {"class": 'colorInputBg'});
 
     tinymce.init({
         plugins: [
-            "simple_link", "fontfamily", "fontsize", "simplecontrols", "custom_style", "my_color", "my_color_bg"
+            "simple_link", "fontfamily", "fontsize", "simple_bold", "custom_style", "my_color", "my_color_bg"
         ],
         selector: ".js-editor",
         menubar: false,
@@ -21,6 +25,9 @@ $(function () {
         colorInputBg: $colorInputBg,
         fontFamily: $fontFamily,
         fontSize: $fontSize,
+        fontBold: $fontBold,
+        fontItalic: $fontItalic,
+        fontUnderline: $fontUnderline,
         fontFamilyDefault: 'Helvetica',
         fontFormats: [
             'Serif',
@@ -113,20 +120,20 @@ $(function () {
                 }
             }
         ],
-        toolbar: "fontfamily fontsize | bold italic underline",
+        toolbar: false,
         setup: tinyMceSetupHandler
     });
 
 
     function tinyMceSetupHandler(editor) {
-        editor.on('load', function(){
+        editor.on('load', function () {
             setEditorView(editor);
         });
         editor.on('focus', editorFocusHandler);
     }
 
     function setEditorView(editor) {
-        var $toolbar = $('.mce-toolbar-grp'),
+        var $toolbar = $('.js-editor-toolbar'),
             $fontGroup = $('<div>', {class: 'font-group'}),
             $header = $('<div>', {class: 'mce-toolbar-header'});
 
@@ -134,6 +141,10 @@ $(function () {
         $fontGroup.append($fontSize);
         $header.append($('<h1>', {text: 'Word Editor'}));
         $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
+        $simpleControls.append($fontBold);
+        $simpleControls.append($fontItalic);
+        $simpleControls.append($fontUnderline);
+        $toolbar.append($simpleControls);
         $toolbar.prepend($fontGroup);
         $toolbar.prepend($header);
         $toolbar.append($colorInput);
@@ -145,7 +156,7 @@ $(function () {
     }
 
     function editorFocusHandler() {
-        var $toolbar = $('.mce-toolbar-grp');
+        var $toolbar = $('.js-editor-toolbar');
 
         $toolbar.show();
     }

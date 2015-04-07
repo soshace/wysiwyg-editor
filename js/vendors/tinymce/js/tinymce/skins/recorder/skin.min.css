@@ -180,7 +180,7 @@ div.mce-tinymce-inline {
     color: #707070
 }
 
-.mce-toolbar-grp {
+.editor-toolbar {
     display: none;
     position: absolute;
     top: 149px;
@@ -191,9 +191,12 @@ div.mce-tinymce-inline {
     margin-left: 15px;
     background: #EDEEED;
     display: none;
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
 }
 
-.mce-toolbar-grp:after {
+.editor-toolbar:after {
     content: "";
     position: absolute;
     left: -22px;
@@ -205,7 +208,7 @@ div.mce-tinymce-inline {
     border-bottom: 13px solid transparent;
 }
 
-.mce-toolbar-grp:before {
+.editor-toolbar:before {
     content: "";
     position: absolute;
     left: -23px;
@@ -215,11 +218,6 @@ div.mce-tinymce-inline {
     border-top: 15px solid transparent;
     border-right: 23px solid #bfbfbf;
     border-bottom: 15px solid transparent;
-}
-
-.mce-toolbar-grp .mce-flow-layout-item {
-    border-bottom: 1px solid #bfbfbf;
-    overflow: hidden;
 }
 
 .mce-rtl .mce-wordcount {
