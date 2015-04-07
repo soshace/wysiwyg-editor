@@ -1955,6 +1955,7 @@ i.mce-i-backcolor {
     background: #fafafa;
     width: 50px;
     cursor: pointer;
+    position: relative;
 }
 
 .mce-grid td.mce-grid-cell div {
@@ -1993,6 +1994,7 @@ i.mce-i-backcolor {
     background: #fafafa;
     width: 50px;
     cursor: pointer;
+    position: relative;
 }
 
 #opacitySliderTextBg {
@@ -2057,7 +2059,7 @@ i.mce-i-backcolor {
 }
 
 #colorPicker__buton {
-    margin-top: 125px;
+    margin-top: 0;
     margin-left: 0;
     right: inherit;
 }
@@ -2085,7 +2087,7 @@ i.mce-i-backcolor {
 }
 
 #colorPickerBg__buton {
-    margin-top: 170px;
+    margin-top: 0;
     margin-left: 0;
     right: inherit;
 }
