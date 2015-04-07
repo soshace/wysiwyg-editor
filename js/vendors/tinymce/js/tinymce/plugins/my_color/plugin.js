@@ -332,17 +332,19 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanel');
-        $('body').on('click', '#colorPicker' || '#colorPicker__buton', function () {
+        $('body').on('click', '#colorPicker', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
-
-                $('body').on('click', function (e) {
-                    if (e.target.id != 'colorPicker' && e.target.id != 'opacitySliderText' && e.target.id != 'colorPicker__buton') {
+                $("#colorMenuPanel").click(function(e) {
+                    e.stopPropagation();
+                });
+                $('body').one('click', function (e) {
+                    if (e.target.id != 'colorPicker__buton' && e.target.id != 'colorPicker') {
                         divColorMenuPanel.style.display = 'none';
                     }
                 });
             }
-            else {
+            else{
                 divColorMenuPanel.style.display = 'none';
             }
         });
@@ -366,13 +368,11 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     /******font color panel***************/
     function applyFormat(format, value) {
-        if (editor.selection.getContent({format: 'text'}).length > 0) {
-            editor.undoManager.transact(function () {
-                editor.focus();
-                editor.formatter.apply(format, {value: value});
-                editor.nodeChanged();
-            });
-        }
+        editor.undoManager.transact(function () {
+            editor.focus();
+            editor.formatter.apply(format, {value: value});
+            editor.nodeChanged();
+        });
     }
 
     function allToRgba(rgb) {

@@ -61,7 +61,7 @@ $(function () {
                 }
             }
         ],
-        toolbar: "fontfamily fontsize | bold italic underline | simpleLink",
+        toolbar: "fontfamily fontsize | bold italic underline",
         setup: tinyMceSetupHandler
     });
 
