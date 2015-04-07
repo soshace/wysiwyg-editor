@@ -1,15 +1,13 @@
 $(function () {
-    var $linkInput = $('<input>', {type: 'text'}),
-        $customStyle = $('<div>', {'class': 'editor__custom-style'}),
-        $colorInput = $('<div>', {"class": 'colorInput'}),
-        $fontFamily = $('<div>', {"class": 'editor__font-family'}),
-        $fontSize = $('<div>', {"class": 'editor__font-size'}),
-        $fontBold = $('<div>', {"class": 'editor__font-bold'}),
-        $fontItalic = $('<div>', {"class": 'editor__font-italic'}),
-        $fontUnderline = $('<div>', {"class": 'editor__font-underline'}),
-        $simpleControls = $('<div>', {"class": 'editor__simple-controls'}),
-        $dropDownMenu,
-        $colorInputBg = $('<div>', {"class": 'colorInputBg'});
+    var $linkInput = $('.editor__link-input'),
+        $customStyle = $('.editor__custom-style'),
+        $colorInput = $('.colorInput'),
+        $fontFamily = $('.editor__font-family'),
+        $fontSize = $('.editor__font-size'),
+        $fontBold = $('.editor__font-bold'),
+        $fontItalic = $('.editor__font-italic'),
+        $fontUnderline = $('.editor__font-underline'),
+        $colorInputBg = $('.colorInputBg');
 
     tinymce.init({
         plugins: [
@@ -133,25 +131,6 @@ $(function () {
     }
 
     function setEditorView(editor) {
-        var $toolbar = $('.js-editor-toolbar'),
-            $fontGroup = $('<div>', {class: 'font-group'}),
-            $header = $('<div>', {class: 'mce-toolbar-header'});
-
-        $fontGroup.append($fontFamily);
-        $fontGroup.append($fontSize);
-        $header.append($('<h1>', {text: 'Word Editor'}));
-        $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
-        $simpleControls.append($fontBold);
-        $simpleControls.append($fontItalic);
-        $simpleControls.append($fontUnderline);
-        $toolbar.append($simpleControls);
-        $toolbar.prepend($fontGroup);
-        $toolbar.prepend($header);
-        $toolbar.append($colorInput);
-        $toolbar.append($colorInputBg);
-        $toolbar.append($linkInput);
-        $toolbar.append($customStyle);
-        $dropDownMenu = $('.js-dropdown-menu');
         setDropDowns(editor);
     }
 
