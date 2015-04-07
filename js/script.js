@@ -119,11 +119,13 @@ $(function () {
 
 
     function tinyMceSetupHandler(editor) {
-        editor.on('load', setEditorView);
+        editor.on('load', function(){
+            setEditorView(editor);
+        });
         editor.on('focus', editorFocusHandler);
     }
 
-    function setEditorView() {
+    function setEditorView(editor) {
         var $toolbar = $('.mce-toolbar-grp'),
             $fontGroup = $('<div>', {class: 'font-group'}),
             $header = $('<div>', {class: 'mce-toolbar-header'});
@@ -139,7 +141,7 @@ $(function () {
         $toolbar.append($linkInput);
         $toolbar.append($customStyle);
         $dropDownMenu = $('.js-dropdown-menu');
-        setDropDowns();
+        setDropDowns(editor);
     }
 
     function editorFocusHandler() {
@@ -148,8 +150,9 @@ $(function () {
         $toolbar.show();
     }
 
-    function setDropDowns() {
-        var $document = $(document);
+    function setDropDowns(editor) {
+        var $document = $(document),
+            $allDropDownLists = $('.dropdown-list');
 
         $document.on('click', '.dropdown-title', function () {
             var $this = $(this),
@@ -177,6 +180,10 @@ $(function () {
                 $dropDownList.addClass('hide');
                 $document.off('click.dropDownClick');
             }
+        });
+
+        editor.on('click', function () {
+            $allDropDownLists.addClass('hide');
         });
     }
 });
