@@ -2246,7 +2246,7 @@ td.mce-grid-cell div {
     display: none;
 }
 
-.editor__custom-style li.custom-style:hover .editor__edit-button {
+.editor__custom-style li.custom-style .editor__edit-button {
     display: inline-block;
 }
 
