@@ -6,7 +6,7 @@ tinymce.PluginManager.add('simple_underline', function (editor) {
             return;
         }
 
-        if (editor.formatter.match('Underline')) {
+        if (editor.formatter.match('underline')) {
             $underlineField.addClass('active');
             return;
         }

@@ -1903,11 +1903,11 @@ i.mce-i-backcolor {
 }
 
 .colorPicker {
-    display: inline-block;
     margin: 12px 0 0 26px;
     background: #fafafa;
     width: 50px;
     cursor: pointer;
+    float: left;
     position: relative;
 }
 
@@ -1992,16 +1992,13 @@ i.mce-i-backcolor {
     width: 30px;
     height: 22px;
     margin-left: 8px;
-    margin-top: 9px;
-    vertical-align: middle;
     border: 0;
+    float: left;
 }
 
 #colorPicker__FontColor {
-    position: relative;
-    top: 14px;
-    left: 11px;
     font-size: 14px;
+    float: left;
 }
 
 .colorPicker__color {
@@ -2241,6 +2238,7 @@ td.mce-grid-cell div {
     height: 22px;
     line-height: 22px;
     cursor: pointer;
+    padding-left: 8px;
 }
 
 .dropdown-title:before {
@@ -2259,4 +2257,41 @@ td.mce-grid-cell div {
     border-top: 8px solid #656769;
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
+}
+
+.font-group {
+    padding: 8px 11px;
+}
+
+.editor__font-family {
+    width: 164px;
+    float: left;
+    margin-right: 10px;
+}
+
+.editor__font-size {
+    float: left;
+    width: 50px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.editor-border-bottom {
+    border-bottom: 1px #cecece solid;
+}
+
+.editor__font-bold, .editor__font-italic, .editor__font-underline {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}
+
+.editor__font-bold.active:before, .editor__font-italic.active:before, .editor__font-underline.active:before {
+    color: #4ca7da;
 }

@@ -6,7 +6,7 @@ tinymce.PluginManager.add('simple_bold', function (editor) {
             return;
         }
 
-        if (editor.formatter.match('Bold')) {
+        if (editor.formatter.match('bold')) {
             $boldField.addClass('active');
             return;
         }

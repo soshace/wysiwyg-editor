@@ -6,7 +6,7 @@ tinymce.PluginManager.add('simple_italic', function (editor) {
             return;
         }
 
-        if (editor.formatter.match('Italic')) {
+        if (editor.formatter.match('italic')) {
             $italicField.addClass('active');
             return;
         }
