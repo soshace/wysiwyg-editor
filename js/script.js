@@ -20,6 +20,7 @@ $(function () {
         colorInputBg: $colorInputBg,
         fontFamily: $fontFamily,
         fontSize: $fontSize,
+        fontFamilyDefault: 'Helvetica',
         fontFormats: [
             'Serif',
             'Arial',
@@ -35,6 +36,7 @@ $(function () {
             'Times New Roman',
             'Verdana'
         ],
+        fontSizeDefault: '14',
         fontSizes: [
             '9',
             '10',

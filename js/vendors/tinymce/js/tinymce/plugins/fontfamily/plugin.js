@@ -1,6 +1,7 @@
 tinymce.PluginManager.add('fontfamily', function (editor) {
     var $fontFamily = editor.settings.fontFamily,
         fontFormats = editor.settings.fontFormats,
+        fontFamilyDefault = editor.settings.fontFamilyDefault,
         $fontWrapper = $('<div>'),
         $fontName = $('<div>'),
         $fontsList = $('<ul>');
@@ -31,22 +32,30 @@ tinymce.PluginManager.add('fontfamily', function (editor) {
     }
 
     editor.on('nodeChange', function (event) {
+        var isMatch = false;
+
         if (!event.selectionChange) {
             return;
         }
 
         $.each(fontFormats, function (index, value) {
-            var isMatch = editor.formatter.match('fontname', {value: value});
+            isMatch = editor.formatter.match('fontname', {value: value});
 
             if (isMatch) {
                 selectValue(value);
                 return false;
             }
         });
+
+        if (isMatch) {
+            return;
+        }
+
+        selectValue(fontFamilyDefault);
     });
 
     fillFontsList(fontFormats);
-    $fontName.html('Normal');
+    $fontName.html(fontFamilyDefault);
     $fontWrapper.append($fontName);
     $fontWrapper.append($fontsList);
     $fontFamily.append($fontWrapper);

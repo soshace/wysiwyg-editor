@@ -1886,51 +1886,6 @@ i.mce-i-backcolor {
     text-decoration: none;
 }
 
-#mceu_11-body {
-    overflow: hidden;
-    padding: 8px 0 9px 11px;
-}
-
-#mceu_1, #mceu_0 {
-    float: left;
-    height: 22px;
-    background: #fafafa;
-}
-
-#mceu_0 {
-    margin-right: 9px;
-    width: 165px;
-}
-
-#mceu_0.mce-menubtn.mce-fixed-width span {
-    width: 135px;
-    padding-left: 9px;
-}
-
-#mceu_1 {
-    width: 51px;
-}
-
-#mceu_1.mce-menubtn.mce-fixed-width span {
-    width: 20px;
-    padding-left: 9px;
-}
-
-#mceu_12-body {
-    overflow: hidden;
-}
-
-#mceu_2, #mceu_3, #mceu_4 {
-    float: left;
-    width: 33.333%;
-    height: 44px;
-}
-
-#mceu_2 button, #mceu_3 button, #mceu_4 button {
-    width: 100%;
-    text-align: center;
-}
-
 .mce-colorbutton .mce-caret {
     position: relative;
 }
