@@ -4,6 +4,7 @@ $(function () {
         $colorInput = $('<div>', {"class": 'colorInput'}),
         $fontFamily = $('<div>', {"class": 'editor__font-family'}),
         $fontSize = $('<div>', {"class": 'editor__font-size'}),
+        $dropDownMenu,
         $colorInputBg = $('<div>', {"class": 'colorInputBg'});
 
     tinymce.init({
@@ -137,11 +138,45 @@ $(function () {
         $toolbar.append($colorInputBg);
         $toolbar.append($linkInput);
         $toolbar.append($customStyle);
+        $dropDownMenu = $('.js-dropdown-menu');
+        setDropDowns();
     }
 
     function editorFocusHandler() {
         var $toolbar = $('.mce-toolbar-grp');
 
         $toolbar.show();
+    }
+
+    function setDropDowns() {
+        var $document = $(document);
+
+        $document.on('click', '.dropdown-title', function () {
+            var $this = $(this),
+                $thisDropDownMenu = $this.parent(),
+                $allDropDownLists = $('.dropdown-list'),
+                $dropDownList = $('.dropdown-list', $thisDropDownMenu),
+                isHide = $dropDownList.hasClass('hide');
+
+            $allDropDownLists.addClass('hide');
+
+            if (isHide) {
+                $dropDownList.removeClass('hide');
+
+                $document.on('click.dropDownClick', function (event) {
+                    var $target = $(event.target);
+
+                    if ($target.parents('.dropdown-list').length) {
+                        return;
+                    }
+
+                    $dropDownList.addClass('hide');
+                    $document.off('click.dropDownClick');
+                });
+            } else {
+                $dropDownList.addClass('hide');
+                $document.off('click.dropDownClick');
+            }
+        });
     }
 });

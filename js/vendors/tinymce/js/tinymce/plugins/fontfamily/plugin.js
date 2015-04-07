@@ -2,9 +2,9 @@ tinymce.PluginManager.add('fontfamily', function (editor) {
     var $fontFamily = editor.settings.fontFamily,
         fontFormats = editor.settings.fontFormats,
         fontFamilyDefault = editor.settings.fontFamilyDefault,
-        $fontWrapper = $('<div>'),
-        $fontName = $('<div>'),
-        $fontsList = $('<ul>');
+        $fontWrapper = $('<div>', {'class': 'js-dropdown-menu dropdown-menu'}),
+        $fontName = $('<div>', {'class': 'dropdown-title'}),
+        $fontsList = $('<ul>', {'class': 'dropdown-list hide'});
 
     function selectValue(value) {
         $fontName.html(value);

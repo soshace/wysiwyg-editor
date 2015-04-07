@@ -1,5 +1,5 @@
 (function () {
-    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive) {
+    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive, callback) {
         this.editor = editor;
         this.$wrapper = $wrapper;
         this.$el = null;
@@ -8,6 +8,7 @@
         this.$checkedSign = null;
         this.$editInput = null;
         this.$title = null;
+        this.callback = callback;
         this.styleName = null;
         this.isDefault = false;
         this.styles = $.extend({}, editorStyles);
@@ -95,6 +96,7 @@
 
     CustomStyle.prototype.setActive = function () {
         this.$el.addClass('active');
+        this.callback(this.styleName);
     };
 
     CustomStyle.prototype.unsetActive = function () {
@@ -314,7 +316,9 @@
         var stylesList = [],
             editorStyles = editor.settings.editorStyles,
             defaultStyles = editor.settings.defaultStyles,
-            $stylesList = $('<ul>'),
+            $styleListWrapper = $('<div>', {'class': 'js-dropdown-menu dropdown-menu'}),
+            $styleListTitle = $('<div>', {'class': 'dropdown-title'}),
+            $stylesList = $('<ul>', {'class': 'dropdown-list hide'}),
             $optionsWrapper = $('<div>', {text: 'options'}),
             $optionsList = $('<ul>'),
             $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
@@ -330,18 +334,22 @@
             eventEditor = event;
         });
 
+        function setTitle(value) {
+            $styleListTitle.html(value);
+        }
+
         function setDropDownView(defaultStyles) {
 
             $.each(defaultStyles, function (index, style) {
                 var styleName = style.title,
                     isDefault = style.isDefault,
                     styleValues = style.values,
-                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault);
+                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault, false, setTitle);
 
                 stylesList.push(newCustomStyle);
             });
 
-            $wrapper.append($stylesList);
+            $styleListWrapper.append($stylesList);
             setOptionsView();
         }
 
@@ -458,7 +466,7 @@
         function saveAsMyDefaultHandler() {
             var currentStyles = getCurrentStyles(),
                 styleName = getStyleName(),
-                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true);
+                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true, setTitle);
 
             stylesList.push(newCustomStyle);
             setDeleteStyleView();
@@ -480,9 +488,12 @@
                 append($deleteStyles);
 
             $optionsWrapper.append($optionsList);
-            $wrapper.append($optionsWrapper);
+            $styleListWrapper.append($optionsWrapper);
         }
 
+        $styleListWrapper.append($styleListTitle);
         setDropDownView(defaultStyles);
+        $wrapper.append($styleListWrapper);
+        stylesList[0].setActive();
     });
 })();

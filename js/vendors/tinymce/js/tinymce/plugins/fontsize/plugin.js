@@ -2,12 +2,11 @@ tinymce.PluginManager.add('fontsize', function (editor) {
     var $fontSize = editor.settings.fontSize,
         fontSizes = editor.settings.fontSizes,
         fontSizeDefault = editor.settings.fontSizeDefault,
-        $fontWrapper = $('<div>'),
-        $fontSizeTitle = $('<div>'),
-        $fontsList = $('<ul>');
+        $fontWrapper = $('<div>', {'class': 'js-dropdown-menu dropdown-menu'}),
+        $fontSizeTitle = $('<div>', {'class': 'dropdown-title'}),
+        $fontsList = $('<ul>', {'class': 'dropdown-list hide'});
 
     function selectValue(value) {
-        console.log('selectValue', value);
         $fontSizeTitle.html(value);
         $('.active', $fontsList).removeClass('active');
 
