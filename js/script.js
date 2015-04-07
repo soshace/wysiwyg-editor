@@ -11,7 +11,7 @@ $(function () {
 
     tinymce.init({
         plugins: [
-            "simple_link", "fontfamily", "fontsize", "simple_bold", "custom_style", "my_color", "my_color_bg"
+            "simple_link", "fontfamily", "fontsize", "simple_bold", "simple_italic", "simple_underline", "custom_style", "my_color", "my_color_bg"
         ],
         selector: ".js-editor",
         menubar: false,

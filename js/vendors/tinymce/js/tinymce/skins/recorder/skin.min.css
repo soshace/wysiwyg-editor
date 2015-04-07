@@ -1778,7 +1778,7 @@ i.mce-i-resize {
     content: "\e029"
 }
 
-.mce-i-bold:before {
+.editor__font-bold:before {
     content: "B";
     font-family: "Times New Roman", serif;
     font-size: 25px;
@@ -1788,7 +1788,7 @@ i.mce-i-resize {
     cursor: pointer;
 }
 
-.mce-i-italic:before {
+.editor__font-italic:before {
     font-family: "Times New Roman", serif;
     content: "I";
     font-size: 25px;
@@ -1798,7 +1798,7 @@ i.mce-i-resize {
     cursor: pointer;
 }
 
-.mce-i-underline:before {
+.editor__font-underline:before {
     font-family: "Times New Roman", serif;
     cursor: pointer;
     content: "U";
