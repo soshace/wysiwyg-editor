@@ -2,6 +2,8 @@ $(function () {
     var $linkInput = $('<input>', {type: 'text'}),
         $customStyle = $('<div>', {'class': 'editor__custom-style'}),
         $colorInput = $('<div>', {"class": 'colorInput'}),
+        $fontFamily = $('<div>', {"class": 'editor__font-family'}),
+        $fontSize = $('<div>', {"class": 'editor__font-size'}),
         $colorInputBg = $('<div>', {"class": 'colorInputBg'});
 
     tinymce.init({
@@ -16,6 +18,53 @@ $(function () {
         customStyle: $customStyle,
         colorInput: $colorInput,
         colorInputBg: $colorInputBg,
+        fontFamily: $fontFamily,
+        fontSize: $fontSize,
+        fontFormats: [
+            'Serif',
+            'Arial',
+            'Courier',
+            'Courier New',
+            'Comic Sans MS',
+            'Helvetica',
+            'Impact',
+            'Lucida Grande',
+            'Lucida Sans',
+            'Tahoma',
+            'Times',
+            'Times New Roman',
+            'Verdana'
+        ],
+        fontSizes: [
+            '9',
+            '10',
+            '11',
+            '12',
+            '13',
+            '14',
+            '15',
+            '16',
+            '17',
+            '18',
+            '19',
+            '20',
+            '21',
+            '22',
+            '23',
+            '24',
+            '25',
+            '26',
+            '27',
+            '28',
+            '29',
+            '30',
+            '31',
+            '32',
+            '33',
+            '34',
+            '35',
+            '36'
+        ],
         editorStyles: {
             fontFamily: null,
             fontSize: null,
@@ -73,10 +122,14 @@ $(function () {
 
     function setEditorView() {
         var $toolbar = $('.mce-toolbar-grp'),
+            $fontGroup = $('<div>', {class: 'font-group'}),
             $header = $('<div>', {class: 'mce-toolbar-header'});
 
+        $fontGroup.append($fontFamily);
+        $fontGroup.append($fontSize);
         $header.append($('<h1>', {text: 'Word Editor'}));
         $header.append($('<a>', {text: 'X', title: 'Close', href: '#'}));
+        $toolbar.prepend($fontGroup);
         $toolbar.prepend($header);
         $toolbar.append($colorInput);
         $toolbar.append($colorInputBg);

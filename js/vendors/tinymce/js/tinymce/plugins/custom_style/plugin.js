@@ -124,9 +124,9 @@
 
         $el = this.$el = $('<li>');
         $title = this.$title = $('<span>', {class: 'editor__title'});
-        $deleteButton = this.$deleteButton = $('<span>', {class: 'editor__delete-button'});
-        $editButton = this.$editButton = $('<span>', {class: 'editor__edit-button'});
-        $checkedSign = this.$checkedSign = $('<span>', {class: 'editor__checked-sign'});
+        $deleteButton = this.$deleteButton = $('<span>', {class: 'editor__delete-button icon-trash'});
+        $editButton = this.$editButton = $('<span>', {class: 'editor__edit-button  icon-pencil'});
+        $checkedSign = this.$checkedSign = $('<span>', {class: 'editor__checked-sign icon-check'});
         $editInput = this.$editInput = $('<input>', {class: 'editor__title-input hide'});
         $el.append($title, $deleteButton, $editButton, $checkedSign, $editInput);
         if (!this.isDefault) {
