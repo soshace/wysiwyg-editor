@@ -314,9 +314,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html += '</div>';
 
-        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100">'+
-        '<input type="range" min="0" max="1" step="0.01" value="1" id="opacitySlider" list="opacitySliderDataList">'+
-        '<datalist id=opacitySliderDataList> <option>0</option> <option>0.2</option> <option>0.4</option> <option>0.6</option> <option>0.8</option> <option>1</option> </datalist> </div>';
+        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100"><div id="opacitySlider"></div></div>';
 
         return html;
     }
@@ -390,19 +388,31 @@ tinymce.PluginManager.add('my_color', function (editor) {
     }
 
     function opacitySliderListener() {
-        $('#opacitySlider').change(function (e) {
-            var newColor;
-            if (lastColor.indexOf("rgb") > -1) {
-                if (lastColor.indexOf("rgba") > -1)
-                    newColor = lastColor.replace(/[^,]+(?=\))/, e.target.value);
-                else
-                    newColor = lastColor.replace(')', ', ' + e.target.value).replace('rgb', 'rgba');
+
+        $("#opacitySlider").slider({
+            orientation: "horizontal",
+            max: 1,
+            min: 0,
+            step: 0.1,
+            value: 1,
+            slide: function (ev, ui) {
+                if(ui.value<0){
+                    return false;
+                }else{
+                    var newColor;
+                    if (lastColor.indexOf("rgb") > -1) {
+                        if (lastColor.indexOf("rgba") > -1)
+                            newColor = lastColor.replace(/[^,]+(?=\))/, ui.value);
+                        else
+                            newColor = lastColor.replace(')', ', ' + ui.value).replace('rgb', 'rgba');
+                    }
+                    else {
+                        newColor = 'rgba(0,0,0,1)';
+                    }
+                    applyFormat('forecolor', newColor);
+                }
             }
-            else {
-                newColor = 'rgba(0,0,0,1)';
-            }
-            applyFormat('forecolor', newColor);
-        });
+        }).slider("pips");
     }
 
     function opacitySliderTextListener() {
@@ -468,8 +478,8 @@ tinymce.PluginManager.add('my_color', function (editor) {
         $colorPicker__color.css('background-color', value);
         rgbValue = getRgbArray(value);
         if (rgbValue.length > 2) {
-            $opacitySlider.val(rgbValue[3]);
-            $opacitySliderText.val(Math.floor(rgbValue[3] * 100));
+            $opacitySlider.slider('value', rgbValue[3]);//val(rgbValue[3]);
+            $opacitySliderText.val(Math.round(rgbValue[3] * 100));
         }
         for (var i = 0; i < $allCells.length; i++) {
             cellRgb = getRgbArray($allCells[i].getElementsByTagName('div')[0].getAttribute('data-mce-color'));
@@ -489,6 +499,5 @@ tinymce.PluginManager.add('my_color', function (editor) {
             }
         }
     }
-
     mapColors();//Initialize all
 });

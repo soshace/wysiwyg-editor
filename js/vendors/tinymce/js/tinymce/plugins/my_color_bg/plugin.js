@@ -262,6 +262,7 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
 
         html = '<h1 class="mce-colorbutton-gridBg-header">Color Menu</h1>';
         html += '<div class="mce-colorbutton-gridBg-header-color"></div>';
+        html += '<div class="mce-grid-color-tables">';
         html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-left" role="list" cellspacing="0"><tbody>';
 
         for (x = 0; x < cols; x++) {
@@ -309,7 +310,9 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
 
         html += '</tbody></table>';
 
-        html += '<div class="opacitySliderBg"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderTextBg" value="100"><input type="range" min="0" max="1" step="0.01" value="1" id="opacitySliderBg"></div>';
+        html += '</div>';
+
+        html += '<div class="opacitySliderBg"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderTextBg" value="100"><div id="opacitySliderBg"></div></div>';
 
         return html;
     }
@@ -383,19 +386,30 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
     }
 
     function opacitySliderListener() {
-        $('#opacitySliderBg').change(function (e) {
-            var newColor;
-            if (lastColor.indexOf("rgb") > -1) {
-                if (lastColor.indexOf("rgba") > -1)
-                    newColor = lastColor.replace(/[^,]+(?=\))/, e.target.value);
-                else
-                    newColor = lastColor.replace(')', ', ' + e.target.value).replace('rgb', 'rgba');
+        $("#opacitySliderBg").slider({
+            orientation: "horizontal",
+            max: 1,
+            min: 0,
+            step: 0.1,
+            value: 1,
+            slide: function (ev, ui) {
+                if(ui.value<0){
+                    return false;
+                }else{
+                    var newColor;
+                    if (lastColor.indexOf("rgb") > -1) {
+                        if (lastColor.indexOf("rgba") > -1)
+                            newColor = lastColor.replace(/[^,]+(?=\))/, ui.value);
+                        else
+                            newColor = lastColor.replace(')', ', ' + ui.value).replace('rgb', 'rgba');
+                    }
+                    else {
+                        newColor = 'rgba(0,0,0,1)';
+                    }
+                    applyFormat('hilitecolor', newColor);
+                }
             }
-            else {
-                newColor = 'rgba(255,255,255,1)';
-            }
-            applyFormat('hilitecolor', newColor);
-        });
+        }).slider("pips");
     }
 
     function opacitySliderTextListener() {
@@ -462,7 +476,8 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
         rgbValue = getRgbArray(value);
         if (rgbValue.length > 2) {
             $opacitySlider.val(rgbValue[3]);
-            $opacitySliderText.val(Math.floor(rgbValue[3] * 100));
+            $opacitySlider.slider('value', rgbValue[3]);
+            $opacitySliderText.val(Math.round(rgbValue[3] * 100));
         }
         for (var i = 0; i < $allCells.length; i++) {
             cellRgb = getRgbArray($allCells[i].getElementsByTagName('div')[0].getAttribute('data-mce-color'));
