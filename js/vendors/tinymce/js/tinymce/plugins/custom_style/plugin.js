@@ -318,7 +318,8 @@
             defaultStyles = editor.settings.defaultStyles,
             $styleListWrapper = $('<div>', {'class': 'js-dropdown-menu dropdown-menu'}),
             $styleListTitle = $('<div>', {'class': 'dropdown-title'}),
-            $stylesList = $('<ul>', {'class': 'dropdown-list hide'}),
+            $dropDownContent = $('<div>', {'class': 'dropdown-list hide'}),
+            $stylesList = $('<ul>'),
             $optionsWrapper = $('<div>', {text: 'options'}),
             $optionsList = $('<ul>'),
             $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
@@ -349,7 +350,7 @@
                 stylesList.push(newCustomStyle);
             });
 
-            $styleListWrapper.append($stylesList);
+            $dropDownContent.append($stylesList);
             setOptionsView();
         }
 
@@ -488,10 +489,11 @@
                 append($deleteStyles);
 
             $optionsWrapper.append($optionsList);
-            $styleListWrapper.append($optionsWrapper);
+            $dropDownContent.append($optionsWrapper);
         }
 
         $styleListWrapper.append($styleListTitle);
+        $styleListWrapper.append($dropDownContent);
         setDropDownView(defaultStyles);
         $wrapper.append($styleListWrapper);
         stylesList[0].setActive();
