@@ -175,6 +175,7 @@ $(function () {
 
         editor.on('click', function () {
             $allDropDownLists.addClass('hide');
+            $document.off('click.dropDownClick');
         });
     }
 });
