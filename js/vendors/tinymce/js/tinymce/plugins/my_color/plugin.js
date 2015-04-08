@@ -264,8 +264,8 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html = '<h1 class="mce-colorbutton-grid-header">Color Menu</h1>';
         html += '<div class="mce-colorbutton-grid-header-color"></div>';
-        html += '<div class="mce-grid-color-tables">';
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-left" role="list" cellspacing="0"><tbody>';
+        html += '<div class="mce-grid-color-tables clearfix">';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-left" role="list" cellspacing="0" cellpadding="0"><tbody>';
 
         for (x = 0; x < cols; x++) {
             html += '<tr>';
@@ -278,7 +278,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
             html += '</tr>';
         }
 
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid" role="list" cellspacing="0"><tbody>';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid" role="list" cellspacing="0" cellpadding="0"><tbody>';
 
         for (y = 0; y < rows; y++) {
             html += '<tr>';
@@ -297,7 +297,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
             html += '</tr>';
         }
 
-        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-bottom" role="list" cellspacing="0"><tbody>';
+        html += '<table class="mce-grid mce-grid-border mce-colorbutton-grid-bottom" role="list" cellspacing="0" cellpadding="0"><tbody>';
 
         html += '<tr>';
         for (x = 0; x < cols; x++) {
@@ -314,7 +314,7 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
         html += '</div>';
 
-        html += '<div class="opacitySlider"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100"><div id="opacitySlider"></div></div>';
+        html += '<div class="opacitySlider clearfix"><span>Opacity</span><input type="text" min="0" max="100" id="opacitySliderText" value="100"><div id="opacitySlider"></div></div>';
 
         return html;
     }

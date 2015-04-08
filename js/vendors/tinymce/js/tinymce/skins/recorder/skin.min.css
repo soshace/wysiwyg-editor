@@ -929,17 +929,15 @@ i.mce-i-checkbox {
 
 .mce-colorbutton-grid {
     display: inline-block;
-    margin: 4px 0px 15px 15px;
+    margin: 0 0px 15px 15px;
 }
 
 .mce-colorbutton-grid-left {
-    display: inline-block;
-    margin-top: 4px;
+    float: left;
 }
 
 .mce-colorbutton-grid-bottom {
     margin-left: 45px;
-    margin-bottom: 20px;
 }
 
 .mce-colorbutton button {
@@ -1895,13 +1893,6 @@ i.mce-i-backcolor {
     margin: 13px 0 0 0;
 }
 
-.colorPicker__color {
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 1);
-}
-
 .colorPicker {
     margin: 12px 0 0 26px;
     background: #fafafa;
@@ -1991,7 +1982,7 @@ i.mce-i-backcolor {
 #colorPicker__bigA {
     width: 30px;
     height: 22px;
-    margin-left: 8px;
+    margin: 11px 0 0 8px;
     border: 0;
     float: left;
 }
@@ -1999,19 +1990,19 @@ i.mce-i-backcolor {
 #colorPicker__FontColor {
     font-size: 14px;
     float: left;
+    line-height: 43px;
 }
 
 .colorPicker__color {
-    display: inline-block;
     width: 30px;
     height: 20px;
     margin-right: 4px;
+    background-color: rgba(0, 0, 0, 1);
 }
 
 #colorPicker__buton {
     margin-top: 0;
     margin-left: 0;
-    right: inherit;
 }
 
 #colorPickerBg__bigA {
@@ -2029,7 +2020,6 @@ i.mce-i-backcolor {
 }
 
 .colorPickerBg__color {
-    display: inline-block;
     width: 30px;
     height: 20px;
     margin-right: 4px;
@@ -2039,7 +2029,6 @@ i.mce-i-backcolor {
 #colorPickerBg__buton {
     margin-top: 0;
     margin-left: 0;
-    right: inherit;
 }
 
 .mce-colorbutton-grid-header {
@@ -2072,20 +2061,25 @@ td.mce-grid-cell div {
     margin: 14px 0 14px 18px;
 }
 
+.opacitySlider > span {
+    float: left;
+}
+
 .opacitySlider #opacitySliderText {
     margin-left: 10px;
-    display: inline-block;
     margin-left: 10px;
     width: 34px;
     height: 18px;
     padding-left: 5px;
     background: white;
+    float: left;
 }
 
 .opacitySlider #opacitySlider {
-    width: 177px;
+    width: 168px;
     margin-left: 13px;
-    display: inline-block;
+    float: left;
+    margin-top: 6px;
 }
 
 .opacitySlider .ui-slider-horizontal .ui-state-default {
@@ -2126,20 +2120,24 @@ td.mce-grid-cell div {
     margin: 14px 0 14px 18px;
 }
 
+.opacitySliderBg > span {
+    float: left;
+}
+
 .opacitySliderBg #opacitySliderTextBg {
     margin-left: 10px;
-    display: inline-block;
     margin-left: 10px;
     width: 34px;
     height: 18px;
     padding-left: 5px;
     background: white;
+    float: left;
 }
 
 .opacitySliderBg #opacitySliderBg {
-    width: 177px;
+    width: 168px;
     margin-left: 13px;
-    display: inline-block;
+    float: left;
 }
 
 .opacitySliderBg .ui-slider-horizontal .ui-state-default {
@@ -2294,4 +2292,8 @@ td.mce-grid-cell div {
 
 .editor__font-bold.active:before, .editor__font-italic.active:before, .editor__font-underline.active:before {
     color: #4ca7da;
+}
+
+#opacitySlider.ui-slider-pips .ui-slider-pip, #opacitySliderBg.ui-slider-pips .ui-slider-pip {
+    top: 15px;
 }
