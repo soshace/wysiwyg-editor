@@ -2307,6 +2307,15 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li.custom-style .editor__title-input {
+    width: 120px;
+}
+
+.editor__edit-button {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    line-height: 10px;
+    font-size: 20px;
 }
 
 .editor__custom-style li .editor__title {
@@ -2318,7 +2327,7 @@ td.mce-grid-cell div {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .dropdown-menu {
@@ -2335,7 +2344,7 @@ td.mce-grid-cell div {
     background: #fff;
     position: absolute;
     top: 23px;
-    min-width: 160px;
+    min-width: 180px;
     z-index: 10;
     font-size: 14px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -2359,7 +2368,10 @@ td.mce-grid-cell div {
     height: 22px;
     line-height: 22px;
     cursor: pointer;
-    padding-left: 8px;
+    padding: 0 10px 0 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
 }
 
 .dropdown-title:hover {
