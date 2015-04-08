@@ -325,7 +325,7 @@
             $styleListTitle = $('<div>', {'class': 'dropdown-title'}),
             $dropDownContent = $('<div>', {'class': 'dropdown-list hide'}),
             $stylesList = $('<ul>'),
-            $optionsWrapper = $('<div>', {text: 'options'}),
+            $optionsWrapper = $('<div>', {text: 'Options', 'class': 'dropdown-menu-options'}),
             $optionsList = $('<ul>'),
             $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
             $deleteStyles = $('<li>', {text: 'Delete styles'}),

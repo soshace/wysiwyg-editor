@@ -764,7 +764,7 @@ define("tinymce/EditorCommands", [
 
 			mceInsertLink: function(command, ui, value) {
 				var anchor;
-
+				debugger;
 				if (typeof value == 'string') {
 					value = {href: value};
 				}

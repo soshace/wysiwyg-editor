@@ -28,9 +28,8 @@ tinymce.PluginManager.add('simple_link', function (editor) {
 
         if (event.which === 13) {
             value = event.target.value;
-            editor.execCommand('mceInsertLink', false, {
-                href: value,
-                target: '_blank'
+            editor.formatter.apply('simple_link', {
+                value: value
             });
         }
     });
