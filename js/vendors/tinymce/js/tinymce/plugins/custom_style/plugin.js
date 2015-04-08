@@ -283,8 +283,12 @@
     };
 
     CustomStyle.prototype.deleteStyleHandler = function () {
-        this.$el.remove();
-        delete this;
+        var that = this;
+
+        setTimeout(function () {
+            delete that;
+            that.$el.remove();
+        }, 0);
     };
 
     CustomStyle.prototype.editStyleHandler = function () {

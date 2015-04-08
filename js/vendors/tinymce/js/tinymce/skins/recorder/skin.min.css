@@ -2551,3 +2551,84 @@ td.mce-grid-cell div {
     color: #333333;
     background-color: #e6e6e6;
 }
+
+.closeDialog {
+    position: absolute;
+    right: -14px;
+    top: -143px;
+    border: 2px solid #BABABA;
+    border-radius: 5px;
+    width: 265px;
+    height: 110px;
+    background-color: #FFF;
+}
+
+.closeDialog header {
+    width: 100px;
+}
+
+.closeDialog p {
+    margin: 0px 0px 10px;
+    float: left;
+    width: 175px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 9px;
+}
+
+.closeDialog span {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    color: #991020;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.closeDialog .btn-group {
+    width: 100%;
+    margin-top: 13px;
+
+}
+
+.closeDialog .btn-group .btn {
+    color: #676767;
+    padding: 1px 14px;
+    margin-left: 8px;
+    font-size: 12px;
+    background: white;
+    border: 1px solid #bababa;
+}
+
+.closeDialog .btn-group .btn:active {
+    color: #4ca7da;
+}
+.closeDialog .btn-group .btn:hover {
+    background-color: #e6e6e6;
+}
+
+.closeDialog:before {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 22px solid #bfbfbf;
+    border-right: 18px solid transparent;
+    border-left: 18px solid transparent;
+
+}
+
+.closeDialog:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #ffffff;
+    border-right: 16px solid transparent;
+    border-left: 16px solid transparent;
+}

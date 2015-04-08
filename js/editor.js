@@ -542,6 +542,7 @@
     };
 
     Styles.prototype.init = function () {
+        debugger;
         var ul = this._container.find('> .dropdown-menu'),
             li,
             styles = this._styles,

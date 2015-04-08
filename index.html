@@ -12,7 +12,32 @@
 </div>
 <div class="editor js-editor-wrapper">
     <div class="js-editor-toolbar editor-toolbar" style="display: block;">
-        <div class="mce-toolbar-header"><h1>Word Editor</h1><a title="Close" href="#">X</a></div>
+        <div class="closeDialog js-close-dialog hide">
+            <span>Warning:</span>
+
+            <p>Save changes to the transcript before closing?</p>
+
+            <div class="btn-group">
+                <a class="btn dontSaveBtn">Don't Save</a>
+                <a class="btn cancelBtn">Cancel</a>
+                <a class="btn saveBtn">Save</a>
+            </div>
+        </div>
+        <div class="closeDialog hide js-delete-dialog">
+            <span>Warning:</span>
+
+            <p>Save changes to the transcript before closing?</p>
+
+            <div class="btn-group">
+                <a class="btn dontSaveBtn">Don't Save</a>
+                <a class="btn cancelBtn">Cancel</a>
+                <a class="btn saveBtn">Save</a>
+            </div>
+        </div>
+        <div class="mce-toolbar-header">
+            <h1>Word Editor</h1>
+            <a title="Close" class="js-close-toolbar" href="#">X</a>
+        </div>
         <div class="font-group clearfix editor-border-bottom">
             <div class="editor__font-family">
             </div>

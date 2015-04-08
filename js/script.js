@@ -7,7 +7,9 @@ $(function () {
         $fontBold = $('.editor__font-bold'),
         $fontItalic = $('.editor__font-italic'),
         $fontUnderline = $('.editor__font-underline'),
-        $colorInputBg = $('.colorInputBg');
+        $colorInputBg = $('.colorInputBg'),
+        $closeDialog = $('.js-close-dialog'),
+        $closeToolbar = $('.js-close-toolbar');
 
     tinymce.init({
         plugins: [
@@ -126,9 +128,18 @@ $(function () {
 
     function tinyMceSetupHandler(editor) {
         editor.on('load', function () {
+            addListeners();
             setEditorView(editor);
         });
         editor.on('focus', editorFocusHandler);
+    }
+
+    function addListeners() {
+        $closeToolbar.on('click', closeToolbarHandler);
+    }
+
+    function closeToolbarHandler() {
+        $closeDialog.toggleClass('hide');
     }
 
     function setEditorView(editor) {
