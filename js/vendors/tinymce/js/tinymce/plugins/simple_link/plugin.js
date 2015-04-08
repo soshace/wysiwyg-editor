@@ -1,7 +1,7 @@
 tinymce.PluginManager.add('simple_link', function (editor) {
     var $textField = editor.settings.linkInput;
 
-    editor.on('nodeChange', function (event) {
+    editor.on('nodeChange', function (editor) {
         var href = '',
             parents;
 
@@ -9,7 +9,7 @@ tinymce.PluginManager.add('simple_link', function (editor) {
             return;
         }
 
-        parents = event.parents;
+        parents = editor.parents;
 
         $.each(parents, function (index, element) {
             var tagName = element.tagName.toLowerCase();
@@ -28,8 +28,9 @@ tinymce.PluginManager.add('simple_link', function (editor) {
 
         if (event.which === 13) {
             value = event.target.value;
-            editor.formatter.apply('simple_link', {
-                value: value
+            editor.execCommand('mceInsertLink', false, {
+                href: value,
+                target: '_blank'
             });
         }
     });
