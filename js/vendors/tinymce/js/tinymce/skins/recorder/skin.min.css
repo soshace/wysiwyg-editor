@@ -2224,6 +2224,14 @@ td.mce-grid-cell div {
     overflow-y: auto;
 }
 
+.editor__custom-style .dropdown-menu .dropdown-list li {
+    height: 40px;
+    border-bottom: #E8E8E8 1px solid;
+    padding: 0 0 0 25px;
+    position: relative;
+    line-height: 40px;
+}
+
 .editor__custom-style li .editor__checked-sign {
     display: none;
 }
@@ -2253,6 +2261,14 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li.custom-style .editor__title-input {
+}
+
+.editor__custom-style li .editor__title {
+    max-width: 130px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
 }
 
 .hide {

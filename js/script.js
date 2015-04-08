@@ -82,6 +82,7 @@ $(function () {
             backgroundColor: null,
             color: null
         },
+        defaultStyle: 'Normal',
         defaultStyles: [
             {
                 title: 'Header1',
@@ -107,7 +108,7 @@ $(function () {
                 }
             },
             {
-                title: 'Header3',
+                title: 'Header312341234123412341234123',
                 isDefault: true,
                 values: {
                     fontFamily: 'Arial',

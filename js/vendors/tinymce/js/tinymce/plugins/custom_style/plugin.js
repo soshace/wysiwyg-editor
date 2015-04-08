@@ -187,6 +187,11 @@
         });
 
         this.$title.css(css);
+
+        if (css['background-color']) {
+            this.$el.css({'background': css['background-color']});
+            this.$title.css({'background': 'none'});
+        }
     };
 
     CustomStyle.prototype.applyStylesToEditor = function () {
