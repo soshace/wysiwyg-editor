@@ -2261,6 +2261,7 @@ td.mce-grid-cell div {
 .editor__custom-style .dropdown-menu .dropdown-list {
     overflow-y: visible;
     max-height: none;
+    min-width: 190px;
 }
 
 .editor__custom-style .dropdown-menu .dropdown-list li {
@@ -2270,12 +2271,42 @@ td.mce-grid-cell div {
     position: relative;
     line-height: 36px;
     font-weight: 700;
+    padding-left: 25px;
+}
+
+.editor__custom-style .dropdown-menu .dropdown-list .dropdown-menu-options li {
     padding-left: 15px;
+}
+
+.editor__custom-style .dropdown-menu .dropdown-menu-options li.disable {
+    color: #ccc;
+}
+
+.editor__custom-style .dropdown-menu .dropdown-menu-options li.active {
+    color: #4ca7da;
 }
 
 .editor__custom-style .dropdown-menu .dropdown-list > ul {
     max-height: 200px;
     overflow-y: scroll;
+}
+
+.editor__checked-sign {
+    position: absolute;
+    left: 6px;
+    top: 13px;
+    line-height: 10px;
+    font-size: 16px;
+    color: #4ca7da;
+}
+
+.editor__delete-button {
+    position: absolute;
+    left: 6px;
+    top: 13px;
+    line-height: 10px;
+    font-size: 16px;
+    color: red
 }
 
 .editor__custom-style li .editor__checked-sign {
@@ -2319,7 +2350,7 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li .editor__title {
-    max-width: 130px;
+    max-width: 120px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

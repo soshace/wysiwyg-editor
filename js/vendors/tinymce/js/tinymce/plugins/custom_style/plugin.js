@@ -328,7 +328,7 @@
             $optionsWrapper = $('<div>', {text: 'Options', 'class': 'dropdown-menu-options'}),
             $optionsList = $('<ul>'),
             $saveAsMyDefaultStyles = $('<li>', {text: 'Save as my default styles'}),
-            $deleteStyles = $('<li>', {text: 'Delete styles'}),
+            $deleteStyles = $('<li>', {text: 'Delete styles', 'class': 'disable'}),
             eventEditor,
             $wrapper = editor.settings.customStyle;
 
@@ -360,6 +360,10 @@
         }
 
         function getSelectionStyleValue(styleName) {
+            if (typeof eventEditor === 'undefined') {
+                return;
+            }
+
             var parents = eventEditor.parents,
                 value = null;
 
