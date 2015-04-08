@@ -1807,6 +1807,20 @@ i.mce-i-resize {
     line-height: 44px;
 }
 
+.editor__font-bold, .editor__font-italic, .editor__font-underline {
+    cursor: pointer;
+}
+
+.editor__font-bold:hover, .editor__font-bold:focus, .editor__font-italic:hover, .editor__font-italic:focus, .editor__font-underline:hover, .editor__font-underline:focus {
+    background-color: #e6e6e6;
+}
+
+.editor__font-bold:active, .editor__font-italic:active, .editor__font-underline:active {
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+}
+
 .mce-i-strikethrough:before {
     content: "\e02d"
 }
@@ -2518,9 +2532,9 @@ td.mce-grid-cell div {
 .btn.active, .btn:active {
     background-image: none;
     outline: 0;
-    -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
 }
 
 .btn:hover, .btn:focus {
