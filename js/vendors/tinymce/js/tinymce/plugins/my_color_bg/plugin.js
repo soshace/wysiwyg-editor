@@ -331,7 +331,7 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanelBg');
 
-        $(document).on('click', '#colorPickerBg', function () {
+        $(document).on('click', '#colorPickerBg' || '.colorPickerBg__color' || '.colorPickerBg__buton', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
                 $("#colorMenuPanelBg").click(function(e) {
@@ -339,7 +339,7 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
                 });
 
                 $(document).one('click', function (e) {
-                    if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'colorPickerBg') {
+                    if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'colorPickerBg' && e.target.className != 'colorPickerBg__color') {
                         divColorMenuPanel.style.display = 'none';
                     }
                 });

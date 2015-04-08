@@ -332,24 +332,32 @@ tinymce.PluginManager.add('my_color', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanel');
-        $(document).on('click', '#colorPicker', function () {
+        $(document).on('click', '#colorPicker' || '.colorPicker__color' || '.colorPicker__buton', function () {
+            console.log(1);
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
+                console.log(2);
                 $("#colorMenuPanel").click(function(e) {
+                    console.log(3);
                     e.stopPropagation();
                 });
                 $(document).one('click', function (e) {
-                    if (e.target.id != 'colorPicker__buton' && e.target.id != 'colorPicker') {
+                    console.log(4);
+                    if (e.target.id != 'colorPicker__buton' && e.target.id != 'colorPicker' && e.target.className != 'colorPicker__color') {
                         divColorMenuPanel.style.display = 'none';
+                        console.log(e.target);
                     }
                 });
             }
             else{
+                console.log(6);
                 divColorMenuPanel.style.display = 'none';
             }
         });
         editor.on("click", function () {
+            console.log(7);
             if (divColorMenuPanel.style.display == 'block') {
+                console.log(8);
                 divColorMenuPanel.style.display = 'none';
             }
         })
