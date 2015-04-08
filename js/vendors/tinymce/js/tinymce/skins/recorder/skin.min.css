@@ -1891,10 +1891,11 @@ i.mce-i-backcolor {
     background-color: #EDEEED;;
     z-index: 1;
     margin: 13px 0 0 0;
+    border: 1px solid #ccc;
 }
 
 .colorPicker {
-    margin: 12px 0 0 26px;
+    margin: 12px 0 0 15px;
     background: #fafafa;
     width: 50px;
     cursor: pointer;
@@ -1930,11 +1931,12 @@ i.mce-i-backcolor {
     background-color: #EDEEED;
     z-index: 1;
     margin: 13px 0 0 0;
+    border: 1px solid #ccc;
 }
 
 .colorPickerBg {
     display: inline-block;
-    margin: 12px 0 0 26px;
+    margin: 12px 0 0 15px;
     background: #fafafa;
     width: 50px;
     cursor: pointer;
@@ -1991,6 +1993,7 @@ i.mce-i-backcolor {
     font-size: 14px;
     float: left;
     line-height: 43px;
+    margin-left: 10px;
 }
 
 .colorPicker__color {
@@ -2010,13 +2013,14 @@ i.mce-i-backcolor {
     height: 22px;
     margin-left: 8px;
     margin-top: 9px;
+    float: left;
 }
 
 #colorPickerBg__FontColor {
-    position: relative;
-    top: 14px;
-    left: 11px;
     font-size: 14px;
+    float: left;
+    line-height: 43px;
+    margin-left: 10px;
 }
 
 .colorPickerBg__color {
@@ -2174,6 +2178,10 @@ td.mce-grid-cell div {
     display: none;
 }
 
+.editor__custom-style .dropdown-menu .dropdown-list {
+    overflow-y: auto;
+}
+
 .editor__custom-style li .editor__checked-sign {
     display: none;
 }
@@ -2215,14 +2223,25 @@ td.mce-grid-cell div {
 
 .dropdown-menu ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .dropdown-menu .dropdown-list {
     background: #fff;
     position: absolute;
-    top: 30px;
+    top: 23px;
     min-width: 160px;
     z-index: 10;
+    font-size: 14px;
+    border: #E8E8E8 1px solid;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.dropdown-menu .dropdown-list li {
+    text-align: left;
+    padding: 5px 10px;
 }
 
 .dropdown-menu .dropdown-list li:hover {

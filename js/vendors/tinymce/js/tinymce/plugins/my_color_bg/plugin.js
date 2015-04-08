@@ -330,12 +330,14 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
 
     function colorMenuPanelListener() {
         var divColorMenuPanel = document.getElementById('colorMenuPanelBg');
+
         $(document).on('click', '#colorPickerBg', function () {
             if (divColorMenuPanel.style.display == 'none') {
                 divColorMenuPanel.style.display = 'block';
                 $("#colorMenuPanelBg").click(function(e) {
                     e.stopPropagation();
                 });
+
                 $(document).one('click', function (e) {
                     if (e.target.id != 'colorPickerBg__buton' && e.target.id != 'colorPickerBg') {
                         divColorMenuPanel.style.display = 'none';
@@ -346,6 +348,7 @@ tinymce.PluginManager.add('my_color_bg', function (editor) {
                 divColorMenuPanel.style.display = 'none';
             }
         });
+
         editor.on("click", function () {
             if (divColorMenuPanel.style.display == 'block') {
                 divColorMenuPanel.style.display = 'none';
