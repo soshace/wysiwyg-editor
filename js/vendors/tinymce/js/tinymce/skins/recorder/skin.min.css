@@ -2279,17 +2279,18 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style .dropdown-menu .dropdown-list li {
-    height: 36px;
+    height: 50px;
     border-bottom: 1px solid #BABABA;
     padding: 0 0 0 25px;
     position: relative;
-    line-height: 36px;
-    font-weight: 700;
+    line-height: 50px;
     padding-left: 25px;
 }
 
 .editor__custom-style .dropdown-menu .dropdown-list .dropdown-menu-options li {
     padding-left: 15px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .editor__custom-style .dropdown-menu .dropdown-menu-options li.disable {
@@ -2301,14 +2302,14 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style .dropdown-menu .dropdown-list > ul {
-    max-height: 200px;
+    max-height: 255px;
     overflow-y: scroll;
 }
 
 .editor__checked-sign {
     position: absolute;
     left: 6px;
-    top: 13px;
+    top: 19px;
     line-height: 10px;
     font-size: 16px;
     color: #4ca7da;
@@ -2352,15 +2353,26 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li.custom-style .editor__title-input {
-    width: 120px;
+    width: 110px;
+    border: none;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 5px;
+    background: transparent;
+}
+
+.editor__custom-style li.custom-style .editor__title-input:focus,
+.editor__custom-style li.custom-style .editor__title-input:active {
+    outline: none;
 }
 
 .editor__edit-button {
     position: absolute;
-    top: 12px;
-    right: 5px;
+    top: 9px;
+    right: 6px;
     line-height: 10px;
     font-size: 20px;
+    color: #4ca7da;
 }
 
 .editor__custom-style li .editor__title {

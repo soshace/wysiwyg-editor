@@ -140,6 +140,7 @@
 
     CustomStyle.prototype.applyStylesToTitle = function () {
         var css = {},
+            fontSize,
             styles = this.styles;
 
         $.each(styles, function (key, value) {
@@ -157,7 +158,7 @@
             }
 
             if (key === 'fontSize') {
-                css['font-size'] = value;
+                fontSize = css['font-size'] = value;
                 return;
             }
 
@@ -187,10 +188,12 @@
         });
 
         this.$title.css(css);
+        this.$editInput.css(css);
 
         if (css['background-color']) {
             this.$el.css({'background': css['background-color']});
             this.$title.css({'background': 'none'});
+            this.$editInput.css({'background': 'none'});
         }
     };
 
@@ -244,7 +247,7 @@
     };
 
     CustomStyle.prototype.setStyleName = function (styleName) {
-        this.styleName = styleName || 'untitled';
+        this.styleName = styleName || 'Untitled';
         this.$title.html(this.styleName);
         this.$editInput.val(this.styleName);
     };
@@ -441,7 +444,7 @@
         }
 
         function getStyleName() {
-            var styleName = 'untitled',
+            var styleName = 'Untitled',
                 newMaxUntitledNumber = 0,
                 maxUntitledNumber = 0;
 
@@ -452,16 +455,16 @@
                     return;
                 }
 
-                if (!/untitled(\d+)?/.test(currentStyleName)) {
+                if (!/Untitled(\d+)?/.test(currentStyleName)) {
                     return;
                 }
 
-                if (/untitled/.test(currentStyleName)) {
+                if (/Untitled/.test(currentStyleName)) {
                     newMaxUntitledNumber = 1;
                 }
 
-                if (/untitled(\d+)/.test(currentStyleName)) {
-                    newMaxUntitledNumber = Number(currentStyleName.match(/untitled(\d+)/)[1]);
+                if (/Untitled(\d+)/.test(currentStyleName)) {
+                    newMaxUntitledNumber = Number(currentStyleName.match(/Untitled(\d+)/)[1]);
                     newMaxUntitledNumber++;
                 }
 
