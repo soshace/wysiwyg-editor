@@ -2353,11 +2353,10 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li.custom-style .editor__title-input {
-    width: 110px;
+    width: 120px;
     border: none;
     height: 50px;
     line-height: 50px;
-    padding: 0 5px;
     background: transparent;
 }
 
