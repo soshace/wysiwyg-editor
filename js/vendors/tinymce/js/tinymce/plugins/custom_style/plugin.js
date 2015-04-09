@@ -257,12 +257,19 @@
     };
 
     CustomStyle.prototype.addListeners = function () {
-        this.$deleteButton.on('click', this.showDeleteDialog.bind(this));
-        this.$editButton.on('click', this.editStyleHandler.bind(this));
-        this.$editInput.on('blur', this.editStyleBlurHandler.bind(this));
-        this.$editInput.on('keypress', this.editStyleEnterHandler.bind(this));
-        this.$el.on('click', this.styleClickHandler.bind(this));
-        this.editor.on('nodeChange', this.nodeChangeHandler.bind(this));
+        this.$deleteButton.on('click' + '.' + this.styleName, this.showDeleteDialog.bind(this));
+        this.$editButton.on('click' + '.' + this.styleName, this.editStyleHandler.bind(this));
+        this.$editInput.on('blur' + '.' + this.styleName, this.editStyleBlurHandler.bind(this));
+        this.$editInput.on('keypress' + '.' + this.styleName, this.editStyleEnterHandler.bind(this));
+        this.$el.on('click' + '.' + this.styleName, this.styleClickHandler.bind(this));
+    };
+
+    CustomStyle.prototype.removeListeners = function () {
+        this.$deleteButton.off('click' + '.' + this.styleName);
+        this.$editButton.off('click' + '.' + this.styleName);
+        this.$editInput.off('blur' + '.' + this.styleName);
+        this.$editInput.off('keypress' + '.' + this.styleName);
+        this.$el.off('click' + '.' + this.styleName);
     };
 
     CustomStyle.prototype.editStyleBlurHandler = function (event) {
@@ -314,6 +321,7 @@
             deleteStyleCallback = this.deleteStyleCallback;
 
         setTimeout(function () {
+            that.removeListeners();
             that.$el.remove();
             that.hideDeleteDialog();
             deleteStyleCallback(that);
@@ -372,6 +380,10 @@
             }
 
             eventEditor = event;
+
+            $.each(stylesList, function (index, style) {
+                style.nodeChangeHandler(event);
+            })
         });
 
         function setTitle(value) {
@@ -460,6 +472,7 @@
             if (typeof deletedStyle !== 'undefined') {
                 indexOfDeletedElement = stylesList.indexOf(deletedStyle);
                 stylesList.splice(indexOfDeletedElement, 1);
+                setTitle(stylesList[0].styleName);
             }
 
             $.each(stylesList, function (index, style) {
