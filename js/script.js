@@ -10,6 +10,7 @@ $(function () {
         $colorInputBg = $('.colorInputBg'),
         $closeDialog = $('.js-close-dialog'),
         $closeDialogCancel = $('.js-close-dialog-cancel'),
+        $deleteDialog = $('.js-delete-dialog'),
         $closeToolbar = $('.js-close-toolbar');
 
     tinymce.init({
@@ -20,6 +21,7 @@ $(function () {
         menubar: false,
         statusbar: false,
         skin: 'recorder',
+        deleteDialog: $deleteDialog,
         linkInput: $linkInput,
         customStyle: $customStyle,
         colorInput: $colorInput,

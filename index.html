@@ -23,15 +23,15 @@
                 <a class="btn saveBtn">Save</a>
             </div>
         </div>
-        <div class="closeDialog hide js-delete-dialog">
-            <span>Warning:</span>
 
-            <p>Save changes to the transcript before closing?</p>
+        <div class="editor-dialog editor-dialog-delete js-delete-dialog hide">
+            <span class="editor-dialog__warning">Warning:</span>
+
+            <p>Are you sure you would like to delete <strong>'<span class="js-delete-dialog-title"></span>'</strong> ?</p>
 
             <div class="btn-group">
-                <a class="btn dontSaveBtn">Don't Save</a>
-                <a class="btn cancelBtn">Cancel</a>
-                <a class="btn saveBtn">Save</a>
+                <a class="btn cancelBtn js-close-dialog-cancel">Cancel</a>
+                <a class="btn saveBtn js-delete-dialog-delete">Yes</a>
             </div>
         </div>
         <div class="mce-toolbar-header">

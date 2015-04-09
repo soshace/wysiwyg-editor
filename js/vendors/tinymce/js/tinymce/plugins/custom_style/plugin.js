@@ -1,7 +1,8 @@
 (function () {
-    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive, setActiveCallback, deleteStyleCallback) {
+    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive, setActiveCallback, $deleteDialog, deleteStyleCallback) {
         this.editor = editor;
         this.$wrapper = $wrapper;
+        this.$deleteDialog = $deleteDialog;
         this.$el = null;
         this.$deleteButton = null;
         this.$editButton = null;
@@ -132,9 +133,11 @@
         $checkedSign = this.$checkedSign = $('<span>', {class: 'editor__checked-sign icon-check'});
         $editInput = this.$editInput = $('<input>', {class: 'editor__title-input hide'});
         $el.append($title, $deleteButton, $editButton, $checkedSign, $editInput);
+
         if (!this.isDefault) {
             this.$el.addClass('custom-style');
         }
+
         this.applyStylesToTitle();
         $wrapper.append($el);
     };
@@ -254,7 +257,7 @@
     };
 
     CustomStyle.prototype.addListeners = function () {
-        this.$deleteButton.on('click', this.deleteStyleHandler.bind(this));
+        this.$deleteButton.on('click', this.showDeleteDialog.bind(this));
         this.$editButton.on('click', this.editStyleHandler.bind(this));
         this.$editInput.on('blur', this.editStyleBlurHandler.bind(this));
         this.$editInput.on('keypress', this.editStyleEnterHandler.bind(this));
@@ -286,12 +289,33 @@
         this.setStyleName(styleTitle);
     };
 
+    CustomStyle.prototype.showDeleteDialog = function () {
+        var deleteOffset = this.$deleteButton.offset(),
+            wrapperOffset = this.$wrapper.offset(),
+            top = deleteOffset.top - wrapperOffset.top,
+            left = deleteOffset.left - wrapperOffset.left;
+
+        $('.js-delete-dialog-title', this.$deleteDialog).html(this.styleName);
+        this.$deleteDialog.on('click', '.js-close-dialog-cancel', this.hideDeleteDialog.bind(this));
+        this.$deleteDialog.on('click', '.js-delete-dialog-delete', this.deleteStyleHandler.bind(this));
+        this.$deleteDialog.css({top: top, left: left});
+        this.$deleteDialog.removeClass('hide');
+    };
+
+    CustomStyle.prototype.hideDeleteDialog = function () {
+        var that = this;
+
+        that.$deleteDialog.off('click');
+        that.$deleteDialog.addClass('hide');
+    };
+
     CustomStyle.prototype.deleteStyleHandler = function () {
         var that = this,
             deleteStyleCallback = this.deleteStyleCallback;
 
         setTimeout(function () {
             that.$el.remove();
+            that.hideDeleteDialog();
             deleteStyleCallback(that);
         }, 0);
     };
@@ -328,6 +352,7 @@
 
     tinymce.PluginManager.add('custom_style', function (editor) {
         var stylesList = [],
+            $deleteDialog = editor.settings.deleteDialog,
             editorStyles = editor.settings.editorStyles,
             defaultStyles = editor.settings.defaultStyles,
             $styleListWrapper = $('<div>', {'class': 'js-dropdown-menu dropdown-menu'}),
@@ -359,12 +384,13 @@
                 var styleName = style.title,
                     isDefault = style.isDefault,
                     styleValues = style.values,
-                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault, false, setTitle, setDeleteStyleView);
+                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault, false, setTitle, $deleteDialog, setDeleteStyleView);
 
                 stylesList.push(newCustomStyle);
             });
 
             $dropDownContent.append($stylesList);
+            $dropDownContent.append($deleteDialog);
             setOptionsView();
         }
 
@@ -491,7 +517,7 @@
         function saveAsMyDefaultHandler() {
             var currentStyles = getCurrentStyles(),
                 styleName = getStyleName(),
-                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true, setTitle, setDeleteStyleView);
+                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true, setTitle, $deleteDialog, setDeleteStyleView);
 
             stylesList.push(newCustomStyle);
             setDeleteStyleView();

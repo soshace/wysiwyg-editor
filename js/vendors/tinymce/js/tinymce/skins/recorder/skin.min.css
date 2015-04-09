@@ -2338,11 +2338,11 @@ td.mce-grid-cell div {
 }
 
 .editor__custom-style li.active .editor__checked-sign {
-    display: inline-block;
+    display: block;
 }
 
 .editor__custom-style li.showDelete .editor__delete-button {
-    display: inline-block;
+    display: block;
 }
 
 .editor__custom-style li.showDelete.active .editor__checked-sign {
@@ -2575,6 +2575,20 @@ td.mce-grid-cell div {
     width: 264px;
     top: -127px;
     height: 97px;
+}
+
+.editor-dialog-delete {
+    width: 227px;
+    height: 97px;
+    margin: -127px 0 0 -194px;
+}
+
+.editor-dialog.editor-dialog-delete .btn-group .saveBtn {
+    margin-left: 84px;
+}
+
+.editor-dialog.editor-dialog-delete p {
+    width: 143px;
 }
 
 .editor-dialog header {
