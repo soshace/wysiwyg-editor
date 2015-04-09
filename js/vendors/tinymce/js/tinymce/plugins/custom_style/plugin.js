@@ -1,5 +1,5 @@
 (function () {
-    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive, callback) {
+    var CustomStyle = function (editor, $wrapper, editorStyles, styleName, styles, isDefault, isActive, setActiveCallback, deleteStyleCallback) {
         this.editor = editor;
         this.$wrapper = $wrapper;
         this.$el = null;
@@ -8,7 +8,8 @@
         this.$checkedSign = null;
         this.$editInput = null;
         this.$title = null;
-        this.callback = callback;
+        this.setActiveCallback = setActiveCallback;
+        this.deleteStyleCallback = deleteStyleCallback;
         this.styleName = null;
         this.isDefault = false;
         this.styles = $.extend({}, editorStyles);
@@ -96,7 +97,7 @@
 
     CustomStyle.prototype.setActive = function () {
         this.$el.addClass('active');
-        this.callback(this.styleName);
+        this.setActiveCallback(this.styleName);
     };
 
     CustomStyle.prototype.unsetActive = function () {
@@ -286,11 +287,12 @@
     };
 
     CustomStyle.prototype.deleteStyleHandler = function () {
-        var that = this;
+        var that = this,
+            deleteStyleCallback = this.deleteStyleCallback;
 
         setTimeout(function () {
-            delete that;
             that.$el.remove();
+            deleteStyleCallback(that);
         }, 0);
     };
 
@@ -357,7 +359,7 @@
                 var styleName = style.title,
                     isDefault = style.isDefault,
                     styleValues = style.values,
-                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault, false, setTitle);
+                    newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, styleValues, isDefault, false, setTitle, setDeleteStyleView);
 
                 stylesList.push(newCustomStyle);
             });
@@ -425,8 +427,14 @@
             return styles;
         }
 
-        function setDeleteStyleView() {
-            var isCustomStyles = false;
+        function setDeleteStyleView(deletedStyle) {
+            var isCustomStyles = false,
+                indexOfDeletedElement;
+
+            if (typeof deletedStyle !== 'undefined') {
+                indexOfDeletedElement = stylesList.indexOf(deletedStyle);
+                stylesList.splice(indexOfDeletedElement, 1);
+            }
 
             $.each(stylesList, function (index, style) {
                 if (!style.isDefault) {
@@ -483,7 +491,7 @@
         function saveAsMyDefaultHandler() {
             var currentStyles = getCurrentStyles(),
                 styleName = getStyleName(),
-                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true, setTitle);
+                newCustomStyle = new CustomStyle(editor, $stylesList, editorStyles, styleName, currentStyles, false, true, setTitle, setDeleteStyleView);
 
             stylesList.push(newCustomStyle);
             setDeleteStyleView();
