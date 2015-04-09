@@ -87,40 +87,51 @@ $(function () {
             backgroundColor: null,
             color: null
         },
-        defaultStyle: 'Normal',
         defaultStyles: [
             {
-                title: 'Header1',
+                title: 'Normal',
+                isDefault: true,
+                values: {}
+            },
+            {
+                title: 'Title',
                 isDefault: true,
                 values: {
-                    fontFamily: 'Arial',
-                    fontSize: '12px',
                     bold: true,
-                    italic: true,
-                    backgroundColor: 'rgba(255, 255, 255, 1)'
+                    fontSize: '32px'
                 }
             },
             {
-                title: 'Header2',
+                title: 'Title',
                 isDefault: true,
                 values: {
-                    fontFamily: 'Arial',
-                    fontSize: '12px',
                     bold: true,
-                    italic: true,
-                    backgroundColor: 'rgba(108, 253, 109, 1)',
-                    color: 'rgba(101, 52, 101, 1)'
+                    fontSize: '16px',
+                    italic: true
                 }
             },
             {
-                title: 'Header312341234123412341234123',
+                title: 'Heading1',
                 isDefault: true,
                 values: {
-                    fontFamily: 'Arial',
-                    fontSize: '36px',
-                    bold: true,
-                    color: 'rgba(100, 55, 151, 1)',
-                    backgroundColor: 'rgba(108, 253, 109, 0.4)'
+                    fontSize: '24px',
+                    bold: true
+                }
+            },
+            {
+                title: 'Heading2',
+                isDefault: true,
+                values: {
+                    fontSize: '18px',
+                    bold: true
+                }
+            },
+            {
+                title: 'Heading3',
+                isDefault: true,
+                values: {
+                    fontSize: '16px',
+                    bold: true
                 }
             }
         ],
