@@ -9,6 +9,7 @@ $(function () {
         $fontUnderline = $('.editor__font-underline'),
         $colorInputBg = $('.colorInputBg'),
         $closeDialog = $('.js-close-dialog'),
+        $closeDialogCancel = $('.js-close-dialog-cancel'),
         $closeToolbar = $('.js-close-toolbar');
 
     tinymce.init({
@@ -136,6 +137,11 @@ $(function () {
 
     function addListeners() {
         $closeToolbar.on('click', closeToolbarHandler);
+        $closeDialogCancel.on('click', closeDialogCancelHandler)
+    }
+
+    function closeDialogCancelHandler() {
+        $closeDialog.addClass('hide');
     }
 
     function closeToolbarHandler() {

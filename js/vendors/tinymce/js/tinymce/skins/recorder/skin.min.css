@@ -2552,63 +2552,65 @@ td.mce-grid-cell div {
     background-color: #e6e6e6;
 }
 
-.closeDialog {
+.editor-dialog {
     position: absolute;
-    right: -14px;
-    top: -143px;
     border: 2px solid #BABABA;
     border-radius: 5px;
-    width: 265px;
-    height: 110px;
     background-color: #FFF;
 }
 
-.closeDialog header {
+.editor-dialog-close {
+    width: 264px;
+    top: -127px;
+    height: 97px;
+}
+
+.editor-dialog header {
     width: 100px;
 }
 
-.closeDialog p {
-    margin: 0px 0px 10px;
+.editor-dialog p {
+    margin: 11px 0px 20px 8px;
     float: left;
     width: 175px;
     font-size: 12px;
     font-weight: bold;
-    margin-top: 9px;
 }
 
-.closeDialog span {
+.editor-dialog__warning {
     display: inline-block;
     float: left;
-    margin: 8px;
+    margin: 8px 0 8px 8px;
     color: #991020;
     font-weight: bold;
     font-style: italic;
     font-size: 15px;
 }
 
-.closeDialog .btn-group {
+.editor-dialog .btn-group {
     width: 100%;
     margin-top: 13px;
 
 }
 
-.closeDialog .btn-group .btn {
+.editor-dialog .btn-group .btn {
     color: #676767;
     padding: 1px 14px;
-    margin-left: 8px;
+    margin-left: 9px;
     font-size: 12px;
     background: white;
     border: 1px solid #bababa;
 }
 
-.closeDialog .btn-group .btn:active {
+.editor-dialog .btn-group .btn:active {
     color: #4ca7da;
 }
-.closeDialog .btn-group .btn:hover {
+
+.editor-dialog .btn-group .btn:hover {
     background-color: #e6e6e6;
 }
 
-.closeDialog:before {
+.editor-dialog:before {
     content: "";
     position: absolute;
     right: 8px;
@@ -2621,7 +2623,7 @@ td.mce-grid-cell div {
 
 }
 
-.closeDialog:after {
+.editor-dialog:after {
     content: "";
     position: absolute;
     right: 10px;
